@@ -1,0 +1,41 @@
+.content{
+    margin-left: 20rem;
+}
+
+.content > h1 {
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 33px;
+    line-height: 40px;
+
+    color: #394050;
+}
+
+.content > h3 {
+    font-family: 'Inter';
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.content > ul {
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 16px;
+    
+    color: #858585;
+}
+
+.content li {
+    margin-top: 0.5rem;
+}
+
+.content > p {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 16px;
+    
+    color: #858585;
+}
