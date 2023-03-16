@@ -1,17 +1,19 @@
-import fs from 'fs';
+// import fs from 'fs';
 import matter from 'gray-matter';
 
-export async function getStaticProps({params: {slug} }) {
-  const file = fs.readFileSync(`ContentDetail/${slug}.md`,'utf-8');
-  const { data: info, content } = matter(file);
+/* export async function getStaticProps() {
+  const files = fs.readdirSync('ContentDetail');
+  const file = files.map((fileName) => ({
+      params: {
+          slug: fileName.replace('.md','')
+      },
+  }));
 
   return {
-      props: {
-          info,
-          content
-      }
-  }
-}
+      file,
+      fallback: false,
+  };
+} */
 
 export default function Home() {
   return (

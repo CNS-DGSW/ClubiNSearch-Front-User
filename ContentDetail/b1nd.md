@@ -1,7 +1,7 @@
 ---
 group: B1ND
 how: 정규직
-part: front-end
+part: Front-end
 ---
 # B1ND 프론트 엔드
 

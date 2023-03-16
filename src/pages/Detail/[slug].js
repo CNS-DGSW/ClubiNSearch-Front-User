@@ -3,9 +3,9 @@ import Ad from "../../../asset/Ad.png";
 import Image from 'next/image';
 // import {useState,useEffect} from "react";
 import styles from '../../styles/slug.module.css';
-import Apply from '../../component/Apply';
 import fs from 'fs';
 import matter from 'gray-matter';
+import AskCNS from '../../../asset/AskCNS.png';
 
 export async function getStaticPaths() {
   const files = fs.readdirSync('ContentDetail');
@@ -14,7 +14,6 @@ export async function getStaticPaths() {
           slug: fileName.replace('.md','')
       },
   }));
-  console.log(paths[0])
   return {
       paths,
       fallback: false,
@@ -43,7 +42,30 @@ export default function DetailPage({ info, content }) {
         <div>
             <Image src={Ad} alt="Ad" width="1512" height='107'/>
             <div dangerouslySetInnerHTML={{__html: md().render(content)}} className={styles.content}/>
-            <Apply></Apply>
+            <div className={styles.Box}>
+            <hr className={styles.Hr}/>
+            <div className={styles.EachBox}>
+                <p className={styles.Label}>소속</p>
+                <p className={styles.Introduce}>{info.group}</p>
+            </div>
+            <hr className={styles.Hr}/>
+            <div className={styles.EachBox}>
+                <p className={styles.Label}>채용 형태</p>
+                <p className={styles.Introduce}>{info.how}</p>
+            </div>
+            <hr className={styles.Hr}/>
+            <div className={styles.EachBox}>
+                <p className={styles.Label}>직군</p>
+                <p className={styles.Introduce}>{info.part}</p>
+            </div>
+            <button className={styles.ApplyBtn}>지원하기</button>
+        </div>
+
+        <div className={styles.Ask}>
+            <p >채용팀에<br/>문의하기</p>
+            <Image src={AskCNS} alt='Ask'/>
+        </div>
+
         </div>
     );
 }

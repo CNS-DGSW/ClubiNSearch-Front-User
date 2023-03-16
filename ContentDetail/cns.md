@@ -1,7 +1,7 @@
 ---
 group: CNS
 how: 정규직
-part: front-end
+part: Front-end
 ---
 
 
