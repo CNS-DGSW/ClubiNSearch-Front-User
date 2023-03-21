@@ -2,6 +2,7 @@
 group: DUCAMI
 how: 인턴
 part: Front-end
+title: Ducami 프론트 엔드
 ---
 # Ducami 프론트 엔드
 

@@ -5,7 +5,7 @@ import Image from 'next/image';
 import styles from '../../styles/slug.module.css';
 import fs from 'fs';
 import matter from 'gray-matter';
-import AskCNS from '../../../asset/AskCNS.png';
+import Ask from '../../component/Ask'
 
 export async function getStaticPaths() {
   const files = fs.readdirSync('ContentDetail');
@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({params: {slug} }) {
   const file = fs.readFileSync(`ContentDetail/${slug}.md`,'utf-8');
   const { data: info, content } = matter(file);
-
+    //console.log(file)
   return {
       props: {
           info,
@@ -61,10 +61,7 @@ export default function DetailPage({ info, content }) {
             <button className={styles.ApplyBtn}>지원하기</button>
         </div>
 
-        <div className={styles.Ask}>
-            <p >채용팀에<br/>문의하기</p>
-            <Image src={AskCNS} alt='Ask'/>
-        </div>
+        <Ask/>
 
         </div>
     );
