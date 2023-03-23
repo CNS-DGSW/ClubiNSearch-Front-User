@@ -30,15 +30,6 @@ export async function getStaticProps() {
   }
 }
 
-/* export function ItemList({posts}) { //왜 여기서는 undefined지??
-  // console.log(posts)
-  return(
-    <div>
-      {}
-    </div>
-  )
-} */
-
 export default function Home({getposts}) {
 
   const [posts, setPosts] = useState(getposts)
@@ -51,9 +42,19 @@ export default function Home({getposts}) {
 
   const contentRef = useRef([])
   const backRef = useRef(null)
+
+  const [groupType, setGroupType] = useState(
+    getposts.filter(({info,slug}, index)=>{ //이 코드 이해하기 [완료]
+      return ( 
+        getposts.findIndex(({info : info2}, jdex) => { // 어째서....post2에 값이 들어있는 것이지? 어떻게 넘어가는 거지?
+          return info.group === info2.group //첫번째 맞는 조건 찾자마자 그 값의 인덱스(jdex) 번호를 리턴하고 종료, post가 바뀜, 근데 계속 0 나옴 -> {info}로 들고왔어야 함, 경로 잘못 됌
+        }) === index //만약 중복이라면 getposts.findIndex 리턴 값이 index보다 작을 것 -> 조건 충족 X
+      )
+    })
+  )
+
   const searchTitle = (e) => {
     // 검색 창이 포함하고있는 값을 제목과 비교해서 맞는 값만 찾기 => 현재 화면에 보여지고 있는 글 관리하는 상태 필요 -> 그 상태 기반으로 필터,필터,필터
-  
     setPosts(
       posts.filter((post)=>(
         (post.info.title).includes(e.target.value)
@@ -106,36 +107,35 @@ export default function Home({getposts}) {
 
       setTotalPages(Math.ceil(posts.length/7))
     })
-
-    // for(let i =1;i< (posts.length/7)+2;i++){
-    //   setPages((prev)=>[...prev,i])
-    // }
-
   }
   , [posts]) 
-  
-  
-  const [groupType, setGroupType] = useState(
-    getposts.filter(({info,slug}, index)=>{ //이 코드 이해하기 [완료]
-      return ( 
-        getposts.findIndex(({info : info2}, jdex) => { // 어째서....post2에 값이 들어있는 것이지? 어떻게 넘어가는 거지?
-          return info.group === info2.group //첫번째 맞는 조건 찾자마자 그 값의 인덱스(jdex) 번호를 리턴하고 종료, post가 바뀜, 근데 계속 0 나옴 -> {info}로 들고왔어야 함, 경로 잘못 됌
-        }) === index //만약 중복이라면 getposts.findIndex 리턴 값이 index보다 작을 것 -> 조건 충족 X
-      )
-    })
-  )
-
-  // const pageLen = () => {
-  //   let i = 1;
-  //   for(; i< ((posts.length)/7) + 2; i++){
-  //     console.log(i)
-  //   }
-  // }
 
   const handlePageClick = (e) => {
     const newOffset = (e.selected * 7) % posts.length;
     setItemOffset(newOffset)
   }
+
+  const ShowGroup = groupType.map(({info,slug},idx)=> {
+      return(
+      <div  key={info.group}>
+        <div id={`${info.group}back`} className={groupstyle === info.group ? styles.ChooseGroupBackClick : styles.ChooseGroupBack} ref={elem =>backRef[idx] = elem }></div>
+        <div id={info.group} className={groupstyle === info.group ? styles.ChooseGroupContentClick : styles.ChooseGroupContent} ref={elem =>contentRef[idx] = elem } onClick={clickGroup}>{info.group}</div>
+      </div>)
+    })
+
+  const ShowPosts = currentItems.map(({info,slug},index)=>{
+      return (
+      <div key={info} className={styles.EachPostBox}>
+        <Link href={`/Detail/${slug}`} className={styles.PostLink} >
+          <div className={styles.PostTitle}>{info.title}</div>
+          <div className={styles.PostPosition}>{info.part}</div>
+          <div className={styles.PostHow}>{info.how}</div>
+        </Link>
+      </div>
+      )
+    })
+
+
   
   return (
     <div>
@@ -147,24 +147,8 @@ export default function Home({getposts}) {
             가슴이 설레시나요?지금이 바로 “DGSW”동아리에 합류할 때입니다. 
       </div>
 
-      <div className={styles.ChooseGroupParents}>
-        {
-          groupType.map(({info,slug},idx)=> {
-            return(
-            <div  key={info.group}>
-              <div id={`${info.group}back`} className={groupstyle === info.group ? styles.ChooseGroupBackClick : styles.ChooseGroupBack} ref={elem =>backRef[idx] = elem }></div>
-              <div id={info.group} className={groupstyle === info.group ? styles.ChooseGroupContentClick : styles.ChooseGroupContent} ref={elem =>contentRef[idx] = elem } onClick={clickGroup}>{info.group}</div>
-            </div>)
-          })
-          
-          // GroupType.map(({info,slug},idx)=> {
-          //     return(
-          //     <div  key={slug}>
-          //       <div id={`${slug}back`} className={groupstyle === slug ? styles.ChooseGroupBackClick : styles.ChooseGroupBack} ref={elem =>backRef[idx] = elem }></div>
-          //       <div id={slug} className={groupstyle === slug ? styles.ChooseGroupContentClick : styles.ChooseGroupContent} ref={elem =>contentRef[idx] = elem } onClick={clickGroup}>{info.group}</div>
-          //     </div>)
-          //   })
-        }
+      <div className={styles.ChooseGroupParents}> 
+      {ShowGroup}
       </div>
 
       <div className={styles.SearchBox}>
@@ -188,19 +172,9 @@ export default function Home({getposts}) {
           <option>인턴</option>
         </select>
       </div>
-      { 
-        currentItems.map(({info,slug},index)=>{
-          return (
-          <div key={info} className={styles.EachPostBox}>
-            <Link href={`/Detail/${slug}`} className={styles.PostLink} >
-              <div className={styles.PostTitle}>{info.title}</div>
-              <div className={styles.PostPosition}>{info.part}</div>
-              <div className={styles.PostHow}>{info.how}</div>
-            </Link>
-          </div>
-          )
-        })
-      }
+      
+      {ShowPosts}
+
       <footer className={styles.Footer}>
         <ReactPaginate
         pageCount={totalPages}
@@ -212,7 +186,6 @@ export default function Home({getposts}) {
         activeClassName={styles.activePagePaginate}
       ></ReactPaginate>
       </footer>
-
 
       <Ask/>
     </div>
