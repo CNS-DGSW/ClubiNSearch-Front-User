@@ -1,3 +1,4 @@
+
 .IntroH1 {
     margin-left: 20rem;
 
@@ -25,20 +26,21 @@
     display: flex;
 
     margin-top: 30px;
-    margin-bottom: 30px;
     margin-left: 317px;
 
 }
 
 .ChooseGroupBack {
     margin-left: 30px;
+    padding-left: 1px;
+    padding-right: 1px;
 }
 
 .ChooseGroupContent {
     margin-left: 30px;
     position: relative;
-    top: -20px;
-    left: 2px;
+    top: -19px;
+    left: 3px;
 
     font-family: 'Inter';
     font-weight: 500;
@@ -54,13 +56,15 @@
     border-radius: 25px;
 
     margin-left: 30px;
+    padding-left: 1px;
+    padding-right: 1px;
 }
 
 .ChooseGroupContentClick {
     margin-left: 30px;
     position: relative;
-    top: -20px;
-    left: 2px;
+    top: -19px;
+    left: 3px;
 
     font-family: 'Inter';
     font-weight: 500;
@@ -129,7 +133,7 @@
     width: 831px;
     height: 19px;
     margin-left: 19rem;
-    margin-top: 3rem;
+    margin-top: 2.5rem;
 }
 
 .PostTitle {
@@ -154,3 +158,34 @@
     color: #000000;
 }
 
+.containerPaginate {
+    list-style: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagePaginate {
+    padding: 0px 12px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.activePagePaginate{
+    padding: 8px;
+
+    background: rgba(21, 86, 247, 0.1);
+    border-radius: 3px;
+}
+
+.Footer {
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+}
