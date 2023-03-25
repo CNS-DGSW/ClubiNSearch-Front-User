@@ -1,6 +1,8 @@
 import Footer from "@/components/Footer";
 import InfoInput from "@/components/InfoInput";
+import Image from "next/image";
 import styles from "../styles/AllowMemberStyle.module.css";
+import cnsComputer from "../../asset/cnsComputer.svg";
 
 const AllowMember = () => {
   return (
@@ -61,13 +63,21 @@ const AllowMember = () => {
           ]}
         ></InfoInput>
 
-        <img src="" alt="CNS 저거 무슨 사진이야 (컴퓨터)" />
-        <nav>
-          <input type="checkbox" />
-          <p>개인정보 수집 및 이용에 동의합니다.</p>
-        </nav>
+        <Image
+          src={cnsComputer}
+          alt="CNS 저거 무슨 사진이야 (컴퓨터)"
+          width={10}
+          height={10}
+          className={styles.CNSComputer}
+        />
+        <label className={styles.PrivacyCheckBoxWrap}>
+          <input type="checkbox" className={styles.PrivacyCheckBox} />
+          <p className={styles.PrivacyCheckCotext}>
+            개인정보 수집 및 이용에 동의합니다.
+          </p>
+        </label>
         <p>
-          <button>제출하기</button>
+          <button className={styles.ButtonStyle}>제출하기</button>
         </p>
       </div>
       <Footer></Footer>
