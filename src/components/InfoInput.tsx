@@ -1,4 +1,6 @@
 import styles from "../styles/InfoInputStyle.module.css";
+import Image from "next/image";
+import fileImage from "../../asset/file.svg";
 
 interface IInformationProps {
   title: string;
@@ -22,7 +24,13 @@ const InfoInput = (props: IInformationProps) => {
       {props.isFile ? (
         <label className={styles.FileInputLabel}>
           <input type="file" className={styles.FileInputStyle} />
-          <img src="" alt="파일" />
+          <Image
+            src={fileImage}
+            alt="file"
+            width={16}
+            height={16}
+            className={styles.FileImageStyle}
+          />
           <p className={styles.FileInputContext}>{props.placehorderContext}</p>
         </label>
       ) : (
@@ -36,7 +44,11 @@ const InfoInput = (props: IInformationProps) => {
       {props.isExplane ? (
         <ul>
           {props.explaneContent?.map((explaneValue, i) => {
-            return <li key={i}>{explaneValue}</li>;
+            return (
+              <li key={i} className={styles.ExplaneContext}>
+                {explaneValue}
+              </li>
+            );
           })}
         </ul>
       ) : null}
