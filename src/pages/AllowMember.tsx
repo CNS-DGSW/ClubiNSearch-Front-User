@@ -3,6 +3,7 @@ import InfoInput from "@/components/InfoInput";
 import Image from "next/image";
 import styles from "../styles/AllowMemberStyle.module.css";
 import cnsComputer from "../../asset/cnsComputer.svg";
+import * as S from "../styles/AllowMemberStyle";
 
 const AllowMember = () => {
   return (
@@ -77,7 +78,7 @@ const AllowMember = () => {
           </p>
         </label>
         <p>
-          <button className={styles.ButtonStyle}>제출하기</button>
+          <S.ButtonStyle>제출하기</S.ButtonStyle>
         </p>
       </div>
       <Footer></Footer>
