@@ -1,0 +1,17 @@
+.title {
+  color: #394050;
+  font-size: 2.2rem;
+  font-weight: bold;
+  letter-spacing: -0.1rem;
+}
+
+.subTitle {
+  color: 666666;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.MainWrapDiv {
+  margin: 5rem auto;
+  width: 27rem;
+}
