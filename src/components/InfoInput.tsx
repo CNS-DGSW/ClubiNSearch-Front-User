@@ -1,3 +1,5 @@
+import styles from "../styles/InfoInputStyle.module.css";
+
 interface IInformationProps {
   title: string;
   isEssential: boolean;
@@ -10,21 +12,27 @@ interface IInformationProps {
 
 const InfoInput = (props: IInformationProps) => {
   return (
-    <nav>
-      <nav>
+    <nav className={styles.InputWrap}>
+      <nav className={styles.InputTitleWrap}>
         <p>{props.title}</p>
-        {props.isEssential ? <p>*</p> : null}
+        {props.isEssential ? (
+          <p className={styles.EssentialContent}>*</p>
+        ) : null}
       </nav>
       {props.isFile ? (
-        <label>
-          <input type="file" />
+        <label className={styles.FileInputLabel}>
+          <input type="file" className={styles.FileInputStyle} />
           <img src="" alt="파일" />
-          <p>{props.placehorderContext}</p>
+          <p className={styles.FileInputContext}>{props.placehorderContext}</p>
         </label>
       ) : (
-        <input type="text" placeholder={props.placehorderContext} />
+        <input
+          type="text"
+          placeholder={props.placehorderContext}
+          className={styles.InputStyle}
+        />
       )}
-      <p>{props.errorAlertContext}</p>
+      <p className={styles.ErrorAlert}>{props.errorAlertContext}</p>
       {props.isExplane ? (
         <ul>
           {props.explaneContent?.map((explaneValue, i) => {
