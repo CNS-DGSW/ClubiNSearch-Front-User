@@ -1,6 +1,7 @@
 import styles from "../styles/InfoInputStyle.module.css";
 import Image from "next/image";
 import fileImage from "../../asset/file.svg";
+import * as S from "../styles/InfoInputStyle";
 
 interface IInformationProps {
   title: string;
@@ -14,16 +15,14 @@ interface IInformationProps {
 
 const InfoInput = (props: IInformationProps) => {
   return (
-    <nav className={styles.InputWrap}>
-      <nav className={styles.InputTitleWrap}>
+    <S.InputWrap>
+      <S.InputTitleWrap>
         <p>{props.title}</p>
-        {props.isEssential ? (
-          <p className={styles.EssentialContent}>*</p>
-        ) : null}
-      </nav>
+        {props.isEssential ? <S.EssentialContent>*</S.EssentialContent> : null}
+      </S.InputTitleWrap>
       {props.isFile ? (
-        <label className={styles.FileInputLabel}>
-          <input type="file" className={styles.FileInputStyle} />
+        <S.FileInputLabel isError={false}>
+          <S.FileInputStyle type="file" />
           <Image
             src={fileImage}
             alt="file"
@@ -31,28 +30,24 @@ const InfoInput = (props: IInformationProps) => {
             height={16}
             className={styles.FileImageStyle}
           />
-          <p className={styles.FileInputContext}>{props.placehorderContext}</p>
-        </label>
+          <S.FileInputContext>{props.placehorderContext}</S.FileInputContext>
+        </S.FileInputLabel>
       ) : (
-        <input
+        <S.InputStyle
+          isError={false}
           type="text"
           placeholder={props.placehorderContext}
-          className={styles.InputStyle}
         />
       )}
-      <p className={styles.ErrorAlert}>{props.errorAlertContext}</p>
+      <S.ErrorAlert isError={false}>{props.errorAlertContext}</S.ErrorAlert>
       {props.isExplane ? (
         <ul>
           {props.explaneContent?.map((explaneValue, i) => {
-            return (
-              <li key={i} className={styles.ExplaneContext}>
-                {explaneValue}
-              </li>
-            );
+            return <S.ExplaneContext key={i}>{explaneValue}</S.ExplaneContext>;
           })}
         </ul>
       ) : null}
-    </nav>
+    </S.InputWrap>
   );
 };
 

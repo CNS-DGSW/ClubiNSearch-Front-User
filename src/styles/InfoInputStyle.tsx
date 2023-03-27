@@ -13,7 +13,7 @@ export const ErrorAlert = styled.p`
 `;
 
 export const InputWrap = styled.nav`
-  margin-bottom: 0.5rem;
+  margin-bottom: 2.5rem;
 `;
 
 export const InputTitleWrap = styled.nav`
@@ -36,14 +36,14 @@ export const InputStyle = styled.input`
   font-size: 0.8rem;
   width: 22.125rem;
   box-shadow: none;
+  color: #666;
+  border-radius: 5px;
   border: ${(props: IErrorProps) =>
     props.isError == null
       ? "1px solid #c0c0c0"
       : props.isError
       ? "1px solid #c0c0c0"
       : "1px solid #FF4F4F"};
-  border-radius: 5px;
-  color: #666;
   ::placeholder,
   ::-webkit-input-placeholder {
     color: #c0c0c0;
@@ -86,14 +86,14 @@ export const FileInputLabel = styled.label`
   font-size: 0.8rem;
   width: 22.125rem;
   box-shadow: none;
+  border-radius: 5px;
+  color: #c0c0c0;
   border: ${(props: IErrorProps) =>
     props.isError == null
       ? "1px solid #c0c0c0"
       : !props.isError
       ? "1px solid #c0c0c0"
       : "1px solid #FF4F4F"};
-  border-radius: 5px;
-  color: #c0c0c0;
   &:hover {
     border: ${(props: IErrorProps) =>
       props.isError == null
@@ -118,23 +118,8 @@ export const FileImageStyle = styled.img`
   margin: 0rem 0.5rem;
 `;
 
-export const ButtonStyle = styled.button`
-  background-color: rgba(21, 86, 247, 0.8);
-  padding: 1rem;
-  box-shadow: none;
-  font-size: 1rem;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  &:hover {
-    background-color: rgba(21, 86, 247, 0.9);
-  }
-  &:active {
-    background-color: rgba(21, 86, 247);
-  }
-  margin-top: 3rem;
-`;
-
-export const EntireWrapTag = styled.div`
-  margin-left: 38%;
+export const ExplaneContext = styled.li`
+  color: rgba(0, 0, 0, 0.4);
+  font-weight: bold;
+  font-size: 0.7rem;
 `;
