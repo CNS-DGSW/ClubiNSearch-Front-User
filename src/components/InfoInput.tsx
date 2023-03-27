@@ -1,5 +1,3 @@
-import styles from "../styles/InfoInputStyle.module.css";
-import Image from "next/image";
 import fileImage from "../../asset/file.svg";
 import * as S from "../styles/InfoInputStyle";
 
@@ -23,13 +21,7 @@ const InfoInput = (props: IInformationProps) => {
       {props.isFile ? (
         <S.FileInputLabel isError={false}>
           <S.FileInputStyle type="file" />
-          <Image
-            src={fileImage}
-            alt="file"
-            width={16}
-            height={16}
-            className={styles.FileImageStyle}
-          />
+          <S.FileImageStyle src={fileImage} alt="file" width={16} height={16} />
           <S.FileInputContext>{props.placehorderContext}</S.FileInputContext>
         </S.FileInputLabel>
       ) : (

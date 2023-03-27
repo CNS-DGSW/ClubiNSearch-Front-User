@@ -1,19 +1,15 @@
 import Footer from "@/components/Footer";
 import InfoInput from "@/components/InfoInput";
-import Image from "next/image";
-import styles from "../styles/AllowMemberStyle.module.css";
 import cnsComputer from "../../asset/cnsComputer.svg";
 import * as S from "../styles/AllowMemberStyle";
 
 const AllowMember = () => {
   return (
     <>
-      <div className={styles.MainWrapDiv}>
+      <S.MainWrapDiv>
         <nav>
-          <p className={styles.title}>지원서 작성하기</p>
-          <p className={styles.subTitle}>
-            CNS 프론트 엔드 ( 아이다 신개발 론칭 )
-          </p>
+          <S.title>지원서 작성하기</S.title>
+          <S.subTitle>CNS 프론트 엔드 ( 아이다 신개발 론칭 )</S.subTitle>
         </nav>
         <InfoInput
           title="이름"
@@ -64,23 +60,22 @@ const AllowMember = () => {
           ]}
         ></InfoInput>
 
-        <Image
+        <S.CNSComputer
           src={cnsComputer}
           alt="CNS 저거 무슨 사진이야 (컴퓨터)"
           width={10}
           height={10}
-          className={styles.CNSComputer}
         />
-        <label className={styles.PrivacyCheckBoxWrap}>
-          <input type="checkbox" className={styles.PrivacyCheckBox} />
-          <p className={styles.PrivacyCheckCotext}>
+        <S.PrivacyCheckBoxWrap>
+          <S.PrivacyCheckBox type="checkbox" />
+          <S.PrivacyCheckContext>
             개인정보 수집 및 이용에 동의합니다.
-          </p>
-        </label>
+          </S.PrivacyCheckContext>
+        </S.PrivacyCheckBoxWrap>
         <p>
           <S.ButtonStyle>제출하기</S.ButtonStyle>
         </p>
-      </div>
+      </S.MainWrapDiv>
       <Footer></Footer>
     </>
   );

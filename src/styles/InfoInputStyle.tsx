@@ -1,5 +1,5 @@
+import Image from "next/image";
 import styled from "styled-components";
-
 interface IErrorProps {
   isError: boolean | null;
 }
@@ -112,7 +112,7 @@ export const FileInputLabel = styled.label`
   }
 `;
 
-export const FileImageStyle = styled.img`
+export const FileImageStyle = styled(Image)`
   width: 1rem;
   height: 1rem;
   margin: 0rem 0.5rem;
@@ -122,4 +122,5 @@ export const ExplaneContext = styled.li`
   color: rgba(0, 0, 0, 0.4);
   font-weight: bold;
   font-size: 0.7rem;
+  margin-left: 1.5rem;
 `;
