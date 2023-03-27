@@ -19,19 +19,19 @@ const InfoInput = (props: IInformationProps) => {
         {props.isEssential ? <S.EssentialContent>*</S.EssentialContent> : null}
       </S.InputTitleWrap>
       {props.isFile ? (
-        <S.FileInputLabel isError={false}>
+        <S.FileInputLabel isError={true}>
           <S.FileInputStyle type="file" />
           <S.FileImageStyle src={fileImage} alt="file" width={16} height={16} />
           <S.FileInputContext>{props.placehorderContext}</S.FileInputContext>
         </S.FileInputLabel>
       ) : (
         <S.InputStyle
-          isError={false}
+          isError={true}
           type="text"
           placeholder={props.placehorderContext}
         />
       )}
-      <S.ErrorAlert isError={false}>{props.errorAlertContext}</S.ErrorAlert>
+      <S.ErrorAlert isError={true}>{props.errorAlertContext}</S.ErrorAlert>
       {props.isExplane ? (
         <ul>
           {props.explaneContent?.map((explaneValue, i) => {

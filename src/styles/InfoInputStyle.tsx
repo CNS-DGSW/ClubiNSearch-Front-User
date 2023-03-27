@@ -91,14 +91,14 @@ export const FileInputLabel = styled.label`
   border: ${(props: IErrorProps) =>
     props.isError == null
       ? "1px solid #c0c0c0"
-      : !props.isError
+      : props.isError
       ? "1px solid #c0c0c0"
       : "1px solid #FF4F4F"};
   &:hover {
     border: ${(props: IErrorProps) =>
       props.isError == null
         ? "1px solid #a9c0f6"
-        : !props.isError
+        : props.isError
         ? "1px solid #a9c0f6"
         : "1px solid #FF4F4F"};
   }
@@ -106,7 +106,7 @@ export const FileInputLabel = styled.label`
     border: ${(props: IErrorProps) =>
       props.isError == null
         ? "1px solid #1556F7"
-        : !props.isError
+        : props.isError
         ? "1px solid #1556F7"
         : "1px solid #FF4F4F"};
   }
