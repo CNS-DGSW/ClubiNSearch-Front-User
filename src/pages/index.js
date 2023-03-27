@@ -9,6 +9,7 @@ import matter from 'gray-matter';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import styled from 'styled-components';
 
 export async function getStaticProps() {
   const files = fs.readdirSync('ContentDetail');
@@ -135,8 +136,11 @@ export default function Home({getposts}) {
       )
     })
 
+  const Test = styled.div`
+    color: red;
+    background-color: aqua;
+  `
 
-  
   return (
     <div>
       <Image src={Ad} alt="Ad" width="1512" height='107'/>
