@@ -1,43 +1,43 @@
-import styles from "../styles/Footer.module.css";
+import * as S from "../styles/FooterStyle";
 
 const Footer = () => {
   return (
-    <footer className={styles.MainFooter}>
-      <nav className={styles.ContentWrapNav}>
+    <S.MainFooter>
+      <S.ContentWrapNav>
         <nav>
-          <p className={styles.title}>서비스</p>
-          <ul className={styles.ContextWrap}>
-            <li className={styles.Context}>공지사항</li>
-            <li className={styles.Context}>자주 묻는 질문</li>
-          </ul>
+          <S.title>서비스</S.title>
+          <S.ContextWrap>
+            <S.Context>공지사항</S.Context>
+            <S.Context>자주 묻는 질문</S.Context>
+          </S.ContextWrap>
         </nav>
         <nav>
-          <p className={styles.title}>동아리</p>
-          <ul className={styles.ContextWrap}>
-            <li className={styles.subTitle}>동아리 소개</li>
-            <li className={styles.Context}>CNS</li>
-            <li className={styles.Context}>B1nd</li>
-            <li className={styles.Context}>Ducami</li>
-            <li className={styles.Context}>Alt</li>
-            <li className={styles.Context}>3D</li>
-          </ul>
+          <S.title>동아리</S.title>
+          <S.ContextWrap>
+            <S.subTitle>동아리 소개</S.subTitle>
+            <S.Context>CNS</S.Context>
+            <S.Context>B1nd</S.Context>
+            <S.Context>Ducami</S.Context>
+            <S.Context>Alt</S.Context>
+            <S.Context>3D</S.Context>
+          </S.ContextWrap>
         </nav>
         <nav>
-          <p className={styles.title}>문의</p>
-          <ul className={styles.ContextWrap}>
-            <li className={styles.subTitle}>문의사항</li>
-          </ul>
+          <S.title>문의</S.title>
+          <S.ContextWrap>
+            <S.subTitle>문의사항</S.subTitle>
+          </S.ContextWrap>
         </nav>
         <nav>
-          <p className={styles.title}>고객센터</p>
-          <ul className={styles.ContextWrap}>
-            <li className={styles.subTitle}>버그 접수</li>
-            <li className={styles.Context}>전화 : 010-1234-5678</li>
-            <li className={styles.Context}>이메일 : DGSW2023@dgsw.hs.kr</li>
-          </ul>
+          <S.title>고객센터</S.title>
+          <S.ContextWrap>
+            <S.subTitle>버그 접수</S.subTitle>
+            <S.Context>전화 : 010-1234-5678</S.Context>
+            <S.Context>이메일 : DGSW2023@dgsw.hs.kr</S.Context>
+          </S.ContextWrap>
         </nav>
-      </nav>
-    </footer>
+      </S.ContentWrapNav>
+    </S.MainFooter>
   );
 };
 
