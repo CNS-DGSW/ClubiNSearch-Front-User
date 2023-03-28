@@ -1,7 +1,21 @@
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import fileImage from "../../asset/file.svg";
 import * as S from "../styles/InfoInputStyle";
 
+interface IContentsValue {
+  name: string;
+  schoolNumber: string;
+  phoneNumber: string;
+  introduce: string;
+  portfolio?: File | null;
+  link: string;
+}
+
 interface IInformationProps {
+  value: string;
+  setValue: Dispatch<SetStateAction<string>>;
+  entrieValue: IContentsValue;
+  index: number;
   title: string;
   isEssential: boolean;
   placehorderContext: string;
@@ -12,6 +26,10 @@ interface IInformationProps {
 }
 
 const InfoInput = (props: IInformationProps) => {
+  const OnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    props.setValue(event.target.value);
+  };
+
   return (
     <S.InputWrap>
       <S.InputTitleWrap>
@@ -29,6 +47,8 @@ const InfoInput = (props: IInformationProps) => {
           isError={true}
           type="text"
           placeholder={props.placehorderContext}
+          value={props.value}
+          onChange={OnChangeHandler}
         />
       )}
       <S.ErrorAlert isError={true}>{props.errorAlertContext}</S.ErrorAlert>
