@@ -69,55 +69,6 @@ export const InputStyle = styled.input`
   }
 `;
 
-export const FileInputStyle = styled.input`
-  position: absolute;
-  opacity: 0;
-`;
-
-export const FileInputContext = styled.p`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`;
-
-export const FileInputLabel = styled.label`
-  display: flex;
-  padding: 0.8rem 0.5rem;
-  font-size: 0.8rem;
-  width: 22.125rem;
-  box-shadow: none;
-  border-radius: 5px;
-  color: #c0c0c0;
-  border: ${(props: IErrorProps) =>
-    props.isError == null
-      ? "1px solid #c0c0c0"
-      : props.isError
-      ? "1px solid #c0c0c0"
-      : "1px solid #FF4F4F"};
-  &:hover {
-    border: ${(props: IErrorProps) =>
-      props.isError == null
-        ? "1px solid #a9c0f6"
-        : props.isError
-        ? "1px solid #a9c0f6"
-        : "1px solid #FF4F4F"};
-  }
-  &:active {
-    border: ${(props: IErrorProps) =>
-      props.isError == null
-        ? "1px solid #1556F7"
-        : props.isError
-        ? "1px solid #1556F7"
-        : "1px solid #FF4F4F"};
-  }
-`;
-
-export const FileImageStyle = styled(Image)`
-  width: 1rem;
-  height: 1rem;
-  margin: 0rem 0.5rem;
-`;
-
 export const ExplaneContext = styled.li`
   color: rgba(0, 0, 0, 0.4);
   font-weight: bold;

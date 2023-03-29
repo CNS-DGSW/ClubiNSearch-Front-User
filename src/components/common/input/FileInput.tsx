@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React, { Dispatch, SetStateAction, ChangeEvent, useState } from "react";
-import * as S from "../../../styles/FileInputStyle";
+import * as S from "@/styles/FileInputStyle";
 import fileImage from "../../../../asset/file.svg";
 interface IPortfolioValue {
   name: string | null;

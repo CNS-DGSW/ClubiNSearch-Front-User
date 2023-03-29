@@ -16,7 +16,8 @@ export const FileInputTitleWrap = styled.nav`
   display: flex;
   margin-bottom: 0.5rem;
   margin-top: 2.375rem;
-  font-size: #666;
+  font-size: 13px;
+  color: #666;
 `;
 
 export const EssentialContent = styled.p`
