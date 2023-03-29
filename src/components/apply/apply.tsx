@@ -1,19 +1,18 @@
-import Footer from "@/components/Footer";
-import InfoInput from "@/components/InfoInput";
+import FileInput from "@/components/common/input/FileInput";
+import Footer from "@/components/common/Footer";
+import InfoInput from "@/components/common/input/InfoInput";
+import ErrorHandler from "@/util/ErrorHandler";
 import { useEffect, useState } from "react";
-import cnsComputer from "../../asset/cnsComputer.svg";
+import cnsComputer from "../../../asset/cnsComputer.svg";
 import * as S from "./apply.style";
+import { IContentsValue } from "@/types/IContentsValue";
 
-interface IContentsValue {
-  name: string;
-  schoolNumber: string;
-  phoneNumber: string;
-  introduce: string;
-  portfolio?: File | null;
-  link: string;
+interface IPortfolioValue {
+  name: string | null;
+  url: string | null;
 }
 
-const AllowMember = () => {
+const ApplyForm = () => {
   const [contentsValue, setContentsValue] = useState<IContentsValue>({
     name: "",
     schoolNumber: "",
@@ -22,14 +21,18 @@ const AllowMember = () => {
     portfolio: null,
     link: "",
   });
+
   const [name, setName] = useState<string>("");
   const [schoolNumber, setSchoolNumber] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [introduce, setIntroduce] = useState<string>("");
-  const [link, setLink] = useState<string>("");
-  const [check, setCheck] = useState<boolean>();
+  const [portfolio, setPortfolio] = useState<IPortfolioValue>({
+    name: null,
+    url: null,
+  });
 
-  const [errorManager, setErrorManager] = useState();
+  const [link, setLink] = useState<string>("https://");
+  const [check, setCheck] = useState<boolean>();
 
   useEffect(() => {
     setContentsValue({
@@ -49,67 +52,54 @@ const AllowMember = () => {
           <S.subTitle>CNS 프론트 엔드 ( 아이다 신개발 론칭 )</S.subTitle>
         </nav>
         <InfoInput
-          index={1}
           value={name}
           setValue={setName}
-          entrieValue={contentsValue}
           title="이름"
-          isEssential={true}
+          isEssential
           placehorderContext="이름을 입력해주세요."
           errorAlertContext="ErrorAlret"
-        ></InfoInput>
+        />
         <InfoInput
-          index={2}
           value={schoolNumber}
           setValue={setSchoolNumber}
-          entrieValue={contentsValue}
           title="학번"
           isEssential={true}
           placehorderContext="학번을 입력해주세요."
           errorAlertContext="ErrorAlret"
-        ></InfoInput>
+        />
         <InfoInput
-          index={3}
           value={phoneNumber}
           setValue={setPhoneNumber}
-          entrieValue={contentsValue}
           title="연락처"
           isEssential={true}
           placehorderContext='"-"를 제외한 연락처를 입력해주세요.'
           errorAlertContext="ErrorAlret"
-        ></InfoInput>
+        />
         <InfoInput
-          index={4}
           value={introduce}
           setValue={setIntroduce}
-          entrieValue={contentsValue}
           title="한줄 자기소개"
           isEssential={true}
           placehorderContext="자유롭게 입력해주세요."
           errorAlertContext="ErrorAlret"
-        ></InfoInput>
-        <InfoInput
-          index={5}
-          value={name}
-          setValue={setName}
-          entrieValue={contentsValue}
+        />
+        <FileInput
+          value={portfolio}
+          setValue={setPortfolio}
           title="포트폴리오 (선택사항)"
           isEssential={false}
           placehorderContext="pdf형식을 권장합니다."
           errorAlertContext="ErrorAlret"
-          isFile={true}
           isExplane={true}
           explaneContent={[
             "포트폴리오는 필수가 아닌 선택사항입니다.",
             "파일은 pdf형식을 권장하며 최대 50mb까지 업로드 하실 수 있습니다.",
             "파일은 면접이 끝나는 즉시 삭제될 예정이며 외부 공유를 금지합니다.",
           ]}
-        ></InfoInput>
+        />
         <InfoInput
-          index={6}
           value={link}
           setValue={setLink}
-          entrieValue={contentsValue}
           title="링크 (선택사항)"
           isEssential={false}
           placehorderContext="https://"
@@ -119,7 +109,7 @@ const AllowMember = () => {
             "링크 또한 필수가 아닌 선택사항입니다.",
             "자신을 드러낼 수 있는 깃허브, 개인 블로그 등 자유롭게 입력해주세요.",
           ]}
-        ></InfoInput>
+        />
 
         <S.CNSComputer
           src={cnsComputer}
@@ -141,6 +131,9 @@ const AllowMember = () => {
             onClick={() => {
               if (check) {
                 alert("제출하시겠습니까?");
+                if (ErrorHandler(contentsValue)) {
+                  console.log("통과", contentsValue);
+                }
               } else {
                 alert("개인정보 수집 동의에 동의해주세요.");
               }
@@ -155,4 +148,4 @@ const AllowMember = () => {
   );
 };
 
-export default AllowMember;
+export default ApplyForm;

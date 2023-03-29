@@ -1,4 +1,4 @@
-import * as S from "../styles/FooterStyle";
+import * as S from "../../styles/FooterStyle";
 
 const Footer = () => {
   return (
