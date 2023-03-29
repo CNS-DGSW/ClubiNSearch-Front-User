@@ -2,7 +2,7 @@ import Footer from "@/components/Footer";
 import InfoInput from "@/components/InfoInput";
 import { useEffect, useState } from "react";
 import cnsComputer from "../../asset/cnsComputer.svg";
-import * as S from "../styles/AllowMemberStyle";
+import * as S from "./apply.style";
 
 interface IContentsValue {
   name: string;
