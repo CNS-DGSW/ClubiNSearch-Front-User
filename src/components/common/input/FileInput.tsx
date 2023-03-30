@@ -60,11 +60,3 @@ const FileInput = (props: IFileInputProps) => {
 };
 
 export default FileInput;
-
-/*
-<S.FileInputLabel isError={true}>
-    <S.FileInputStyle type="file" />
-    <S.FileImageStyle src={fileImage} alt="file" width={16} height={16} />
-    <S.FileInputContext>{props.placehorderContext}</S.FileInputContext>
-</S.FileInputLabel>
-*/

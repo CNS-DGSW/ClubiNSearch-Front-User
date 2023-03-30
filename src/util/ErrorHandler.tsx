@@ -1,16 +1,32 @@
-import React from "react";
-interface IContentsValue {
-  name: string;
-  schoolNumber: string;
-  phoneNumber: string;
-  introduce: string;
-  portfolio?: {
-    name: string;
-    url: string;
-  } | null;
-  link: string | null;
+import React, { useState } from "react";
+import { IContentsValue } from "@/types/IContentsValue";
+
+interface IErrorValue {
+  name: {
+    context: string;
+    isError: boolean;
+  };
+  schoolNumber: {
+    context: string;
+    isError: boolean;
+  };
+  phoneNumber: {
+    context: string;
+    isError: boolean;
+  };
+  introduce: {
+    context: string;
+    isError: boolean;
+  };
+  link: {
+    context: string;
+    isError: boolean;
+  };
 }
+
 const ErrorHandler = (props: IContentsValue) => {
+  const [errorValue, setErrorvalue] = useState<IErrorValue | null>(null);
+
   if (
     props.name != null &&
     props.schoolNumber != null &&
