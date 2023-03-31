@@ -1,43 +1,15 @@
 import React, { useState } from "react";
 import { IContentsValue } from "@/types/IContentsValue";
-
-interface IErrorValue {
-  name: {
-    context: string;
-    isError: boolean;
-  };
-  schoolNumber: {
-    context: string;
-    isError: boolean;
-  };
-  phoneNumber: {
-    context: string;
-    isError: boolean;
-  };
-  introduce: {
-    context: string;
-    isError: boolean;
-  };
-  link: {
-    context: string;
-    isError: boolean;
-  };
-}
+import { IErrorValue } from "@/types/IErrorValue";
 
 const ErrorHandler = (props: IContentsValue) => {
   const [errorValue, setErrorvalue] = useState<IErrorValue | null>(null);
+  const regPhone = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
+  const regSchoolNumber = /[1-3][1-4][0-2][0-9]/;
+  const regUrl =
+    /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#()?&//=]*)/;
 
-  if (
-    props.name != null &&
-    props.schoolNumber != null &&
-    props.phoneNumber != null &&
-    props.introduce != null
-  ) {
-    return true;
-  } else {
-    alert("필수 항목을 제대로 입력해주세요.");
-    return false;
-  }
+  return errorValue;
 };
 
 export default ErrorHandler;
