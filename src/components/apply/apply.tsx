@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import cnsComputer from "../../../asset/cnsComputer.svg";
 import * as S from "./apply.style";
 import { IContentsValue } from "@/types/IContentsValue";
+import { IErrorValue } from "@/types/IErrorValue";
 
 interface IPortfolioValue {
   name: string | null;
@@ -131,8 +132,17 @@ const ApplyForm = () => {
             onClick={() => {
               if (check) {
                 alert("제출하시겠습니까?");
-                if (ErrorHandler(contentsValue)) {
-                  console.log("통과", contentsValue);
+                const CheckError: boolean[] = ErrorHandler(contentsValue);
+                if (
+                  CheckError[0] &&
+                  CheckError[1] &&
+                  CheckError[2] &&
+                  CheckError[3] &&
+                  CheckError[4]
+                ) {
+                  console.log("통과", contentsValue, CheckError);
+                } else {
+                  console.log("실패", contentsValue, CheckError);
                 }
               } else {
                 alert("개인정보 수집 동의에 동의해주세요.");

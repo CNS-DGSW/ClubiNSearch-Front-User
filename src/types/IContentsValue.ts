@@ -7,5 +7,5 @@ export interface IContentsValue {
     name: string;
     url: string;
   } | null;
-  link: string | null;
+  link: string;
 }
