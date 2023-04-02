@@ -1,18 +1,109 @@
 import { IContentsValue } from "@/types/IContentsValue";
+import { IErrorValue } from "@/types/IErrorValue";
+import { Dispatch, SetStateAction, useState } from "react";
 
-const ErrorHandler = (props: IContentsValue) => {
+const ErrorHandler = (contentValue: IContentsValue) => {
   const regName = /\s/g;
   const regPhone = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
   const regSchoolNumber = /[1-3][1-4][0-2][0-9]/;
   const regUrl =
     /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#()?&//=]*)/;
-  return [
-    !(props.name === "") || regName.test(props.name),
-    regSchoolNumber.test(props.schoolNumber) && props.schoolNumber.length === 4,
-    regPhone.test(props.phoneNumber),
-    !(props.introduce === "") || props.introduce.length > 3,
-    props.link === "https://" || regUrl.test(props.link),
-  ];
+  const initError: IErrorValue = {
+    name: {
+      context: "",
+      isError: false,
+    },
+    schoolNumber: {
+      context: "",
+      isError: false,
+    },
+    phoneNumber: {
+      context: "",
+      isError: false,
+    },
+    introduce: {
+      context: "",
+      isError: false,
+    },
+    link: {
+      context: "",
+      isError: false,
+    },
+  };
+  console.log(initError);
+
+  if (regName.test(contentValue.name) || contentValue.name === "") {
+    initError.name.isError = true;
+    if (regName.test(contentValue.name)) {
+      initError.name.context = "띄어쓰기를 없애주세요.";
+    } else if (contentValue.name === "") {
+      initError.name.context = "필수 입력 항목 입니다.";
+    } else {
+      initError.name.context = "필수 입력 항목 입니다.";
+    }
+  }
+
+  if (
+    !regSchoolNumber.test(contentValue.schoolNumber) ||
+    contentValue.schoolNumber === ""
+  ) {
+    initError.schoolNumber.isError = true;
+    if (
+      !regSchoolNumber.test(contentValue.schoolNumber) ||
+      contentValue.schoolNumber.length !== 4
+    ) {
+      initError.schoolNumber.context = "학번을 정확하게 입력해주세요.";
+    } else if (contentValue.schoolNumber === "") {
+      initError.schoolNumber.context = "필수 입력 항목 입니다.";
+    } else {
+      initError.schoolNumber.context = "필수 입력 항목 입니다.";
+    }
+  }
+
+  if (
+    !regPhone.test(contentValue.phoneNumber) ||
+    contentValue.phoneNumber === ""
+  ) {
+    initError.phoneNumber.isError = true;
+    if (!regPhone.test(contentValue.phoneNumber)) {
+      initError.phoneNumber.context = "전화 번호를 정확하게 입력해주세요.";
+    } else if (contentValue.phoneNumber === "") {
+      initError.phoneNumber.context = "필수 입력 항목 입니다.";
+    } else {
+      initError.phoneNumber.context = "필수 입력 항목 입니다.";
+    }
+  }
+
+  if (contentValue.introduce.length > 3 || contentValue.introduce === "") {
+    initError.introduce.isError = true;
+    if (contentValue.introduce.length > 3) {
+      initError.introduce.context = "자기소개를 정확하게 입력해주세요.";
+    } else if (contentValue.introduce === "") {
+      initError.introduce.context = "필수 입력 항목 입니다.";
+    } else {
+      initError.introduce.context = "필수 입력 항목 입니다.";
+    }
+  }
+
+  if (!regUrl.test(contentValue.link)) {
+    initError.link.isError = true;
+    if (contentValue.link !== "") {
+      initError.link.isError = false;
+    } else if (regUrl.test(contentValue.link)) {
+      initError.link.context = "링크를 정확하게 입력해주세요.";
+    }
+  }
+  console.log("dd", initError);
+  return initError;
 };
 
 export default ErrorHandler;
+
+// return [
+//   !regName.test(contentValue.name) && contentValue.name !== "",
+//   regSchoolNumber.test(contentValue.schoolNumber) &&
+//     contentValue.schoolNumber.length === 4,
+//   regPhone.test(contentValue.phoneNumber),
+//   !(contentValue.introduce === "") || contentValue.introduce.length > 3,
+//   contentValue.link === "https://" || regUrl.test(contentValue.link),
+// ];

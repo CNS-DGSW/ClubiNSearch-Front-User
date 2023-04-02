@@ -34,6 +34,8 @@ const ApplyForm = () => {
 
   const [link, setLink] = useState<string>("https://");
   const [check, setCheck] = useState<boolean>();
+  const [errorCheckHandler, setErrorCheckHandler] =
+    useState<IErrorValue | null>(null);
 
   useEffect(() => {
     setContentsValue({
@@ -44,6 +46,8 @@ const ApplyForm = () => {
       link: link,
     });
   }, [name, schoolNumber, phoneNumber, introduce, link]);
+
+  const ElseCorrectCheckHandler = (CheckError: boolean[]) => {};
 
   return (
     <>
@@ -58,7 +62,12 @@ const ApplyForm = () => {
           title="이름"
           isEssential
           placehorderContext="이름을 입력해주세요."
-          errorAlertContext="ErrorAlret"
+          errorAlertContext={
+            errorCheckHandler?.name.isError
+              ? errorCheckHandler.name.context
+              : ""
+          }
+          isError={errorCheckHandler?.name.isError}
         />
         <InfoInput
           value={schoolNumber}
@@ -66,7 +75,12 @@ const ApplyForm = () => {
           title="학번"
           isEssential={true}
           placehorderContext="학번을 입력해주세요."
-          errorAlertContext="ErrorAlret"
+          errorAlertContext={
+            errorCheckHandler?.schoolNumber.isError
+              ? errorCheckHandler.schoolNumber.context
+              : ""
+          }
+          isError={errorCheckHandler?.schoolNumber.isError}
         />
         <InfoInput
           value={phoneNumber}
@@ -74,7 +88,12 @@ const ApplyForm = () => {
           title="연락처"
           isEssential={true}
           placehorderContext='"-"를 제외한 연락처를 입력해주세요.'
-          errorAlertContext="ErrorAlret"
+          errorAlertContext={
+            errorCheckHandler?.phoneNumber.isError
+              ? errorCheckHandler.phoneNumber.context
+              : ""
+          }
+          isError={errorCheckHandler?.phoneNumber.isError}
         />
         <InfoInput
           value={introduce}
@@ -82,7 +101,12 @@ const ApplyForm = () => {
           title="한줄 자기소개"
           isEssential={true}
           placehorderContext="자유롭게 입력해주세요."
-          errorAlertContext="ErrorAlret"
+          errorAlertContext={
+            errorCheckHandler?.introduce.isError
+              ? errorCheckHandler.introduce.context
+              : ""
+          }
+          isError={errorCheckHandler?.introduce.isError}
         />
         <FileInput
           value={portfolio}
@@ -104,12 +128,17 @@ const ApplyForm = () => {
           title="링크 (선택사항)"
           isEssential={false}
           placehorderContext="https://"
-          errorAlertContext="ErrorAlret"
+          errorAlertContext={
+            errorCheckHandler?.link.isError
+              ? errorCheckHandler.link.context
+              : ""
+          }
           isExplane={true}
           explaneContent={[
             "링크 또한 필수가 아닌 선택사항입니다.",
             "자신을 드러낼 수 있는 깃허브, 개인 블로그 등 자유롭게 입력해주세요.",
           ]}
+          isError={errorCheckHandler?.link.isError}
         />
 
         <S.CNSComputer
@@ -132,18 +161,24 @@ const ApplyForm = () => {
             onClick={() => {
               if (check) {
                 alert("제출하시겠습니까?");
-                const CheckError: boolean[] = ErrorHandler(contentsValue);
-                if (
-                  CheckError[0] &&
-                  CheckError[1] &&
-                  CheckError[2] &&
-                  CheckError[3] &&
-                  CheckError[4]
-                ) {
-                  console.log("통과", contentsValue, CheckError);
-                } else {
-                  console.log("실패", contentsValue, CheckError);
-                }
+                const initError: IErrorValue = ErrorHandler(contentsValue);
+                console.log(initError);
+                setErrorCheckHandler({ ...initError });
+                console.log(errorCheckHandler);
+
+                // console.log(CheckError);
+
+                // if (
+                //   CheckError[0] &&
+                //   CheckError[1] &&
+                //   CheckError[2] &&
+                //   CheckError[3] &&
+                //   CheckError[4]
+                // ) {
+                //   console.log("통과", contentsValue, CheckError);
+                // } else {
+                //   console.log("실패", contentsValue, CheckError);
+                // }
               } else {
                 alert("개인정보 수집 동의에 동의해주세요.");
               }

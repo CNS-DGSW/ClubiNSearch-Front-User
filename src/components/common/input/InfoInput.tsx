@@ -10,6 +10,7 @@ interface IInformation {
   errorAlertContext: string;
   isExplane?: boolean;
   explaneContent?: string[];
+  isError?: boolean;
 }
 
 const InfoInput = ({
@@ -21,6 +22,7 @@ const InfoInput = ({
   errorAlertContext,
   isExplane,
   explaneContent,
+  isError,
 }: IInformation) => {
   const OnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
@@ -33,13 +35,15 @@ const InfoInput = ({
         {isEssential ? <S.EssentialContent>*</S.EssentialContent> : null}
       </S.InputTitleWrap>
       <S.InputStyle
-        isError={true}
+        isError={isError ? false : true}
         type="text"
         placeholder={placehorderContext}
         value={value}
         onChange={OnChangeHandler}
       />
-      <S.ErrorAlert isError={true}>{errorAlertContext}</S.ErrorAlert>
+      <S.ErrorAlert isError={isError ? false : true}>
+        {errorAlertContext}
+      </S.ErrorAlert>
       {isExplane ? (
         <ul>
           {explaneContent?.map((explaneValue, i) => {
