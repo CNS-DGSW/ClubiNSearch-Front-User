@@ -1,3 +1,11 @@
+---
+group: CNS
+how: 정규직
+part: Front-end
+title: CNS 프론트 엔드 (아이다 신개발 론칭)
+---
+
+
 # CNS 프론트 엔드 (아이다 신개발 론칭)
 
 ### CNS 프론트 팀에 대해 알려드려요

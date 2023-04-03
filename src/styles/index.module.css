@@ -1,0 +1,191 @@
+
+.IntroH1 {
+    margin-left: 20rem;
+
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 36px;
+    
+    color: #394050;
+}
+
+.IntroDiv {
+    margin-left: 20rem;
+
+    font-family: 'Inter';
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 17px;
+    
+    color: #858585;
+    
+}
+
+.ChooseGroupParents {
+    display: flex;
+
+    margin-top: 30px;
+    margin-left: 317px;
+
+}
+
+.ChooseGroupBack {
+    margin-left: 30px;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+.ChooseGroupContent {
+    margin-left: 30px;
+    position: relative;
+    top: -19px;
+    left: 3px;
+
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #858585;
+    
+}
+
+.ChooseGroupBackClick {
+    background: rgba(21, 86, 247, 0.1);
+    opacity: 0.3;
+    border-radius: 25px;
+
+    margin-left: 30px;
+    padding-left: 1px;
+    padding-right: 1px;
+}
+
+.ChooseGroupContentClick {
+    margin-left: 30px;
+    position: relative;
+    top: -19px;
+    left: 3px;
+
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    
+    color: #858585;
+}
+
+.SearchBox {
+    margin-left: 19rem;
+
+    display: flex;
+}
+
+.SearchPosition {
+    border: 3px solid #EBEBEB;
+    border-radius: 10px;
+    width: 416px;
+    height: 49px;
+
+    display: flex;
+    align-items: center;
+    padding-left: 1rem;
+}
+
+.SearchTitleInput {
+    border: none;
+    margin-left: 0.5rem;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 17px;
+    
+}
+
+.SearchTitleInput::placeholder {
+        color: #A5A4A4;
+}
+
+.ChoosePosition {
+    margin-left: 1rem;
+    padding-left: 1rem;
+
+    border: 3px solid #EBEBEB;
+    border-radius: 10px;
+    width: 233px;
+    height: 55px;
+}
+
+.ChooseHowwork {
+    margin-left: 1rem;
+    padding-left: 1rem;
+
+    border: 3px solid #EBEBEB;
+    border-radius: 10px;
+    width: 233px;
+    height: 55px;
+}
+
+.EachPostBox {
+    position: relative;
+    display: flex;
+    width: 831px;
+    height: 19px;
+    margin-left: 19rem;
+    margin-top: 2.5rem;
+}
+
+.PostTitle {
+    position: absolute;
+    font-family: 'Inter';
+    font-weight: 900;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+.PostPosition {
+    position: absolute;
+    margin-left: 29rem;
+}
+
+.PostHow {
+    margin-left: 44.7rem;
+}
+
+.PostLink {
+    text-decoration: none;
+    color: #000000;
+}
+
+.containerPaginate {
+    list-style: none;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pagePaginate {
+    padding: 0px 12px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.activePagePaginate{
+    padding: 8px;
+
+    background: rgba(21, 86, 247, 0.1);
+    border-radius: 3px;
+}
+
+.Footer {
+    position: absolute;
+    bottom: 0;
+
+    width: 100%;
+}
