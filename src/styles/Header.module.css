@@ -1,23 +1,23 @@
 .Nav {
-    display: flex;
-    align-items: center;
-    margin-top: 1.2rem;
-    margin-left: 20rem;
-    margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  margin-top: 1.2rem;
+  margin-left: 20rem;
+  margin-bottom: 1.2rem;
 }
 
 .NavItem {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 0.875rem;
-    line-height: 1rem;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.875rem;
+  line-height: 1rem;
 
-    color: #767676;
+  color: #767676;
 
-    padding-right: 2.25rem;
+  padding-right: 2.25rem;
 }
 
 .Logo {
-    padding-right: 20rem;
+  padding-right: 20rem;
 }
