@@ -4,14 +4,6 @@ interface IErrorProps {
   isError: boolean | null;
 }
 
-export const ErrorAlert = styled.p`
-  margin: 0.4rem;
-  color: #ff4f4f;
-  font-size: 0.7rem;
-  opacity: ${(props: IErrorProps) =>
-    props.isError == null ? "0" : !props.isError ? "1" : "0"};
-`;
-
 export const InputWrap = styled.nav`
   margin-bottom: 2.5rem;
 `;
@@ -74,4 +66,12 @@ export const ExplaneContext = styled.li`
   font-weight: bold;
   font-size: 0.7rem;
   margin-left: 1.5rem;
+`;
+
+export const ErrorAlert = styled.p`
+  margin: 0.4rem;
+  color: #ff4f4f;
+  font-size: 0.7rem;
+  opacity: ${(props: IErrorProps) =>
+    props.isError == null ? "0" : !props.isError ? "1" : "0"};
 `;

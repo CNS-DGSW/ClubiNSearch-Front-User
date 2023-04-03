@@ -63,9 +63,11 @@ const ApplyForm = () => {
           isEssential
           placehorderContext="이름을 입력해주세요."
           errorAlertContext={
-            errorCheckHandler?.name.isError
-              ? errorCheckHandler.name.context
-              : ""
+            errorCheckHandler
+              ? errorCheckHandler.name.isError
+                ? errorCheckHandler.name.context
+                : "None Error"
+              : "None Error"
           }
           isError={errorCheckHandler?.name.isError}
         />
@@ -76,9 +78,11 @@ const ApplyForm = () => {
           isEssential={true}
           placehorderContext="학번을 입력해주세요."
           errorAlertContext={
-            errorCheckHandler?.schoolNumber.isError
-              ? errorCheckHandler.schoolNumber.context
-              : ""
+            errorCheckHandler
+              ? errorCheckHandler.schoolNumber.isError
+                ? errorCheckHandler.schoolNumber.context
+                : "None Error"
+              : "None Error"
           }
           isError={errorCheckHandler?.schoolNumber.isError}
         />
@@ -89,9 +93,11 @@ const ApplyForm = () => {
           isEssential={true}
           placehorderContext='"-"를 제외한 연락처를 입력해주세요.'
           errorAlertContext={
-            errorCheckHandler?.phoneNumber.isError
-              ? errorCheckHandler.phoneNumber.context
-              : ""
+            errorCheckHandler
+              ? errorCheckHandler.phoneNumber.isError
+                ? errorCheckHandler.phoneNumber.context
+                : "None Error"
+              : "None Error"
           }
           isError={errorCheckHandler?.phoneNumber.isError}
         />
@@ -102,9 +108,11 @@ const ApplyForm = () => {
           isEssential={true}
           placehorderContext="자유롭게 입력해주세요."
           errorAlertContext={
-            errorCheckHandler?.introduce.isError
-              ? errorCheckHandler.introduce.context
-              : ""
+            errorCheckHandler
+              ? errorCheckHandler.introduce.isError
+                ? errorCheckHandler.introduce.context
+                : "None Error"
+              : "None Error"
           }
           isError={errorCheckHandler?.introduce.isError}
         />
@@ -114,7 +122,7 @@ const ApplyForm = () => {
           title="포트폴리오 (선택사항)"
           isEssential={false}
           placehorderContext="pdf형식을 권장합니다."
-          errorAlertContext="ErrorAlret"
+          errorAlertContext="ErrorAlert"
           isExplane={true}
           explaneContent={[
             "포트폴리오는 필수가 아닌 선택사항입니다.",
@@ -128,17 +136,12 @@ const ApplyForm = () => {
           title="링크 (선택사항)"
           isEssential={false}
           placehorderContext="https://"
-          errorAlertContext={
-            errorCheckHandler?.link.isError
-              ? errorCheckHandler.link.context
-              : ""
-          }
+          errorAlertContext="ErrorAlert"
           isExplane={true}
           explaneContent={[
             "링크 또한 필수가 아닌 선택사항입니다.",
             "자신을 드러낼 수 있는 깃허브, 개인 블로그 등 자유롭게 입력해주세요.",
           ]}
-          isError={errorCheckHandler?.link.isError}
         />
 
         <S.CNSComputer
@@ -164,7 +167,6 @@ const ApplyForm = () => {
                 const initError: IErrorValue = ErrorHandler(contentsValue);
                 console.log(initError);
                 setErrorCheckHandler({ ...initError });
-                console.log(errorCheckHandler);
 
                 // console.log(CheckError);
 

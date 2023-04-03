@@ -30,7 +30,6 @@ const ErrorHandler = (contentValue: IContentsValue) => {
       isError: false,
     },
   };
-  console.log(initError);
 
   if (regName.test(contentValue.name) || contentValue.name === "") {
     initError.name.isError = true;
@@ -45,16 +44,17 @@ const ErrorHandler = (contentValue: IContentsValue) => {
 
   if (
     !regSchoolNumber.test(contentValue.schoolNumber) ||
+    contentValue.schoolNumber.length !== 4 ||
     contentValue.schoolNumber === ""
   ) {
     initError.schoolNumber.isError = true;
-    if (
+    if (contentValue.schoolNumber === "") {
+      initError.schoolNumber.context = "필수 입력 항목 입니다.";
+    } else if (
       !regSchoolNumber.test(contentValue.schoolNumber) ||
       contentValue.schoolNumber.length !== 4
     ) {
       initError.schoolNumber.context = "학번을 정확하게 입력해주세요.";
-    } else if (contentValue.schoolNumber === "") {
-      initError.schoolNumber.context = "필수 입력 항목 입니다.";
     } else {
       initError.schoolNumber.context = "필수 입력 항목 입니다.";
     }
@@ -65,35 +65,26 @@ const ErrorHandler = (contentValue: IContentsValue) => {
     contentValue.phoneNumber === ""
   ) {
     initError.phoneNumber.isError = true;
-    if (!regPhone.test(contentValue.phoneNumber)) {
+    if (contentValue.phoneNumber === "") {
+      initError.phoneNumber.context = "필수 입력 항목 입니다.";
+    } else if (!regPhone.test(contentValue.phoneNumber)) {
       initError.phoneNumber.context = "전화 번호를 정확하게 입력해주세요.";
-    } else if (contentValue.phoneNumber === "") {
-      initError.phoneNumber.context = "필수 입력 항목 입니다.";
     } else {
       initError.phoneNumber.context = "필수 입력 항목 입니다.";
     }
   }
 
-  if (contentValue.introduce.length > 3 || contentValue.introduce === "") {
+  if (contentValue.introduce.length < 3 || contentValue.introduce === "") {
     initError.introduce.isError = true;
-    if (contentValue.introduce.length > 3) {
-      initError.introduce.context = "자기소개를 정확하게 입력해주세요.";
-    } else if (contentValue.introduce === "") {
+    if (contentValue.introduce === "") {
       initError.introduce.context = "필수 입력 항목 입니다.";
+    } else if (contentValue.introduce.length < 3) {
+      initError.introduce.context = "3자이상 자기소개를 정확하게 입력해주세요.";
     } else {
       initError.introduce.context = "필수 입력 항목 입니다.";
     }
   }
 
-  if (!regUrl.test(contentValue.link)) {
-    initError.link.isError = true;
-    if (contentValue.link !== "") {
-      initError.link.isError = false;
-    } else if (regUrl.test(contentValue.link)) {
-      initError.link.context = "링크를 정확하게 입력해주세요.";
-    }
-  }
-  console.log("dd", initError);
   return initError;
 };
 
