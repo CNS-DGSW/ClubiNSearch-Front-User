@@ -1,12 +1,14 @@
-.Nav {
+import styled from "styled-components";
+
+export const Nav = styled.div`
     display: flex;
     align-items: center;
     margin-top: 1.2rem;
     margin-left: 20rem;
     margin-bottom: 1.2rem;
-}
+`
 
-.NavItem {
+export const NavItem = styled.div`
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
@@ -15,9 +17,10 @@
 
     color: #767676;
 
-    padding-right: 2.25rem;
-}
+    margin-right: calc(33% / 4);
+`
 
-.Logo {
+export const headerLogo = styled.div`
     padding-right: 20rem;
-}
+`
+

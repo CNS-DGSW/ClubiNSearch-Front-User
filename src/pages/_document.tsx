@@ -15,7 +15,7 @@ export default class MyDocument extends Document {
                     sheet.collectStyles(<App {...props}/>),
                 })
 
-            const initalialProps = awa it Document.getInitialProps(ctx)
+            const initalialProps = await Document.getInitialProps(ctx)
             return {
                 ...initalialProps,
                 styles: (

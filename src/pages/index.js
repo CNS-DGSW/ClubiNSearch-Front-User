@@ -1,15 +1,14 @@
 // import fs from 'fs';
 import Ask from '../component/Ask';
-import styles from '../styles/index.module.css';
 import Image from 'next/image';
-import Ad from '../../asset/Ad.png';
-import SearchIcon from '../../asset/SearchIcon.png';
+import Ad from '../../asset/Ad.svg';
+import SearchIcon from '../../asset/SearchIcon.svg';
 import fs from 'fs';
 import matter from 'gray-matter';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import styled from 'styled-components';
+import * as S from "../styles/index.style";
 
 export async function getStaticProps() {
   const files = fs.readdirSync('ContentDetail');
@@ -119,77 +118,87 @@ export default function Home({getposts}) {
   const ShowGroup = groupType.map(({info,slug},idx)=> {
       return(
       <div  key={info.group}>
-        <div id={`${info.group}back`} className={groupstyle === info.group ? styles.ChooseGroupBackClick : styles.ChooseGroupBack} ref={elem =>backRef[idx] = elem }></div>
-        <div id={info.group} className={groupstyle === info.group ? styles.ChooseGroupContentClick : styles.ChooseGroupContent} ref={elem =>contentRef[idx] = elem } onClick={clickGroup}>{info.group}</div>
-      </div>)
+        {
+          groupstyle === info.group ?
+          <S.ChooseGroupBackClick id={`${info.group}back`} ref={elem =>backRef[idx] = elem }></S.ChooseGroupBackClick>
+          : <S.ChooseGroupBack id={`${info.group}back`} ref={elem =>backRef[idx] = elem } ></S.ChooseGroupBack>
+        }
+        {
+          groupstyle === info.group ?
+          <S.ChooseGroupContentClick id={info.group} ref={elem =>contentRef[idx] = elem } onClick={clickGroup}>{info.group}</S.ChooseGroupContentClick>
+          : <S.ChooseGroupContent id={info.group} ref={elem =>contentRef[idx] = elem } onClick={clickGroup}>{info.group}</S.ChooseGroupContent>
+        }
+        </div>)
     })
 
   const ShowPosts = currentItems.map(({info,slug},index)=>{
       return (
-      <div key={info} className={styles.EachPostBox}>
-        <Link href={`/Detail/${slug}`} className={styles.PostLink} >
-          <div className={styles.PostTitle}>{info.title}</div>
-          <div className={styles.PostPosition}>{info.part}</div>
-          <div className={styles.PostHow}>{info.how}</div>
+      <S.EachPostBox key={info}>
+        <Link href={`/Detail/${slug}`}>
+          {info.title}
         </Link>
-      </div>
+        <S.PostPosition>{info.part}</S.PostPosition>
+        <S.PostHow>{info.how}</S.PostHow>
+          
+      </S.EachPostBox>
       )
     })
 
-  const Test = styled.div`
-    color: red;
-    background-color: aqua;
-  `
-
   return (
     <div>
-      <Image src={Ad} alt="Ad" width="1512" height='107'/>
-      <h1 className={styles.IntroH1}>가슴 뛰는 미래,<br/>내일이 있는 삶</h1>
-      <div className={styles.IntroDiv}>우리는 “세상을 이롭게 하는 소프트웨어 개발자가 되겠다”는  같은 목표에 마음이 움직여<br/> 
-            이곳 “DGSW”에 모이게 되었습니다. DGSW는 모두가 협동하여 서로의 목표를 향해 나아갑니다.<br/>
-            동료들과 함께 서로 도우며 불가능한 가능하게 하며 열정적으로 유능한 개발자로 성장하고 있습니다.<br/>
-            가슴이 설레시나요?지금이 바로 “DGSW”동아리에 합류할 때입니다. 
-      </div>
+      <S.AdWrapper>
+        <Image src={Ad} alt="Ad"/>
+      </S.AdWrapper>
 
-      <div className={styles.ChooseGroupParents}> 
-      {ShowGroup}
-      </div>
+      <S.ContentWrapper>
+        <S.IntroH1>가슴 뛰는 미래,<br/>내일이 있는 삶</S.IntroH1>
+        <S.IntroDiv>우리는 “세상을 이롭게 하는 소프트웨어 개발자가 되겠다”는  같은 목표에 마음이 움직여<br/> 
+              이곳 “DGSW”에 모이게 되었습니다. DGSW는 모두가 협동하여 서로의 목표를 향해 나아갑니다.<br/>
+              동료들과 함께 서로 도우며 불가능한 가능하게 하며 열정적으로 유능한 개발자로 성장하고 있습니다.<br/>
+              가슴이 설레시나요?지금이 바로 “DGSW”동아리에 합류할 때입니다. 
+        </S.IntroDiv>
 
-      <div className={styles.SearchBox}>
-        <div className={styles.SearchPosition}>
-        <Image src={SearchIcon} alt='SearchIcon'/>
-        <input className={styles.SearchTitleInput} placeholder='포지션 역할 검색하기' onKeyPress={onKeyPress}/>
-        </div>
+        <S.ChooseGroupParents>
+        {ShowGroup}
+        </S.ChooseGroupParents>
+
+        <S.SearchBox>
+          <S.SearchPosition>
+            <Image src={SearchIcon} alt='SearchIcon'/>
+            <S.SearchTitleInput placeholder='포지션 역할 검색하기' onKeyPress={onKeyPress}/>
+          </S.SearchPosition>
+          
+          <S.ChoosePosition required  onChange={changePosition}>
+            <option disabled selected hidden>채용 포지션</option>
+            <option value="Front-end">프론트엔드</option>
+            <option value="Back-end">벡엔드</option>
+            <option value="Designer">디자이너</option>
+            <option value="3D-Design">3D 디자인</option>
+            <option value="Planner">기획</option>
+          </S.ChoosePosition>
+          <S.ChooseHowwork required onChange={changeHowwork}>
+            <option disabled selected hidden>채용 형태</option>
+            <option>정규직</option>
+            <option>비정규직</option>
+            <option>인턴</option>
+          </S.ChooseHowwork>
+        </S.SearchBox>
         
-        <select required className={styles.ChoosePosition} onChange={changePosition}>
-          <option disabled selected hidden>채용 포지션</option>
-          <option value="Front-end">프론트엔드</option>
-          <option value="Back-end">벡엔드</option>
-          <option value="Designer">디자이너</option>
-          <option value="3D-Design">3D 디자인</option>
-          <option value="Planner">기획</option>
-        </select>
-        <select required className={styles.ChooseHowwork} onChange={changeHowwork}>
-          <option disabled selected hidden>채용 형태</option>
-          <option>정규직</option>
-          <option>비정규직</option>
-          <option>인턴</option>
-        </select>
-      </div>
-      
-      {ShowPosts}
+        <S.PostWrapper>
+          {ShowPosts}
+        </S.PostWrapper>
 
-      <footer className={styles.Footer}>
-        <ReactPaginate
-        pageCount={totalPages}
-        previousLabel=""
-        nextLabel=""
-        onPageChange={handlePageClick}
-        containerClassName={styles.containerPaginate}
-        pageClassName={styles.pagePaginate}
-        activeClassName={styles.activePagePaginate}
-      ></ReactPaginate>
-      </footer>
+        <S.StyledReactPaginate
+          pageCount={totalPages}
+          previousLabel=""
+          nextLabel=""
+          onPageChange={handlePageClick}
+          containerClassName="containerPaginate"
+          pageClassName="pagePaginate"
+          activeClassName="ctivePagePaginate"
+        ></S.StyledReactPaginate>
+      </S.ContentWrapper>
+
 
       <Ask/>
     </div>

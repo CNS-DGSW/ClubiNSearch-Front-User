@@ -1,13 +1,13 @@
-import AskCNS from '../../asset/AskCNS.png';
+import AskCNS from '../../asset/AskCNS.svg';
 import Image from 'next/image';
-import styles from '../styles/Ask.module.css';
+import * as S from "../styles/Ask.style";
 
 export default function Ask() {
 
     return(
-        <div className={styles.Ask}>
+        <S.Ask>
             <p >채용팀에<br/>문의하기</p>
             <Image src={AskCNS} alt='Ask'/>
-        </div>
+        </S.Ask>
     )
 }
