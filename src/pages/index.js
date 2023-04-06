@@ -11,109 +11,93 @@ import ReactPaginate from 'react-paginate';
 import * as S from "../styles/index.style";
 
 export async function getStaticProps() {
-  const files = fs.readdirSync('ContentDetail');
+  const files = fs.readdirSync("ContentDetail");
 
-  const getposts = files.map((fileName) =>{
-    const slug = fileName.replace('.md','');
-    const readFile = fs.readFileSync(`ContentDetail/${fileName}`,'utf-8')
-    const {data : info, content} = matter(readFile)
+  const getposts = files.map((fileName) => {
+    const slug = fileName.replace(".md", "");
+    const readFile = fs.readFileSync(`ContentDetail/${fileName}`, "utf-8");
+    const { data: info, content } = matter(readFile);
     return {
-      info , slug
-    }
-  }
-  );
+      info,
+      slug,
+    };
+  });
 
   return {
-      props : {
-        getposts
-      }
-  }
+    props: {
+      getposts,
+    },
+  };
 }
 
-export default function Home({getposts}) {
-
-  const [posts, setPosts] = useState(getposts)
-  const [groupstyle, setGroupstyle] = useState()
-  const [pages, setPages] = useState([])
-  const [totalPages , setTotalPages] = useState(Math.ceil(posts.length/7))
+export default function Home({ getposts }) {
+  const [posts, setPosts] = useState(getposts);
+  const [groupstyle, setGroupstyle] = useState();
+  const [pages, setPages] = useState([]);
+  const [totalPages, setTotalPages] = useState(Math.ceil(posts.length / 7));
   const [itemOffset, setItemOffset] = useState(0);
-  
-  const currentItems = posts.slice(itemOffset,itemOffset + 7)
 
-  const contentRef = useRef([])
-  const backRef = useRef(null)
+  const currentItems = posts.slice(itemOffset, itemOffset + 7);
+
+  const contentRef = useRef([]);
+  const backRef = useRef(null);
 
   const [groupType, setGroupType] = useState(
-    getposts.filter(({info,slug}, index)=>{ //이 코드 이해하기 [완료]
-      return ( 
-        getposts.findIndex(({info : info2}, jdex) => { // 어째서....post2에 값이 들어있는 것이지? 어떻게 넘어가는 거지?
-          return info.group === info2.group //첫번째 맞는 조건 찾자마자 그 값의 인덱스(jdex) 번호를 리턴하고 종료, post가 바뀜, 근데 계속 0 나옴 -> {info}로 들고왔어야 함, 경로 잘못 됌
+    getposts.filter(({ info, slug }, index) => {
+      //이 코드 이해하기 [완료]
+      return (
+        getposts.findIndex(({ info: info2 }, jdex) => {
+          // 어째서....post2에 값이 들어있는 것이지? 어떻게 넘어가는 거지?
+          return info.group === info2.group; //첫번째 맞는 조건 찾자마자 그 값의 인덱스(jdex) 번호를 리턴하고 종료, post가 바뀜, 근데 계속 0 나옴 -> {info}로 들고왔어야 함, 경로 잘못 됌
         }) === index //만약 중복이라면 getposts.findIndex 리턴 값이 index보다 작을 것 -> 조건 충족 X
-      )
+      );
     })
-  )
+  );
 
   const searchTitle = (e) => {
     // 검색 창이 포함하고있는 값을 제목과 비교해서 맞는 값만 찾기 => 현재 화면에 보여지고 있는 글 관리하는 상태 필요 -> 그 상태 기반으로 필터,필터,필터
-    setPosts(
-      posts.filter((post)=>(
-        (post.info.title).includes(e.target.value)
-      ))
-    )
-  }
-  
+    setPosts(posts.filter((post) => post.info.title.includes(e.target.value)));
+  };
+
   const onKeyPress = (e) => {
-    if(e.key == 'Enter') {
-      searchTitle(e)
+    if (e.key == "Enter") {
+      searchTitle(e);
     }
-  }
+  };
 
   const changePosition = (e) => {
-    setPosts(
-      getposts.filter((post)=>(
-        (post.info.part) === (e.target.value)
-      ))
-    )
-  }
+    setPosts(getposts.filter((post) => post.info.part === e.target.value));
+  };
 
   const changeHowwork = (e) => {
-    setPosts(
-      getposts.filter((post)=>(
-        (post.info.how) === (e.target.value)
-      ))
-    )    
-  }
+    setPosts(getposts.filter((post) => post.info.how === e.target.value));
+  };
 
   const clickGroup = (e) => {
-    setGroupstyle(e.target.id)
-    const backTag = document.getElementById(`${e.target.id}back`)
-    backTag.style.width = e.target.clientWidth + "px"
-    backTag.style.height = e.target.clientHeight + "px"
+    setGroupstyle(e.target.id);
+    const backTag = document.getElementById(`${e.target.id}back`);
+    backTag.style.width = e.target.clientWidth + "px";
+    backTag.style.height = e.target.clientHeight + "px";
 
-    setPosts(
-      getposts.filter((post)=>
-        post.info.group === e.target.id
-      )
-    )
-  }
+    setPosts(getposts.filter((post) => post.info.group === e.target.id));
+  };
 
   useEffect(() => {
-    groupType.map(({slug},idx)=>{
-      const contentTag = contentRef[idx]
-      const backTag = backRef[idx]
+    groupType.map(({ slug }, idx) => {
+      const contentTag = contentRef[idx];
+      const backTag = backRef[idx];
 
-      backTag.style.width = contentTag.clientWidth + "px"
-      backTag.style.height = contentTag.clientHeight + "px"
+      backTag.style.width = contentTag.clientWidth + "px";
+      backTag.style.height = contentTag.clientHeight + "px";
 
-      setTotalPages(Math.ceil(posts.length/7))
-    })
-  }
-  , [posts]) 
+      setTotalPages(Math.ceil(posts.length / 7));
+    });
+  }, [posts]);
 
   const handlePageClick = (e) => {
     const newOffset = (e.selected * 7) % posts.length;
-    setItemOffset(newOffset)
-  }
+    setItemOffset(newOffset);
+  };
 
   const ShowGroup = groupType.map(({info,slug},idx)=> {
       return(
@@ -200,7 +184,7 @@ export default function Home({getposts}) {
       </S.ContentWrapper>
 
 
-      <Ask/>
+      <Ask />
     </div>
-  )
+  );
 }

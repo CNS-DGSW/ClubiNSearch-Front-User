@@ -3,9 +3,8 @@ import Image from 'next/image';
 import * as S from "../styles/Header.style";
 import Link from 'next/link';
 
-export default function Header(){
-
-  return(
+export default function Header() {
+  return (
     <header>
       <S.Nav>
         <S.headerLogo>
@@ -19,5 +18,5 @@ export default function Header(){
         <S.NavItem>자주 묻는 질문</S.NavItem>
       </S.Nav>
     </header>
-  )
+  );
 }
