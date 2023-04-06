@@ -15,18 +15,19 @@ export default class MyDocument extends Document {
             sheet.collectStyles(<App {...props} />),
         });
 
-      const initalialProps = await Document.getInitialProps(ctx);
-      return {
-        ...initalialProps,
-        styles: (
-          <>
-            {initalialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
-      };
-    } finally {
-      sheet.seal();
+            const initalialProps = await Document.getInitialProps(ctx)
+            return {
+                ...initalialProps,
+                styles: (
+                    <>
+                        {initalialProps.styles}
+                        {sheet.getStyleElement()}
+                    </>
+                )
+            }
+        } finally {
+            sheet.seal()
+        }
     }
   }
 }
