@@ -15,7 +15,6 @@ export const AdWrapper = styled.div`
 `
 
 export const ContentWrapper = styled.div`
-    background: aqua;
     
     margin:auto;
     width: 60vw;
