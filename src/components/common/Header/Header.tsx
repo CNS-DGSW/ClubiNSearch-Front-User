@@ -1,6 +1,6 @@
-import headerLogo from '../../asset/headerLogo.svg';
+import headerLogo from '../../../asset/headerLogo.svg';
 import Image from 'next/image';
-import * as S from "../styles/Header.style";
+import * as S from "./Header.style";
 import Link from 'next/link';
 
 export default function Header() {

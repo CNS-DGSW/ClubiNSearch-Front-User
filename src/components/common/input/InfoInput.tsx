@@ -1,5 +1,5 @@
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
-import * as S from "@/styles/InfoInputStyle";
+import * as S from "./InfoInputStyle";
 
 interface IInformation {
   value: string;

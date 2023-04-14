@@ -24,6 +24,6 @@
     "**/*.tsx",
     "src/pages/_app.js",
     "src/pages/_document.js"
-  ],
+, "src/components/main/main.js"  ],
   "exclude": ["node_modules"]
 }

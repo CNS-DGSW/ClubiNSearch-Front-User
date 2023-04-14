@@ -20,6 +20,19 @@ export const AdWrapper = styled.div`
 export const Content = styled.div`
     margin-left: 20rem;
     margin-top: 4rem;
+
+    > h1{
+        
+    }
+    > h3{
+        margin-top: 1.2rem;
+    }
+    > ul, p{
+        margin-top: 0.6rem;
+        line-height: 1.7rem;
+        color: #858585;
+        font-weight: 700;
+    }
 `
 
 export const Box = styled.div`
@@ -72,10 +85,14 @@ export const ApplyBtn = styled.button`
     background-color: #4980EE;
     margin-top: 0.5rem;
     
-    color:  #FFFFFF ;
-    font-family: 'Nanum Myeongjo';
-    font-style: normal;
-    font-weight: 700;
-    font-size: 0.6rem;
-    line-height: 0.7rem;
+    > a{
+        text-decoration: none;
+        color:  #FFFFFF ;
+        font-family: 'Nanum Myeongjo';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 0.6rem;
+        line-height: 0.7rem;  
+    }
+
 `

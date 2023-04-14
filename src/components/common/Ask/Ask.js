@@ -1,6 +1,6 @@
-import AskCNS from '../../asset/AskCNS.svg';
+import AskCNS from '../../../asset/AskCNS.svg';
 import Image from 'next/image';
-import * as S from "../styles/Ask.style";
+import * as S from "./Ask.style";
 
 export default function Ask() {
 

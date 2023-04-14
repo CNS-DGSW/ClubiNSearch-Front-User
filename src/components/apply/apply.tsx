@@ -1,9 +1,9 @@
 import FileInput from "@/components/common/input/FileInput";
-import Footer from "@/components/common/Footer";
+import Footer from "@/components/common/footer/Footer";
 import InfoInput from "@/components/common/input/InfoInput";
 import ErrorHandler from "@/util/ErrorHandler";
 import { useEffect, useState } from "react";
-import cnsComputer from "../../../asset/cnsComputer.svg";
+import cnsComputer from "../../asset/cnsComputer.svg";
 import * as S from "./apply.style";
 import { IContentsValue } from "@/types/IContentsValue";
 import { IErrorValue } from "@/types/IErrorValue";
@@ -167,20 +167,7 @@ const ApplyForm = () => {
                 const initError: IErrorValue = ErrorHandler(contentsValue);
                 console.log(initError);
                 setErrorCheckHandler({ ...initError });
-
-                // console.log(CheckError);
-
-                // if (
-                //   CheckError[0] &&
-                //   CheckError[1] &&
-                //   CheckError[2] &&
-                //   CheckError[3] &&
-                //   CheckError[4]
-                // ) {
-                //   console.log("통과", contentsValue, CheckError);
-                // } else {
-                //   console.log("실패", contentsValue, CheckError);
-                // }
+                
               } else {
                 alert("개인정보 수집 동의에 동의해주세요.");
               }
