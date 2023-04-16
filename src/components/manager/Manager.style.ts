@@ -15,3 +15,11 @@ export const ContentsBox = styled.nav`
   background-color: #fff;
   border-top-right-radius: 4rem;
 `;
+
+export const MemberContentsContainer = styled.nav`
+  margin: 0rem 4rem;
+  width: 90%;
+  height: 82%;
+  overflow: auto;
+  display: flex;
+`;

@@ -21,7 +21,18 @@ export const SearchInput = styled.input`
   margin-left: 5%;
   width: 90%;
   font-size: 0.875rem;
+  color: #808080;
   &::placeholder {
     color: #c0c0c0;
   }
+`;
+
+export const Title = styled.p`
+  font-size: 1.125rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+`;
+
+export const ContentsContainer = styled.nav`
+  margin: 2rem 4rem;
 `;
