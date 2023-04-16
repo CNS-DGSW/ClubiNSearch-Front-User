@@ -8,7 +8,9 @@ const Title = () => {
       <S.Title>프론트 엔드 개발자</S.Title>
       <S.SearchBoxContainer>
         <S.SearchImageIcon src={SearchIcon} alt="" />
-        <S.SearchInput type="text" placeholder="검색" />
+        <>
+          <S.SearchInput type="text" placeholder="검색" />
+        </>
       </S.SearchBoxContainer>
     </S.ContentsContainer>
   );

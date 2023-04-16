@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Image from "next/image";
 
 export const MainContainer = styled.nav`
   width: 20rem;
@@ -12,6 +13,7 @@ export const SubContainer = styled.nav`
   background-color: #f3f3f3;
   border-radius: 5px;
   overflow: hidden;
+  position: relative;
 `;
 
 export const TitleConatainer = styled.div`
@@ -34,4 +36,14 @@ export const TitleDateInput = styled.input`
   width: 8rem;
   text-align: right;
   letter-spacing: -0.05rem;
+`;
+
+export const TrashCanIcon = styled(Image)`
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.75rem;
+`;
+
+export const TitleLeftContainer = styled.div`
+  display: flex;
 `;

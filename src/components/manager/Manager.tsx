@@ -11,13 +11,13 @@ const Manager = () => {
       <S.ContentsBox>
         <Title />
         <S.MemberContentsContainer>
-          <MemederBox></MemederBox>
-          <MemederBox></MemederBox>
-          <MemederBox></MemederBox>
-          <MemederBox></MemederBox>
-          <MemederBox></MemederBox>
-          <MemederBox></MemederBox>
-          <MemederBox></MemederBox>
+          <MemederBox title="📩 지원 접수"></MemederBox>
+          <MemederBox title="1"></MemederBox>
+          <MemederBox title="2"></MemederBox>
+          <MemederBox title="3"></MemederBox>
+          <MemederBox title="4"></MemederBox>
+          <MemederBox title="5"></MemederBox>
+          <MemederBox title="56"></MemederBox>
         </S.MemberContentsContainer>
       </S.ContentsBox>
     </S.ManagerMainContainer>

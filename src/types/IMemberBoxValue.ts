@@ -1,6 +1,6 @@
 export interface IMemberBoxValue {
   title: string;
-  member: IMemberValue[];
+  member?: IMemberValue[];
 }
 
 interface IMemberValue {
