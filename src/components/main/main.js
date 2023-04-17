@@ -61,24 +61,22 @@ export default function Main({ getposts }) {
 
   useEffect(() => {
     groupType && groupType.map(({ slug }, idx) => {
-      const contentTag = contentRef[idx];
-      const backTag = backRef[idx];
-      console.log(contentRef)
+      // const contentTag = contentRef[idx];
+      // const backTag = backRef[idx];
 
-      backTag.style.width = contentTag.clientWidth + "px";
-      backTag.style.height = contentTag.clientHeight + "px";
+      // backTag.style.width = contentTag.clientWidth + "px";
+      // backTag.style.height = contentTag.clientHeight + "px";
 
       setTotalPages(Math.ceil(posts.length / 7));
     });
-    console.log(posts)
-  }, [posts]);
+  }, []);
 
   const handlePageClick = (e) => {
     const newOffset = (e.selected * 7) % posts.length;
     setItemOffset(newOffset);
   };
 
-  const ShowGroup = groupType && groupType.map(({info,slug},idx)=> {
+/*  const ShowGroup = groupType && groupType.map(({info,slug},idx)=> {
       return(
       <div  key={info.group}>
         {
@@ -92,7 +90,7 @@ export default function Main({ getposts }) {
           : <S.ChooseGroupContent id={info.group} ref={elem =>contentRef[idx] = elem } onClick={clickGroup}>{info.group}</S.ChooseGroupContent>
         }
         </div>)
-    })
+    }) */
 
   const ShowPosts = currentItems && currentItems.map(({info,slug},index)=>{
       return (
@@ -100,20 +98,19 @@ export default function Main({ getposts }) {
         <Link href={`/Detail/${slug}`}>
           {info.title}
         </Link>
-        <S.PostPosition>{info.part}</S.PostPosition>
-        <S.PostHow>{info.how}</S.PostHow>
-          
+        <S.PostPositionHow>{info.part}</S.PostPositionHow>
+        <S.PostPositionHow>{info.how}</S.PostPositionHow>
       </S.EachPostBox>
       )
     })
 
   return (
-    <div>
+    <S.Wrapper>
       <S.AdWrapper>
         <Image src={Ad} alt="Ad"/>
       </S.AdWrapper>
 
-      <S.ContentWrapper>
+      <S.ContentWrapperWithoutPagination>
         <S.IntroH1>가슴 뛰는 미래,<br/>내일이 있는 삶</S.IntroH1>
         <S.IntroDiv>우리는 “세상을 이롭게 하는 소프트웨어 개발자가 되겠다”는  같은 목표에 마음이 움직여<br/> 
               이곳 “DGSW”에 모이게 되었습니다. DGSW는 모두가 협동하여 서로의 목표를 향해 나아갑니다.<br/>
@@ -121,48 +118,43 @@ export default function Main({ getposts }) {
               가슴이 설레시나요?지금이 바로 “DGSW”동아리에 합류할 때입니다. 
         </S.IntroDiv>
 
-        <S.ChooseGroupParents>
-        {ShowGroup}
-        </S.ChooseGroupParents>
-
         <S.SearchBox>
           <S.SearchPosition>
             <Image src={SearchIcon} alt='SearchIcon'/>
             <S.SearchTitleInput placeholder='포지션 역할 검색하기' onKeyPress={onKeyPress}/>
           </S.SearchPosition>
           
-          <S.ChoosePosition required  onChange={changePosition}>
+          <S.ChoosePositionHow required  onChange={changePosition}>
             <option disabled selected hidden>채용 포지션</option>
             <option value="Front-end">프론트엔드</option>
             <option value="Back-end">벡엔드</option>
             <option value="Designer">디자이너</option>
             <option value="3D-Design">3D 디자인</option>
             <option value="Planner">기획</option>
-          </S.ChoosePosition>
-          <S.ChooseHowwork required onChange={changeHowwork}>
+          </S.ChoosePositionHow>
+          <S.ChoosePositionHow required onChange={changeHowwork}>
             <option disabled selected hidden>채용 형태</option>
             <option>정규직</option>
             <option>비정규직</option>
             <option>인턴</option>
-          </S.ChooseHowwork>
+          </S.ChoosePositionHow>
         </S.SearchBox>
         
         <S.PostWrapper>
           {ShowPosts}
         </S.PostWrapper>
-
-        <S.StyledReactPaginate
-          pageCount={totalPages}
-          previousLabel=""
-          nextLabel=""
-          onPageChange={handlePageClick}
-          containerClassName="containerPaginate"
-          pageClassName="pagePaginate"
-        ></S.StyledReactPaginate>
-      </S.ContentWrapper>
-
+      </S.ContentWrapperWithoutPagination>
+      
+      <S.StyledReactPaginate
+        pageCount={totalPages}
+        previousLabel=""
+        nextLabel=""
+        onPageChange={handlePageClick}
+        containerClassName="containerPaginate"
+        pageClassName="pagePaginate"
+      ></S.StyledReactPaginate>
 
       <Ask />
-    </div>
+    </S.Wrapper>
   );
 }
