@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const ManagerMainContainer = styled.nav`
   position: absolute;
   width: 100%;
-  height: 90%;
+  height: 110%;
   background-color: #f2f4f6;
   padding-top: 2%;
   display: flex;

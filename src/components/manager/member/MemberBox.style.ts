@@ -36,14 +36,34 @@ export const TitleDateInput = styled.input`
   width: 8rem;
   text-align: right;
   letter-spacing: -0.05rem;
+  &:hover {
+    filter: opacity(60%);
+  }
 `;
 
 export const TrashCanIcon = styled(Image)`
   width: 1rem;
   height: 1rem;
   margin-left: 0.75rem;
+  &:hover {
+    filter: brightness(50%);
+  }
 `;
 
 export const TitleLeftContainer = styled.div`
   display: flex;
+`;
+
+export const FooterNumOfPeople = styled.div`
+  background-color: blue;
+  position: absolute;
+  bottom: 0;
+  width: 80%;
+  height: 1rem;
+  padding: 8% 10%;
+  border-radius: 5px;
+  color: #394050;
+  font-weight: bold;
+  background-color: #f3f3f3;
+  box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.5);
 `;

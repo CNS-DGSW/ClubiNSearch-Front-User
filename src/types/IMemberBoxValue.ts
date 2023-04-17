@@ -3,7 +3,7 @@ export interface IMemberBoxValue {
   member?: IMemberValue[];
 }
 
-interface IMemberValue {
+export interface IMemberValue {
   name: string;
   schoolNumber: string;
   phoneNumber: string;
