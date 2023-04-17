@@ -1,6 +1,14 @@
 import ReactPaginate from "react-paginate";
 import styled from "styled-components";
 
+export const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    width: 100vw;
+    height: calc(100vh - 5rem); //왜 header만 빠지는데 5rem이나 빼줘야 모니터 100%에 맞는거지?
+`
+
 export const AdWrapper = styled.div`
     width: 100%;
     height: 5rem;
@@ -14,25 +22,25 @@ export const AdWrapper = styled.div`
     }
 `
 
-export const ContentWrapper = styled.div`
-    
-    margin:auto;
-    width: 60vw;
+export const ContentWrapperWithoutPagination = styled.div`
+    margin: 0 auto;
 `
 
 export const IntroH1 = styled.h1`
-    margin-top: 3%;
     margin-left: 1rem;
+    margin-top: 3.5%;
 
     font-family: 'Inter';
     font-weight: 700;
     font-size: 1.8rem;
+    line-height: 2.5rem;
     
     color: #394050;
 `
 
 export const IntroDiv = styled.div`
     margin-left: 1rem;
+    margin-top: 0.8rem;
 
     font-family: 'Inter';
     font-weight: 700;
@@ -41,7 +49,7 @@ export const IntroDiv = styled.div`
     
     color: #858585;
 `
-
+/*
 export const ChooseGroupParents = styled.div`
     display: flex;
 
@@ -91,17 +99,18 @@ export const ChooseGroupContentClick = styled.div`
     
     color: #858585;
 `
+*/
 
 export const SearchBox = styled.div`
+    margin-top: 1.5rem;
     display: flex;
-
     width: 60vw;
 `
 
 export const SearchPosition = styled.div`
     border: 3px solid #EBEBEB;
     border-radius: 10px;
-    width: 33vw;
+    width: 45%;
     min-width: 16rem;
     height: 49px;
 
@@ -130,7 +139,17 @@ export const SearchTitleInput = styled.input`
     }
 `
 
-export const ChoosePosition = styled.select`
+export const ChoosePositionHow = styled.select`
+    margin-left: 1rem;
+    padding-left: 1rem;
+
+    border: 3px solid #EBEBEB;
+    border-radius: 10px;
+    width: calc((100% - 45% - 2rem) / 2 );
+    height: 55px;
+`
+
+/* export const ChooseHowwork = styled.select`
     margin-left: 1rem;
     padding-left: 1rem;
 
@@ -138,23 +157,15 @@ export const ChoosePosition = styled.select`
     border-radius: 10px;
     width: 19.5vw;
     height: 55px;
-`
-
-export const ChooseHowwork = styled.select`
-    margin-left: 1rem;
-    padding-left: 1rem;
-
-    border: 3px solid #EBEBEB;
-    border-radius: 10px;
-    width: 19.5vw;
-    height: 55px;
-`
+` */
 
 export const EachPostBox = styled.div`
     display: flex;
-    height: 19px;
+    min-height: 3rem;
+    height: calc(100% / 7);
     > a {
-        width: 33vw;
+        width: 45%;
+        margin-left: 1rem;
         padding-right: 3rem;
         min-width: 18.375rem;
         
@@ -167,6 +178,15 @@ export const EachPostBox = styled.div`
     }
 `
 
+export const PostWrapper = styled.div`
+    margin-top: 4vh;
+
+    height: 45vh;
+    width: 60vw;
+    display: flex;
+    flex-direction: column;
+`
+
 // export const PostTitle = styled.div`
 //     font-family: 'Inter';
 //     font-weight: 900;
@@ -174,24 +194,27 @@ export const EachPostBox = styled.div`
 //     line-height: 19px;
 // `
 
-export const PostPosition = styled.div`
-width: 18.5vw;
-margin-right: 2rem;
+export const PostPositionHow = styled.div`
+    width: calc((100% - 45% - 2rem) / 2 );
+    margin-left: 1.5rem;
 `
 
-export const PostHow = styled.div`
+/* export const PostHow = styled.div`
     width: 19.5vw;
-`
+` */
 
 
 export const StyledReactPaginate = styled(ReactPaginate).attrs({
     activeClassName : "active",
 })`
     list-style: none;
+    margin: -0.7rem auto auto auto;
 
+    height: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     
     li {
         padding: 8px;
@@ -209,15 +232,6 @@ export const StyledReactPaginate = styled(ReactPaginate).attrs({
         border-radius: 3px;
     }
 
-`
-
-export const PostWrapper = styled.div`
-
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-
-    height: 40vh;
 `
 
 export const Footer = styled.footer`
