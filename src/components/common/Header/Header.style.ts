@@ -4,7 +4,7 @@ export const Nav = styled.div`
     display: flex;
     align-items: center;
     margin-top: 1.2rem;
-    margin-left: 20rem;
+    padding : 0 2.5vw 0 4.3vw;
     margin-bottom: 1.2rem;
 `
 
@@ -14,13 +14,12 @@ export const NavItem = styled.div`
     font-weight: 700;
     font-size: 0.875rem;
     line-height: 1rem;
+    color: #767676;
 
-  color: #767676;
-
-    margin-right: calc(33% / 4);
+    margin-right: 2.5vw;
 `
 
 export const headerLogo = styled.div`
-    padding-right: 20rem;
+    flex-grow: 1;
 `
 
