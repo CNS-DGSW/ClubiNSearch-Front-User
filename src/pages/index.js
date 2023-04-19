@@ -18,8 +18,6 @@ export async function getStaticProps() {
     };
   });
 
-  console.log(getposts)
-
   return {
     props: {
       getposts,
