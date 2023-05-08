@@ -21,9 +21,8 @@ const MemederBox = (props: IMemberBoxValue) => {
             />
           </S.TitleLeftContainer>
         </S.TitleConatainer>
-        <div>
+        <S.MemberContainer>
           {props.member?.map((value) => {
-            console.log(value, "ddd");
             return (
               <MemberContents
                 name={value.name}
@@ -33,7 +32,7 @@ const MemederBox = (props: IMemberBoxValue) => {
               ></MemberContents>
             );
           })}
-        </div>
+        </S.MemberContainer>
 
         <S.FooterNumOfPeople>
           전체 인원 : ({props.member?.length})

@@ -3,9 +3,7 @@ import Image from "next/image";
 
 export const MemberContainer = styled.div`
   width: 90%;
-  height: 85%;
   margin: 5%;
-  over-flow: hidden;
 `;
 
 export const MemberContents = styled.div`
@@ -15,6 +13,7 @@ export const MemberContents = styled.div`
   border-radius: 5px;
   padding: 6%;
   box-shadow: 0rem 0.3rem 0.5rem rgba(0, 0, 0, 0.3);
+  position: relative;
 `;
 
 export const MemberDeleteButton = styled(Image)`
@@ -22,7 +21,7 @@ export const MemberDeleteButton = styled(Image)`
   width: 1rem;
   height: 1rem;
   right: 0;
-  margin-right: 2rem;
+  margin-right: 1rem;
   &:hover {
     filter: opacity(50%);
   }

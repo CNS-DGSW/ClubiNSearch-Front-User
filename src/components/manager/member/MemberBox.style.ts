@@ -67,3 +67,9 @@ export const FooterNumOfPeople = styled.div`
   background-color: #f3f3f3;
   box-shadow: 0rem 0rem 1rem rgba(0, 0, 0, 0.5);
 `;
+
+export const MemberContainer = styled.div`
+  background-color: blue;
+  height: 48rem;
+  overflow: auto;
+`;
