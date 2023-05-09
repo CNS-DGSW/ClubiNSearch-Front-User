@@ -27,81 +27,29 @@ const Manager = () => {
         phoneNumber: "010-1234-5678",
         introduce: "열심히 하겠습니다.",
       },
-      {
-        name: "배경민",
-        schoolNumber: "2307",
-        phoneNumber: "010-6207-7445",
-        introduce: "열심히 하겠습니다.",
-      },
-      {
-        name: "조수현",
-        schoolNumber: "2301",
-        phoneNumber: "010-1234-4567",
-        introduce: "열심히 하겠습니다.",
-      },
-      {
-        name: "최아영",
-        schoolNumber: "2403",
-        phoneNumber: "010-1234-5678",
-        introduce: "열심히 하겠습니다.",
-      },
-      {
-        name: "배경민",
-        schoolNumber: "2307",
-        phoneNumber: "010-6207-7445",
-        introduce: "열심히 하겠습니다.",
-      },
-      {
-        name: "조수현",
-        schoolNumber: "2301",
-        phoneNumber: "010-1234-4567",
-        introduce: "열심히 하겠습니다.",
-      },
-      {
-        name: "최아영",
-        schoolNumber: "2403",
-        phoneNumber: "010-1234-5678",
-        introduce: "열심히 하겠습니다.",
-      },
     ],
   };
-  const MemberBox2: IMemberBoxValue = {
-    title: "👩‍💻 면접",
-    member: [
-      {
-        name: "조수현",
-        schoolNumber: "2301",
-        phoneNumber: "010-1234-4567",
-        introduce: "열심히 하겠습니다.",
-      },
-      {
-        name: "최아영",
-        schoolNumber: "2403",
-        phoneNumber: "010-1234-5678",
-        introduce: "열심히 하겠습니다.",
-      },
-    ],
-  };
-  const MemberBox3: IMemberBoxValue = {
-    title: "🖥️ 최종 심사",
-    member: [
-      {
-        name: "조수현",
-        schoolNumber: "2301",
-        phoneNumber: "010-1234-4567",
-        introduce: "열심히 하겠습니다.",
-      },
-    ],
-  };
+  const MemberContentsValue: IMemberBoxValue[] = [
+    MemberBox1,
+    MemberBox1,
+    MemberBox1,
+    MemberBox1,
+  ];
   return (
     <S.ManagerMainContainer>
       <Sidebar />
       <S.ContentsBox>
         <Title />
         <S.MemberContentsContainer>
-          <MemederBox title={MemberBox1.title} member={MemberBox1.member} />
-          <MemederBox title={MemberBox2.title} member={MemberBox2.member} />
-          <MemederBox title={MemberBox3.title} member={MemberBox3.member} />
+          {MemberContentsValue.map((value, index) => {
+            return (
+              <MemederBox
+                key={index}
+                title={value.title}
+                member={value.member}
+              />
+            );
+          })}
         </S.MemberContentsContainer>
       </S.ContentsBox>
     </S.ManagerMainContainer>
