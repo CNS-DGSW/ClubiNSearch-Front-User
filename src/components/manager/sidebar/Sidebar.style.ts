@@ -17,6 +17,7 @@ export const TitleContainer = styled.nav`
   width: 80%;
   margin: 0rem auto;
   padding: 2rem 0rem;
+  height: 5%;
 `;
 
 export const TitleImage = styled(Image)`
@@ -40,7 +41,14 @@ export const InquiryBox = styled.nav`
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 5rem;
+  height: 5%;
   background-color: transparent;
   border-top: 1px solid #d9d9d9;
+  background-color: #fafafa;
+`;
+
+export const ContentsContainer = styled.div`
+  height: 84%;
+  padding-bottom: 1rem;
+  overflow: auto;
 `;
