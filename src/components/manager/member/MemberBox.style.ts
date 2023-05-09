@@ -4,7 +4,7 @@ import Image from "next/image";
 export const MainContainer = styled.nav`
   width: 20rem;
   height: 100%;
-  margin-right: 5rem;
+  margin-right: 2rem;
 `;
 
 export const SubContainer = styled.nav`
@@ -69,7 +69,6 @@ export const FooterNumOfPeople = styled.div`
 `;
 
 export const MemberContainer = styled.div`
-  background-color: blue;
   height: 48rem;
   overflow: auto;
 `;

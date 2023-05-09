@@ -22,9 +22,10 @@ const MemederBox = (props: IMemberBoxValue) => {
           </S.TitleLeftContainer>
         </S.TitleConatainer>
         <S.MemberContainer>
-          {props.member?.map((value) => {
+          {props.member?.map((value, index) => {
             return (
               <MemberContents
+                key={index}
                 name={value.name}
                 schoolNumber={value.schoolNumber}
                 phoneNumber={value.phoneNumber}
