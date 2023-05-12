@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import * as S from "./Sidebar.style";
-import Logo from "@/asset/CNSLogo.svg";
-import detailBtn from "@/asset/managerPage/detailButton.svg";
-import FavoritedetailBtn from "@/asset/managerPage/detailButton_v2.svg";
-import AnnounceIcon from "@/asset/managerPage/AnnounceIcon.svg";
-import EditButton from "@/asset/managerPage/EditButton.svg";
-import Image from "next/image";
+import {
+  Logo,
+  detailBtn,
+  FavoritedetailBtn,
+  AnnounceIcon,
+  EditButton,
+  FileIcon,
+} from "./useSideBar";
 import PlusButton from "../common/PlusButton";
 
 const Sidebar = () => {
@@ -18,7 +20,7 @@ const Sidebar = () => {
     },
     {
       name: "개발",
-      active: true,
+      active: false,
       index: 0,
       List: [
         { name: "프론트엔드 개발자" },
@@ -70,13 +72,14 @@ const Sidebar = () => {
                     alt="Image"
                     isActive={value.active}
                   />
+                  <S.FileIcon src={FileIcon} alt="dd" />
                   <S.PositionTitle>{value.name}</S.PositionTitle>
                 </S.PositionTitleContaiver>
                 {value.active
                   ? value.List.map((value, index) => {
                       return (
                         <S.PositionName>
-                          <S.PositionRadioBtn type="radio" />
+                          <S.PositionRadioBtn type="checkbox" />
                           <p>{value.name}</p>
                         </S.PositionName>
                       );
