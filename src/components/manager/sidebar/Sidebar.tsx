@@ -3,7 +3,10 @@ import * as S from "./Sidebar.style";
 import Logo from "@/asset/CNSLogo.svg";
 import detailBtn from "@/asset/managerPage/detailButton.svg";
 import FavoritedetailBtn from "@/asset/managerPage/detailButton_v2.svg";
+import AnnounceIcon from "@/asset/managerPage/AnnounceIcon.svg";
+import EditButton from "@/asset/managerPage/EditButton.svg";
 import Image from "next/image";
+import PlusButton from "../common/PlusButton";
 
 const Sidebar = () => {
   const [position, setPosition] = useState([
@@ -33,21 +36,21 @@ const Sidebar = () => {
         <S.TitleContext>Care And Service</S.TitleContext>
       </S.TitleContainer>
       <S.ContentsContainer>
-        <S.SubContentsContainer>
-          <S.ContentsTitleContainer>
-            <></>
+        <S.AnnounceContentsContainer>
+          <S.AnnounceTitleContainer>
+            <S.AnnounceIcon src={AnnounceIcon} alt="announceIcon" />
             <p>공고 리스트</p>
-          </S.ContentsTitleContainer>
-          <>
-            <></>
-            <></>
-          </>
-        </S.SubContentsContainer>
+          </S.AnnounceTitleContainer>
+          <S.AnnounceEditContainer>
+            <S.AnnounceImage src={EditButton} alt="editBtn" />
+            <PlusButton />
+          </S.AnnounceEditContainer>
+        </S.AnnounceContentsContainer>
         <S.SubContentsContainer>
-          <S.ContentsTitleContainer>
+          <S.FavoriteTitleContainer>
             <p>즐겨찾기</p>
             <S.FavoriteDetailButton src={FavoritedetailBtn} alt="dd" />
-          </S.ContentsTitleContainer>
+          </S.FavoriteTitleContainer>
           <div></div>
         </S.SubContentsContainer>
         <S.SubContentsContainer>

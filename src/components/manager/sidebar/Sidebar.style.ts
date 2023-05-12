@@ -106,9 +106,16 @@ export const SubContentsContainer = styled.nav`
   border-bottom: 2px solid #d9d9d9;
   padding: 5% 0%;
 `;
-
-export const ContentsTitleContainer = styled.div`
+export const AnnounceContentsContainer = styled.nav`
+  border-bottom: 2px solid #d9d9d9;
+  padding: 5% 0%;
   display: flex;
+  justify-content: space-between;
+`;
+
+export const FavoriteTitleContainer = styled.div`
+  display: flex;
+  justify-content:space-between;
   align-items: center;
   font-weight: bold;
   color: #777777;
@@ -117,8 +124,35 @@ export const ContentsTitleContainer = styled.div`
   padding 0% 10%;
 `;
 
+export const AnnounceTitleContainer = styled.div`
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  font-weight: bold;
+  color: #777777;
+  fon-size: 1rem;
+  width : 32%;
+  padding 0% 10%;
+`;
+
+export const AnnounceEditContainer = styled.div`
+  display: flex;
+  justify-content:space-between;
+  align-items: center;
+  width : 22%;
+  padding 0% 10%;
+`;
+
 export const FavoriteDetailButton = styled(Image)`
   width: 1rem;
   height: 0.5rem;
-  margin-left: 70%;
+`;
+
+export const AnnounceImage = styled(Image)`
+  width: 2rem;
+  height: 2rem;
+`;
+export const AnnounceIcon = styled(Image)`
+  width: 1.25rem;
+  height: 1.25rem;
 `;
