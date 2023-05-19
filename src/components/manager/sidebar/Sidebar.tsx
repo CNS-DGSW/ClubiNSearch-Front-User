@@ -11,22 +11,23 @@ import {
 import PlusButton from "../common/PlusButton";
 
 const Sidebar = () => {
+  const [favPosition, setFavPosition] = useState<boolean>(false);
   const [position, setPosition] = useState([
     {
       name: "디자인",
       active: false,
       index: 0,
-      List: [{ name: "웹 디자인" }],
+      List: [{ name: "웹 디자인", active: false }],
     },
     {
       name: "개발",
       active: false,
       index: 0,
       List: [
-        { name: "프론트엔드 개발자" },
-        { name: "백엔드 개발자" },
-        { name: "안드로이드 개발자" },
-        { name: "iOS 개발자" },
+        { name: "프론트엔드 개발자", active: false },
+        { name: "백엔드 개발자", active: false },
+        { name: "안드로이드 개발자", active: false },
+        { name: "iOS 개발자", active: false },
       ],
     },
   ]);
@@ -49,11 +50,41 @@ const Sidebar = () => {
           </S.AnnounceEditContainer>
         </S.AnnounceContentsContainer>
         <S.SubContentsContainer>
-          <S.FavoriteTitleContainer>
+          <S.FavoriteTitleContainer
+            onClick={() => {
+              setFavPosition(!favPosition);
+            }}
+          >
             <p>즐겨찾기</p>
-            <S.FavoriteDetailButton src={FavoritedetailBtn} alt="dd" />
+            <S.FavoriteDetailButton
+              src={FavoritedetailBtn}
+              alt="dd"
+              isActive={favPosition}
+            />
           </S.FavoriteTitleContainer>
-          <div></div>
+
+          <>
+            {favPosition
+              ? position.map((value) => {
+                  return value.List.map((value) => {
+                    if (value.active) {
+                      return (
+                        <S.PositionName>
+                          <S.PositionRadioBtn
+                            type="checkbox"
+                            checked={value.active}
+                            onClick={() => {
+                              value.active = !value.active;
+                            }}
+                          />
+                          <p>{value.name}</p>
+                        </S.PositionName>
+                      );
+                    }
+                  });
+                })
+              : null}
+          </>
         </S.SubContentsContainer>
         <S.SubContentsContainer>
           {position.map((value, index) => {
@@ -76,10 +107,14 @@ const Sidebar = () => {
                   <S.PositionTitle>{value.name}</S.PositionTitle>
                 </S.PositionTitleContaiver>
                 {value.active
-                  ? value.List.map((value, index) => {
+                  ? value.List.map((value) => {
                       return (
                         <S.PositionName>
-                          <S.PositionRadioBtn type="checkbox" />
+                          <S.PositionRadioBtn
+                            type="checkbox"
+                            checked={value.active}
+                            onClick={() => (value.active = !value.active)}
+                          />
                           <p>{value.name}</p>
                         </S.PositionName>
                       );

@@ -146,6 +146,9 @@ export const AnnounceEditContainer = styled.div`
 export const FavoriteDetailButton = styled(Image)`
   width: 1rem;
   height: 0.5rem;
+  transform: rotate(
+    ${(props: IisActiveProps) => (props.isActive ? "180deg" : "0deg")}
+  );
 `;
 
 export const AnnounceImage = styled(Image)`
