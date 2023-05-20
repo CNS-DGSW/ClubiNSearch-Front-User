@@ -1,5 +1,5 @@
 // import fs from 'fs';
-import Ask from '../common/Ask/Asktjs';
+import Ask from '../common/Ask/Ask.tsx';
 import Image from 'next/image';
 import Ad from '../../asset/Ad.svg';
 import SearchIcon from '../../asset/SearchIcon.svg';
