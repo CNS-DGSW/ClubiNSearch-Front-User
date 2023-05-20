@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import { ChangeEvent, ChangeEventHandler, Dispatch, SetStateAction } from "react";
 import * as S from "./InfoInputStyle";
 
 interface IInformation {
@@ -24,7 +24,7 @@ const InfoInput = ({
   explaneContent,
   isError,
 }: IInformation) => {
-  const OnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  const OnChangeHandler: ChangeEventHandler<HTMLInputElement> = (event) => {
     setValue(event.target.value);
   };
 
@@ -32,7 +32,7 @@ const InfoInput = ({
     <S.InputWrap>
       <S.InputTitleWrap>
         <p>{title}</p>
-        {isEssential ? <S.EssentialContent>*</S.EssentialContent> : null}
+        {isEssential && <S.EssentialContent>*</S.EssentialContent>}
       </S.InputTitleWrap>
       <S.InputStyle
         isError={isError ? false : true}
@@ -46,9 +46,9 @@ const InfoInput = ({
       </S.ErrorAlert>
       {isExplane ? (
         <ul>
-          {explaneContent?.map((explaneValue, i) => {
-            return <S.ExplaneContext key={i}>{explaneValue}</S.ExplaneContext>;
-          })}
+          {explaneContent?.map((explaneValue, i) => (
+            <S.ExplaneContext key={i}>{explaneValue}</S.ExplaneContext>
+          ))}
         </ul>
       ) : null}
     </S.InputWrap>
