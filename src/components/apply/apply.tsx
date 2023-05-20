@@ -8,10 +8,15 @@ import * as S from "./apply.style";
 import { IContentsValue } from "@/types/IContentsValue";
 import { IErrorValue } from "@/types/IErrorValue";
 
-interface IPortfolioValue {
-  name: string | null;
-  url: string | null;
-}
+//Pick을 써서 portfolio를 골라냄
+type GetObjectPickType<T, U extends keyof T> = T[U];
+//Partial을 써서 portfolio의 속성에 null을 추가함
+type ApplyAllNull<T> = { [t in keyof T]: T[t] | null };
+
+//위의 과정을 IPortfolioValue에 넣어서 새 타입을 만듬
+type IPortfolioValue = ApplyAllNull<
+  GetObjectPickType<IContentsValue, "portfolio">
+>; //IContentsValue라는 타입과 "portfolio"의 유니온 타입을 넘겨줌
 
 const ApplyForm = () => {
   const [contentsValue, setContentsValue] = useState<IContentsValue>({
@@ -167,7 +172,6 @@ const ApplyForm = () => {
                 const initError: IErrorValue = ErrorHandler(contentsValue);
                 console.log(initError);
                 setErrorCheckHandler({ ...initError });
-                
               } else {
                 alert("개인정보 수집 동의에 동의해주세요.");
               }
