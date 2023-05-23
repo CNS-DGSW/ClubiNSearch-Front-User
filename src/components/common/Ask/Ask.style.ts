@@ -9,8 +9,8 @@ export const Ask = styled.div`
     align-items: center;
 
     position: absolute;
-    left: calc(100% - 15rem);
-    top: 77%;
+    left: 88%;
+    top: 80%;
 
     > p {
         font-family: 'Inter';

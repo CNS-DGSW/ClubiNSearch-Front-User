@@ -8,13 +8,18 @@ import matter from 'gray-matter';
 import Ask from '../../components/common/Ask/Ask';
 import Link from 'next/link';
 import Detail from "../../components/detail/detail";
+import API from "@/util/api.ts"
 
 export async function getStaticPaths() {
-  const files = fs.readdirSync('ContentDetail');
+
+  const {data} = await API.get('/api/recruitment/')
+  const files = data;
+
   const paths = files.map((fileName) => ({
-      params: {
-          slug: fileName.replace('.md','')
-      },
+    params: {
+      // fileName.id 자료형은 숫자
+      slug: (fileName.id).toString()
+    },
   }));
   return {
       paths,
@@ -23,18 +28,15 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params: {slug} }) {
-  const file = fs.readFileSync(`ContentDetail/${slug}.md`,'utf-8');
-  const { data: info, content } = matter(file);
-    //console.log(file)
+  const {data} = await API.get(`/api/recruitment/${slug}`);
   return {
       props: {
-          info,
-          content
+        data
       }
   }
 }
 
-export default function DetailPage({ info, content }) {
+export default function DetailPage({ data }) {
 
-    return <Detail info={info} content={content}/>;
+    return <Detail data={data}/>;
 }

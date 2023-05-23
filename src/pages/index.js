@@ -5,13 +5,13 @@ import matter from 'gray-matter';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import axios from "axios";
+import API from "@/util/api.ts"
 
 export async function getStaticProps() {
-  const baseUrl = 'http://52.78.246.108:8080/'
   const option = 'api/recruitment/'
   
   // await 왜 붙여야 됌?
-  const {data} = await axios.get(baseUrl+option);
+  const {data} = await API.get('api/recruitment/');
 
   return {
     props : {
