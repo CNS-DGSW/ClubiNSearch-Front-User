@@ -22,7 +22,7 @@ export const Content = styled.div`
     margin-top: 4rem;
 
     > h1{
-        
+        color: #000000
     }
     > h3{
         margin-top: 1.2rem;

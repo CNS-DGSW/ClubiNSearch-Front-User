@@ -25,10 +25,10 @@ export default function Main({ getposts }) {
     setItemOffset(newOffset);
   };
 
-  const ShowPosts = currentItems.map(({title,position,employmentType},index)=>{
+  const ShowPosts = currentItems.map(({id,title,position,employmentType},index)=>{
       return (
-      <S.EachPostBox key={title}>
-        <Link href={`/Detail/${title}`}>
+      <S.EachPostBox key={id}>
+        <Link href={`/Detail/${id}`}>
           {title}
         </Link>
         <S.PostPositionHow>{position}</S.PostPositionHow>
@@ -57,13 +57,13 @@ export default function Main({ getposts }) {
             <S.SearchTitleInput placeholder='포지션 역할 검색하기'/>
           </S.SearchPosition>
           
-          <S.ChoosePositionHow required  onChange={changePosition}>
+          <S.ChoosePositionHow required >
             <option disabled selected hidden>채용 포지션</option>
             {
               // option 채우기
             }
           </S.ChoosePositionHow>
-          <S.ChoosePositionHow required onChange={changeHowwork}>
+          <S.ChoosePositionHow required>
             <option disabled selected hidden>채용 형태</option>
             {
               // option 채우기
