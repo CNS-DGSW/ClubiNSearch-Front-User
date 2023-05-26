@@ -64,26 +64,29 @@ const Sidebar = () => {
           </S.FavoriteTitleContainer>
 
           <>
-            {favPosition
-              ? position.map((value) => {
-                  return value.List.map((value) => {
-                    if (value.active) {
-                      return (
-                        <S.PositionName>
-                          <S.PositionRadioBtn
-                            type="checkbox"
-                            checked={value.active}
-                            onClick={() => {
-                              value.active = !value.active;
-                            }}
-                          />
-                          <p>{value.name}</p>
-                        </S.PositionName>
-                      );
-                    }
-                  });
-                })
-              : null}
+            {favPosition &&
+              position.map((value) => {
+                return (
+                  <S.FavPosition>
+                    {value.List.map((value) => {
+                      if (value.active) {
+                        return (
+                          <S.PositionName>
+                            <S.PositionRadioBtn
+                              type="checkbox"
+                              checked={value.active}
+                              onClick={() => {
+                                value.active = !value.active;
+                              }}
+                            />
+                            <p>{value.name}</p>
+                          </S.PositionName>
+                        );
+                      }
+                    })}
+                  </S.FavPosition>
+                );
+              })}
           </>
         </S.SubContentsContainer>
         <S.SubContentsContainer>
@@ -106,20 +109,19 @@ const Sidebar = () => {
                   <S.FileIcon src={FileIcon} alt="dd" />
                   <S.PositionTitle>{value.name}</S.PositionTitle>
                 </S.PositionTitleContaiver>
-                {value.active
-                  ? value.List.map((value) => {
-                      return (
-                        <S.PositionName>
-                          <S.PositionRadioBtn
-                            type="checkbox"
-                            checked={value.active}
-                            onClick={() => (value.active = !value.active)}
-                          />
-                          <p>{value.name}</p>
-                        </S.PositionName>
-                      );
-                    })
-                  : null}
+                {value.active &&
+                  value.List.map((value) => {
+                    return (
+                      <S.PositionName>
+                        <S.PositionRadioBtn
+                          type="checkbox"
+                          checked={value.active}
+                          onClick={() => (value.active = !value.active)}
+                        />
+                        <p>{value.name}</p>
+                      </S.PositionName>
+                    );
+                  })}
               </>
             );
           })}
