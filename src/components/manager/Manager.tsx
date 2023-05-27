@@ -80,6 +80,7 @@ const Manager = () => {
   const [memberContentsValue, setMemberContentsValue] = useState<
     IMemberBoxValue[]
   >([MemberBox1, MemberBox2, MemberBox3]);
+
   return (
     <DndProvider backend={HTML5Backend}>
       <S.ManagerMainContainer>
@@ -91,7 +92,9 @@ const Manager = () => {
               return (
                 <MemederBox
                   key={index}
-                  index={index}
+                  state={memberContentsValue}
+                  setState={setMemberContentsValue}
+                  Boxindex={index}
                   title={value.title}
                   member={value.member}
                 />

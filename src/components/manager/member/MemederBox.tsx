@@ -1,15 +1,15 @@
-import { IMemberBoxValue } from "@/types/IMemberBoxValue";
+import { IMemberBoxPropsValue } from "@/types/IMemberBoxValue";
 import React, { useState } from "react";
 import * as S from "./MemberBox.style";
 import TrashCanIcon from "@/asset/TrashCanIcon.svg";
 import MemberContents from "./memberContents/MemberContents";
 import { useDrop } from "react-dnd";
 
-const MemederBox = (props: IMemberBoxValue) => {
+const MemederBox = (props: IMemberBoxPropsValue) => {
   const [menuClick, setMenuClick] = useState<boolean>(false);
   const [collectedProps, drop] = useDrop(() => ({
     accept: "BOX",
-    drop: () => ({ index: props.index }),
+    drop: () => ({ index: props.Boxindex }),
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop,
@@ -35,6 +35,10 @@ const MemederBox = (props: IMemberBoxValue) => {
             return (
               <MemberContents
                 key={index}
+                state={props.state}
+                setState={props.setState}
+                userIndex={index}
+                BeforeContainerIndex={props.Boxindex}
                 name={value.name}
                 schoolNumber={value.schoolNumber}
                 phoneNumber={value.phoneNumber}
