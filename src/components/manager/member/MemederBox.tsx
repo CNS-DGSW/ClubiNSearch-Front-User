@@ -3,10 +3,19 @@ import React, { useState } from "react";
 import * as S from "./MemberBox.style";
 import TrashCanIcon from "@/asset/TrashCanIcon.svg";
 import MemberContents from "./memberContents/MemberContents";
+import { useDrop } from "react-dnd";
 
 const MemederBox = (props: IMemberBoxValue) => {
   const [menuClick, setMenuClick] = useState<boolean>(false);
-
+  const [collectedProps, drop] = useDrop(() => ({
+    accept: "BOX",
+    drop: () => ({ index: props.index }),
+    collect: (monitor) => ({
+      isOver: monitor.isOver(),
+      canDrop: monitor.canDrop,
+      endDrop: monitor.getDropResult(),
+    }),
+  }));
   return (
     <S.MainContainer>
       <S.SubContainer>
@@ -21,7 +30,7 @@ const MemederBox = (props: IMemberBoxValue) => {
             />
           </S.TitleLeftContainer>
         </S.TitleConatainer>
-        <S.MemberContainer>
+        <S.MemberContainer ref={drop}>
           {props.member?.map((value, index) => {
             return (
               <MemberContents
