@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Title from "./contentsBox/Title";
 import * as S from "./Manager.style";
 import MemederBox from "./member/MemederBox";
@@ -75,21 +75,20 @@ const Manager = () => {
       },
     ],
   };
-  const MemberContentsValue: IMemberBoxValue[] = [
-    MemberBox1,
-    MemberBox2,
-    MemberBox3,
-  ];
+  const [memberContentsValue, setMemberContentsValue] = useState<
+    IMemberBoxValue[]
+  >([MemberBox1, MemberBox2, MemberBox3]);
   return (
     <S.ManagerMainContainer>
       <Sidebar />
       <S.ContentsBox>
         <Title />
         <S.MemberContentsContainer>
-          {MemberContentsValue.map((value, index) => {
+          {memberContentsValue.map((value, index) => {
             return (
               <MemederBox
                 key={index}
+                index={index}
                 title={value.title}
                 member={value.member}
               />
