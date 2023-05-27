@@ -4,6 +4,8 @@ import * as S from "./Manager.style";
 import MemederBox from "./member/MemederBox";
 import { IMemberBoxValue } from "@/types/IMemberBoxValue";
 import Sidebar from "./sidebar/Sidebar";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 const Manager = () => {
   const MemberBox1: IMemberBoxValue = {
@@ -79,24 +81,26 @@ const Manager = () => {
     IMemberBoxValue[]
   >([MemberBox1, MemberBox2, MemberBox3]);
   return (
-    <S.ManagerMainContainer>
-      <Sidebar />
-      <S.ContentsBox>
-        <Title />
-        <S.MemberContentsContainer>
-          {memberContentsValue.map((value, index) => {
-            return (
-              <MemederBox
-                key={index}
-                index={index}
-                title={value.title}
-                member={value.member}
-              />
-            );
-          })}
-        </S.MemberContentsContainer>
-      </S.ContentsBox>
-    </S.ManagerMainContainer>
+    <DndProvider backend={HTML5Backend}>
+      <S.ManagerMainContainer>
+        <Sidebar />
+        <S.ContentsBox>
+          <Title />
+          <S.MemberContentsContainer>
+            {memberContentsValue.map((value, index) => {
+              return (
+                <MemederBox
+                  key={index}
+                  index={index}
+                  title={value.title}
+                  member={value.member}
+                />
+              );
+            })}
+          </S.MemberContentsContainer>
+        </S.ContentsBox>
+      </S.ManagerMainContainer>
+    </DndProvider>
   );
 };
 
