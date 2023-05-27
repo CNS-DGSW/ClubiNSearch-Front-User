@@ -165,3 +165,7 @@ export const FileIcon = styled(Image)`
   height: 1.125rem;
   margin-right: 0.5rem;
 `;
+
+export const FavPosition = styled.div`
+  margin: 1rem 0rem 0rem 0.5rem;
+`;
