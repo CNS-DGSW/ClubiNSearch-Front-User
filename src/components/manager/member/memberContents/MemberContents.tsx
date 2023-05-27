@@ -1,14 +1,15 @@
 import React from "react";
 import * as S from "./MemberContents.style";
 import TrashCanIcon from "@/asset/TrashCanIcon.svg";
-import { IMemberValue } from "@/types/IMemberBoxValue";
+import { IMemberPropsValue } from "@/types/IMemberValue";
 import { useDrag } from "react-dnd";
+import ChangeValue from "@/util/ChangeValue";
 
 interface IMonitorProps {
   index: number;
 }
 
-const MemberContents = (props: IMemberValue) => {
+const MemberContents = (props: IMemberPropsValue) => {
   const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
     type: "BOX",
     item: { name: props.name },
@@ -19,13 +20,13 @@ const MemberContents = (props: IMemberValue) => {
     end: (item, monitor) => {
       const a = monitor.getDropResult<IMonitorProps>();
       if (item && a) {
-        // ChangeValue({
-        //   state: props.ChangeValue.state,
-        //   setState: props.ChangeValue.setState,
-        //   containerIndex: a.index,
-        //   userIndex: props.index,
-        //   BeforeContainerIndex: props.beforeindex,
-        // });
+        ChangeValue({
+          state: props.state,
+          setState: props.setState,
+          containerIndex: a.index,
+          userIndex: props.userIndex,
+          BeforeContainerIndex: props.BeforeContainerIndex,
+        });
       }
     },
   }));
