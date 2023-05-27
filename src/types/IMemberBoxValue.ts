@@ -1,13 +1,14 @@
+import { Dispatch, SetStateAction } from "react";
+import { IMemberValue } from "./IMemberValue";
 export interface IMemberBoxValue {
   title: string;
-  index?: number;
-  member?: IMemberValue[];
+  member: IMemberValue[];
 }
-//타입 리팩토링 하기
 
-export interface IMemberValue {
-  name: string;
-  schoolNumber: string;
-  phoneNumber: string;
-  introduce: string;
+export interface IMemberBoxPropsValue {
+  state: IMemberBoxValue[];
+  setState: Dispatch<SetStateAction<IMemberBoxValue[]>>;
+  title: string;
+  Boxindex: number;
+  member?: IMemberValue[];
 }
