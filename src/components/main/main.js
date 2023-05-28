@@ -10,22 +10,58 @@ import { useEffect, useRef, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import * as S from "./index.style";
 import axios from 'axios';
+import API from "@/util/api.ts"
 
-export default function Main({ getposts }) {
+export default function Main({ getposts, posi }) {
+  // 한 페이지에 보여줄 게시글 개수
+  const ONEPAGEPOST = 7;
   const [posts, setPosts] = useState(getposts);
-  const [groupstyle, setGroupstyle] = useState();
-  const [pages, setPages] = useState([]);
-  const [totalPages, setTotalPages] = useState(Math.ceil(posts.length / 7));
+  // 전체 페이지 수
+  const [totalPages, setTotalPages] = useState(Math.ceil(posts.length / ONEPAGEPOST));
   const [itemOffset, setItemOffset] = useState(0);
+  // 게시글 제목, 포지션, 채용 형태 검색에 사용
+  const [search,setSearch] = useState({
+    position : "",
+    employmentType : "",
+    title : ""
+  });
+  // 채용 형태 옵션들 (typescript로 바꾸고 enum으로 고치기)
+  const employmentTypeOption = ["INTERN", "REGULAR"]
 
-  const currentItems = posts.slice(itemOffset, itemOffset + 7);
+  useEffect(()=>{
+    // 세 개 중에 값이 하나가 바뀌면 나머지에 다 undefined가 들어가는데 왜 그런지 모르겠어서 일단 if문으로 처리해둠
+    if(search.title === undefined){
+      search.title = "";
+      console.log(1)
+    }
+    if(search.position === undefined){
+      search.position = "";
+      console.log(2)
+    }
+    if(search.employmentType === undefined){
+      search.employmentType = "";
+      console.log(3)
+    }
+
+    let query = "search=" + search.title + "&" + "position=" + search.position + "&" + "employmentType=" + search.employmentType
+    API.get(`api/recruitment/?${query}`)
+    .then((res)=>{
+      const {data} = res;
+      setPosts(data)
+    })
+    .catch((err)=>{
+      console.error(err)
+    })
+  },[search])
+
+  const thisPagePosts = posts.slice(itemOffset, itemOffset + 7);
 
   const handlePageClick = (e) => {
-    const newOffset = (e.selected * 7) % posts.length;
+    const newOffset = (e.selected * ONEPAGEPOST) % posts.length;
     setItemOffset(newOffset);
   };
 
-  const ShowPosts = currentItems.map(({id,title,position,employmentType},index)=>{
+  const ShowPosts = thisPagePosts.map(({id,title,position,employmentType},index)=>{
       return (
       <S.EachPostBox key={id}>
         <Link href={`/Detail/${id}`}>
@@ -54,19 +90,23 @@ export default function Main({ getposts }) {
         <S.SearchBox>
           <S.SearchPosition>
             <Image src={SearchIcon} alt='SearchIcon'/>
-            <S.SearchTitleInput placeholder='포지션 역할 검색하기'/>
+            <S.SearchTitleInput placeholder='포지션 역할 검색하기' value={search.title} onChange={(e)=>setSearch({title : e.target.value})}/>
           </S.SearchPosition>
           
-          <S.ChoosePositionHow required >
-            <option disabled selected hidden>채용 포지션</option>
+          <S.ChoosePositionHow value={search.position} onChange={(e)=>setSearch((prevState)=>{return{ ...prevState , position : e.target.value}})}>
+          <option value="" >채용 포지션</option>
             {
-              // option 채우기
+              posi.map((p, index)=>(
+                (posi.indexOf(p) === index) && <option key={p} value={p}>{p}</option>
+              )) 
             }
           </S.ChoosePositionHow>
-          <S.ChoosePositionHow required>
-            <option disabled selected hidden>채용 형태</option>
+          <S.ChoosePositionHow value={search.employmentType} onChange={(e)=>setSearch((prevState)=>{return{ ...prevState , employmentType : e.target.value}})}>
+            <option value="" >채용 형태</option>
             {
-              // option 채우기
+              employmentTypeOption.map((e,index) =>
+                <option value={e} key={e}>{e}</option>
+              )
             }
           </S.ChoosePositionHow>
         </S.SearchBox>
