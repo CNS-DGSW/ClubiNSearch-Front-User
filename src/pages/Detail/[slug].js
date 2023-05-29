@@ -10,8 +10,8 @@ import Link from 'next/link';
 import Detail from "../../components/detail/detail";
 import API from "@/util/api.ts"
 
+// 각 페이지마다 경로 설정
 export async function getStaticPaths() {
-
   const {data} = await API.get('/api/recruitment/')
   const files = data;
 
@@ -27,6 +27,7 @@ export async function getStaticPaths() {
   };
 }
 
+// 각 페이지마다 값 가져오기
 export async function getStaticProps({params: {slug} }) {
   const {data} = await API.get(`/api/recruitment/${slug}`);
   return {
@@ -36,6 +37,7 @@ export async function getStaticProps({params: {slug} }) {
   }
 }
 
+// component/detail/detail 부르고 값 넘겨주기
 export default function DetailPage({ data }) {
 
     return <Detail data={data}/>;

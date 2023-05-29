@@ -10,18 +10,22 @@ import API from "@/util/api.ts"
 export async function getStaticProps() {
   const option = 'api/recruitment/'
   
-  // await 왜 붙여야 됌?
   const {data} = await API.get('api/recruitment/');
+
+  const posi = data.map((d)=>(
+    d.position
+  ))
 
   return {
     props : {
-      getposts : data
+      getposts : data,
+      posi
     }
   }
 
 }
 
-export default function Home({getposts}) {
+export default function Home({getposts,posi}) {
 
-  return <Main getposts={getposts} />;
+  return <Main getposts={getposts} posi={posi} />;
 }
