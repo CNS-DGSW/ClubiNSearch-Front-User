@@ -67,7 +67,7 @@ const Sidebar = () => {
             {favPosition &&
               position.map((value) => {
                 return (
-                  <S.FavPosition>
+                  <>
                     {value.List.map((value) => {
                       if (value.active) {
                         return (
@@ -84,7 +84,7 @@ const Sidebar = () => {
                         );
                       }
                     })}
-                  </S.FavPosition>
+                  </>
                 );
               })}
           </>
