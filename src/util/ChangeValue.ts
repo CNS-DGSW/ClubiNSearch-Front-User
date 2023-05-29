@@ -32,11 +32,8 @@ const AddValue = ({
 
 const ChangeValue = (props: IChangeValue) => {
   let copy: IMemberBoxValue[] = [...props.state];
-  console.log("Before", copy);
   AddValue({ copy, props });
-  console.log("Add ", copy);
   DeleteValue({ copy, props });
-  console.log("Delete ", copy);
   props.setState(copy);
 };
 
