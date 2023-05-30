@@ -3,16 +3,18 @@ import Image from 'next/image';
 import fs from 'fs';
 import matter from 'gray-matter';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import axios from "axios";
-import API from "@/util/api.ts"
+import API from "@/util/api"
+import {recuitment , EmploymentType} from "@/types/Recuitment"
 
 export async function getStaticProps() {
   const option = 'api/recruitment/'
   
-  const {data} = await API.get('api/recruitment/');
+  const {data} : recuitment[] = await API.get('api/recruitment/');
+  console.log(data)
 
-  const posi = data.map((d)=>(
+  const posi = data.map((d : recuitment)=>(
     d.position
   ))
 
@@ -25,7 +27,7 @@ export async function getStaticProps() {
 
 }
 
-export default function Home({getposts,posi}) {
+export default function Home ({getposts, posi} : recuitment[] & EmploymentType ): JSX.Element {
 
   return <Main getposts={getposts} posi={posi} />;
 }
