@@ -41,10 +41,10 @@ const Manager = () => {
         introduce: "열심히 하겠습니다.",
       },
       {
-        name: "강지석",
+        name: "노지석",
         schoolNumber: "2301",
         phoneNumber: "010-1234-4567",
-        introduce: "열심히 하겠습니다.",
+        introduce: "열심히 쓸겠습니다.",
       },
       {
         name: "조완규",
