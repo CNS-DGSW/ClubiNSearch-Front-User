@@ -6,6 +6,7 @@ import { IMemberBoxValue } from "@/types/IMemberBoxValue";
 import Sidebar from "./sidebar/Sidebar";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
+import Modal from "./common/modal/Modal";
 
 const Manager = () => {
   const MemberBox1: IMemberBoxValue = {
@@ -81,12 +82,13 @@ const Manager = () => {
     IMemberBoxValue[]
   >([MemberBox1, MemberBox2, MemberBox3]);
 
+  const [modal, setModal] = useState<boolean>(false);
   return (
     <DndProvider backend={HTML5Backend}>
       <S.ManagerMainContainer>
         <Sidebar />
         <S.ContentsBox>
-          <Title />
+          <Title setModal={setModal} />
           <S.MemberContentsContainer>
             {memberContentsValue.map((value, index) => {
               return (
@@ -103,6 +105,7 @@ const Manager = () => {
           </S.MemberContentsContainer>
         </S.ContentsBox>
       </S.ManagerMainContainer>
+      {modal && <Modal setModal={setModal} />}
     </DndProvider>
   );
 };
