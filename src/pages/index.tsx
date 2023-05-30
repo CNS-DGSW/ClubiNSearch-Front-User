@@ -11,8 +11,7 @@ import {recuitment , EmploymentType} from "@/types/Recuitment"
 export async function getStaticProps() {
   const option = 'api/recruitment/'
   
-  const {data} : recuitment[] = await API.get('api/recruitment/');
-  console.log(data)
+  const {data}:{data:recuitment[]} = await API.get('api/recruitment/');
 
   const posi = data.map((d : recuitment)=>(
     d.position
@@ -27,7 +26,8 @@ export async function getStaticProps() {
 
 }
 
-export default function Home ({getposts, posi} : recuitment[] & EmploymentType ): JSX.Element {
+export default function Home ({getposts, posi} : {getposts: recuitment[] ,posi: string[]} ) {
 
   return <Main getposts={getposts} posi={posi} />;
 }
+

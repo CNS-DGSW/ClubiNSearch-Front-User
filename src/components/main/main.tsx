@@ -8,12 +8,12 @@ import matter from 'gray-matter';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import * as S from "./index.style.js";
+import * as S from "./index.style";
 import axios from 'axios';
 import API from "@/util/api"
 import {recuitment , EmploymentType} from "@/types/Recuitment"
 
-export default function Main({ getposts, posi }: recuitment[] & EmploymentType) {
+export default function Main({ getposts, posi }: {getposts: recuitment[] ,posi: string[]} ) {
   // 한 페이지에 보여줄 게시글 개수
   const ONEPAGEPOST = 7;
   const [posts, setPosts] = useState(getposts);
@@ -91,7 +91,7 @@ export default function Main({ getposts, posi }: recuitment[] & EmploymentType) 
         <S.SearchBox>
           <S.SearchPosition>
             <Image src={SearchIcon} alt='SearchIcon'/>
-            <S.SearchTitleInput placeholder='포지션 역할 검색하기' value={search.title} onChange={(e)=>setSearch({title : e.target.value})}/>
+            <S.SearchTitleInput placeholder='포지션 역할 검색하기' value={search.title} onChange={(e)=>setSearch((prevState)=>{return{ ...prevState , title : e.target.value}})}/>
           </S.SearchPosition>
           
           <S.ChoosePositionHow value={search.position} onChange={(e)=>setSearch((prevState)=>{return{ ...prevState , position : e.target.value}})}>
