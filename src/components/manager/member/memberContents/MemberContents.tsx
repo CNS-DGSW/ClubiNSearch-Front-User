@@ -1,13 +1,51 @@
 import React from "react";
 import * as S from "./MemberContents.style";
 import TrashCanIcon from "@/asset/TrashCanIcon.svg";
-import { IMemberValue } from "@/types/IMemberBoxValue";
+import { IMemberPropsValue } from "@/types/IMemberValue";
+import { useDrag } from "react-dnd";
+import ChangeValue from "@/util/ChangeValue";
+import { IMemberBoxValue } from "@/types/IMemberBoxValue";
 
-const MemberContents = (props: IMemberValue) => {
+interface IMonitorProps {
+  index: number;
+}
+
+const MemberContents = (props: IMemberPropsValue) => {
+  const DeleteMember = () => {
+    if (!window.confirm(props.name + " 지원자를 삭제하시겠습니까?")) return;
+    let copy: IMemberBoxValue[] = [...props.state];
+    copy[props.BeforeContainerIndex].member.splice(props.userIndex, 1);
+    props.setState(copy);
+  };
+
+  const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
+    type: "BOX",
+    item: { name: props.name },
+    collect: (monitor: any) => ({
+      isDragging: monitor.isDragging(),
+      handlerId: monitor.getHandlerId(),
+    }),
+    end: (item, monitor) => {
+      const a = monitor.getDropResult<IMonitorProps>();
+      if (item && a) {
+        ChangeValue({
+          state: props.state,
+          setState: props.setState,
+          containerIndex: a.index,
+          userIndex: props.userIndex,
+          BeforeContainerIndex: props.BeforeContainerIndex,
+        });
+      }
+    },
+  }));
   return (
-    <S.MemberContainer>
+    <S.MemberContainer ref={drag}>
       <S.MemberContents>
-        <S.MemberDeleteButton src={TrashCanIcon} alt="" />
+        <S.MemberDeleteButton
+          src={TrashCanIcon}
+          alt=""
+          onClick={DeleteMember}
+        />
         <S.MemberName>{props.name}</S.MemberName>
         <S.MemberContentsContainer>
           학번 :<S.MemberEachContent>{props.schoolNumber}</S.MemberEachContent>
