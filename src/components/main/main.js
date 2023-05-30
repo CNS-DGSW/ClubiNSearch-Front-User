@@ -1,5 +1,5 @@
 // import fs from 'fs';
-import Ask from '../common/Ask/Ask';
+import Ask from '../common/Ask/Ask.tsx';
 import Image from 'next/image';
 import Ad from '../../asset/Ad.svg';
 import SearchIcon from '../../asset/SearchIcon.svg';
@@ -9,97 +9,66 @@ import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import * as S from "./index.style";
+import axios from 'axios';
+import API from "@/util/api.ts"
 
-export default function Main({ getposts }) {
+export default function Main({ getposts, posi }) {
+  // 한 페이지에 보여줄 게시글 개수
+  const ONEPAGEPOST = 7;
   const [posts, setPosts] = useState(getposts);
-  const [groupstyle, setGroupstyle] = useState();
-  const [pages, setPages] = useState([]);
-  const [totalPages, setTotalPages] = useState(Math.ceil(posts && posts.length / 7));
+  // 전체 페이지 수
+  const [totalPages, setTotalPages] = useState(Math.ceil(posts.length / ONEPAGEPOST));
   const [itemOffset, setItemOffset] = useState(0);
+  // 게시글 제목, 포지션, 채용 형태 검색에 사용
+  const [search,setSearch] = useState({
+    position : "",
+    employmentType : "",
+    title : ""
+  });
+  // 채용 형태 옵션들 (typescript로 바꾸고 enum으로 고치기)
+  const employmentTypeOption = ["INTERN", "REGULAR"]
 
-  const currentItems = posts && posts.slice(itemOffset, itemOffset + 7);
-
-  const contentRef = useRef([]);
-  const backRef = useRef(null);
-
-  const [groupType, setGroupType] = useState(
-    getposts && getposts.filter(({ info, slug }, index) => {
-      return (
-        getposts.findIndex(({ info: info2 }, jdex) => {
-          return info.group === info2.group;
-        }) === index 
-      );
-    })
-  );
-
-  const searchTitle = (e) => {
-    setPosts(posts.filter((post) => post.info.title.includes(e.target.value)));
-  };
-
-  const onKeyPress = (e) => {
-    if (e.key == "Enter") {
-      searchTitle(e);
+  useEffect(()=>{
+    // 세 개 중에 값이 하나가 바뀌면 나머지에 다 undefined가 들어가는데 왜 그런지 모르겠어서 일단 if문으로 처리해둠
+    if(search.title === undefined){
+      search.title = "";
+      console.log(1)
     }
-  };
+    if(search.position === undefined){
+      search.position = "";
+      console.log(2)
+    }
+    if(search.employmentType === undefined){
+      search.employmentType = "";
+      console.log(3)
+    }
 
-  const changePosition = (e) => {
-    setPosts(getposts.filter((post) => post.info.part === e.target.value));
-  };
+    let query = "search=" + search.title + "&" + "position=" + search.position + "&" + "employmentType=" + search.employmentType
+    API.get(`api/recruitment/?${query}`)
+    .then((res)=>{
+      const {data} = res;
+      setPosts(data)
+    })
+    .catch((err)=>{
+      console.error(err)
+    })
+  },[search])
 
-  const changeHowwork = (e) => {
-    setPosts(getposts.filter((post) => post.info.how === e.target.value));
-  };
-
-  const clickGroup = (e) => {
-    setGroupstyle(e.target.id);
-    const backTag  = document.getElementById(`${e.target.id}back`);
-    backTag.style.width = e.target.clientWidth + "px";
-    backTag.style.height = e.target.clientHeight + "px";
-
-    setPosts(getposts.filter((post) => post.info.group === e.target.id));
-  };
-
-  useEffect(() => {
-    groupType && groupType.map(({ slug }, idx) => {
-      // const contentTag = contentRef[idx];
-      // const backTag = backRef[idx];
-
-      // backTag.style.width = contentTag.clientWidth + "px";
-      // backTag.style.height = contentTag.clientHeight + "px";
-
-      setTotalPages(Math.ceil(posts.length / 7));
-    });
-  }, []);
+  const thisPagePosts = posts.slice(itemOffset, itemOffset + 7);
 
   const handlePageClick = (e) => {
-    const newOffset = (e.selected * 7) % posts.length;
+    const newOffset = (e.selected * ONEPAGEPOST) % posts.length;
     setItemOffset(newOffset);
   };
 
-/*  const ShowGroup = groupType && groupType.map(({info,slug},idx)=> {
-      return(
-      <div  key={info.group}>
-        {
-          groupstyle === info.group ?
-          <S.ChooseGroupBackClick id={`${info.group}back`} ref={elem =>backRef[idx] = elem }></S.ChooseGroupBackClick>
-          : <S.ChooseGroupBack id={`${info.group}back`} ref={elem =>backRef[idx] = elem } ></S.ChooseGroupBack>
-        }
-        {
-          groupstyle === info.group ?
-          <S.ChooseGroupContentClick id={info.group} ref={elem =>contentRef[idx] = elem } onClick={clickGroup}>{info.group}</S.ChooseGroupContentClick>
-          : <S.ChooseGroupContent id={info.group} ref={elem =>contentRef[idx] = elem } onClick={clickGroup}>{info.group}</S.ChooseGroupContent>
-        }
-        </div>)
-    }) */
-
-  const ShowPosts = currentItems && currentItems.map(({info,slug},index)=>{
+  const ShowPosts = thisPagePosts.map(({id,title,position,employmentType},index)=>{
       return (
-      <S.EachPostBox key={info}>
-        <Link href={`/Detail/${slug}`}>
-          {info.title}
+      <S.EachPostBox key={id}>
+        <Link href={`/Detail/${id}`}>
+          {title}
         </Link>
-        <S.PostPositionHow>{info.part}</S.PostPositionHow>
-        <S.PostPositionHow>{info.how}</S.PostPositionHow>
+        <S.PostPositionHow>{position}</S.PostPositionHow>
+        <S.PostPositionHow>{employmentType}</S.PostPositionHow>
       </S.EachPostBox>
       )
     })
@@ -121,22 +90,24 @@ export default function Main({ getposts }) {
         <S.SearchBox>
           <S.SearchPosition>
             <Image src={SearchIcon} alt='SearchIcon'/>
-            <S.SearchTitleInput placeholder='포지션 역할 검색하기' onKeyPress={onKeyPress}/>
+            <S.SearchTitleInput placeholder='포지션 역할 검색하기' value={search.title} onChange={(e)=>setSearch({title : e.target.value})}/>
           </S.SearchPosition>
           
-          <S.ChoosePositionHow required  onChange={changePosition}>
-            <option disabled selected hidden>채용 포지션</option>
-            <option value="Front-end">프론트엔드</option>
-            <option value="Back-end">벡엔드</option>
-            <option value="Designer">디자이너</option>
-            <option value="3D-Design">3D 디자인</option>
-            <option value="Planner">기획</option>
+          <S.ChoosePositionHow value={search.position} onChange={(e)=>setSearch((prevState)=>{return{ ...prevState , position : e.target.value}})}>
+          <option value="" >채용 포지션</option>
+            {
+              posi.map((p, index)=>(
+                (posi.indexOf(p) === index) && <option key={p} value={p}>{p}</option>
+              )) 
+            }
           </S.ChoosePositionHow>
-          <S.ChoosePositionHow required onChange={changeHowwork}>
-            <option disabled selected hidden>채용 형태</option>
-            <option>정규직</option>
-            <option>비정규직</option>
-            <option>인턴</option>
+          <S.ChoosePositionHow value={search.employmentType} onChange={(e)=>setSearch((prevState)=>{return{ ...prevState , employmentType : e.target.value}})}>
+            <option value="" >채용 형태</option>
+            {
+              employmentTypeOption.map((e,index) =>
+                <option value={e} key={e}>{e}</option>
+              )
+            }
           </S.ChoosePositionHow>
         </S.SearchBox>
         

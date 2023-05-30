@@ -18,14 +18,12 @@ export const AdWrapper = styled.div`
 `
 
 export const Content = styled.div`
-    margin-left: 20rem;
-    margin-top: 4rem;
+    width: 50vw;
+    word-break: keep-all;
+    margin-bottom: 3vh;
 
-    > h1{
-        
-    }
-    > h3{
-        margin-top: 1.2rem;
+    > h1, h2, h3{
+        margin-top: 1vh;
     }
     > ul, p{
         margin-top: 0.6rem;
@@ -38,9 +36,15 @@ export const Content = styled.div`
 export const Box = styled.div`
     width: 251px;
     height: 167px;
-    position: absolute;
-    left: calc( 100% - 31rem );
-    top: 290px;
+    margin-top: 10vh;
+`
+
+export const ContentWrapper = styled.div`
+    margin-top: 4rem;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    display: flex;
+    justify-content: space-evenly;
 `
 
 export const EachBox = styled.div`

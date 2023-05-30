@@ -4,28 +4,28 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
+import axios from "axios";
+import API from "@/util/api.ts"
 
 export async function getStaticProps() {
-  const files = fs.readdirSync("ContentDetail");
+  const option = 'api/recruitment/'
+  
+  const {data} = await API.get('api/recruitment/');
 
-  const getposts = files.map((fileName) => {
-    const slug = fileName.replace(".md", "");
-    const readFile = fs.readFileSync(`ContentDetail/${fileName}`, "utf-8");
-    const { data: info, content } = matter(readFile);
-    return {
-      info,
-      slug,
-    };
-  });
+  const posi = data.map((d)=>(
+    d.position
+  ))
 
   return {
-    props: {
-      getposts,
-    },
-  };
+    props : {
+      getposts : data,
+      posi
+    }
+  }
+
 }
 
-export default function Home({getposts}) {
+export default function Home({getposts,posi}) {
 
-  return <Main getposts={getposts} />;
+  return <Main getposts={getposts} posi={posi} />;
 }
