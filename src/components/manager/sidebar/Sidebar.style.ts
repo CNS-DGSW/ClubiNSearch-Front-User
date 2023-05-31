@@ -90,7 +90,8 @@ export const PositionName = styled.div`
   align-items: center;
   font-weight: bold;
   font-size: 1rem;
-  width: 100%;
+  width: 80%;
+  padding: 0% 10%;
   height: 2.5rem;
   &:hover {
     background-color: #ebebeb;
@@ -113,17 +114,6 @@ export const AnnounceContentsContainer = styled.nav`
   justify-content: space-between;
 `;
 
-export const FavoriteTitleContainer = styled.div`
-  display: flex;
-  justify-content:space-between;
-  align-items: center;
-  font-weight: bold;
-  color: #777777;
-  fon-size: 1rem;
-  width : 80%;
-  padding 0% 10%;
-`;
-
 export const AnnounceTitleContainer = styled.div`
   display: flex;
   justify-content:space-between;
@@ -137,18 +127,9 @@ export const AnnounceTitleContainer = styled.div`
 
 export const AnnounceEditContainer = styled.div`
   display: flex;
-  justify-content:space-between;
   align-items: center;
-  width : 22%;
+  width : 10%;
   padding 0% 10%;
-`;
-
-export const FavoriteDetailButton = styled(Image)`
-  width: 1rem;
-  height: 0.5rem;
-  transform: rotate(
-    ${(props: IisActiveProps) => (props.isActive ? "180deg" : "0deg")}
-  );
 `;
 
 export const AnnounceImage = styled(Image)`
@@ -168,4 +149,8 @@ export const FileIcon = styled(Image)`
 
 export const FavPosition = styled.div`
   margin: 1rem 0rem 0rem 0.5rem;
+`;
+
+export const PositionMainContainer = styled.nav`
+  margin: 0.5rem 0;
 `;
