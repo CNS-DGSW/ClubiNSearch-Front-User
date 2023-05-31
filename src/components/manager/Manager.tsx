@@ -105,7 +105,12 @@ const Manager = () => {
           </S.MemberContentsContainer>
         </S.ContentsBox>
       </S.ManagerMainContainer>
-      {modal && <Modal setModal={setModal} />}
+      {modal && (
+        <Modal
+          setModal={setModal}
+          setMemberContentsValue={setMemberContentsValue}
+        />
+      )}
     </DndProvider>
   );
 };

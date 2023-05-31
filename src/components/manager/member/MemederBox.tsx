@@ -6,7 +6,6 @@ import MemberContents from "./memberContents/MemberContents";
 import { useDrop } from "react-dnd";
 
 const MemederBox = (props: IMemberBoxPropsValue) => {
-  const [menuClick, setMenuClick] = useState<boolean>(false);
   const [collectedProps, drop] = useDrop(() => ({
     accept: "BOX",
     drop: () => ({ index: props.Boxindex }),
@@ -16,6 +15,18 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
       endDrop: monitor.getDropResult(),
     }),
   }));
+
+  const DeleteMemberContainer = () => {
+    if (!window.confirm(props.title + "을/를 삭제하시겠습니까?")) return;
+    if (props.member) {
+      alert("남은 지원자를 이동시키거나 삭제해주세요.");
+      return;
+    }
+    let copy = [...props.state];
+    copy.splice(props.Boxindex, 1);
+    props.setState(copy);
+  };
+
   return (
     <S.MainContainer>
       <S.SubContainer>
@@ -26,7 +37,7 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
             <S.TrashCanIcon
               src={TrashCanIcon}
               alt=""
-              onClick={() => setMenuClick(true)}
+              onClick={DeleteMemberContainer}
             />
           </S.TitleLeftContainer>
         </S.TitleConatainer>
