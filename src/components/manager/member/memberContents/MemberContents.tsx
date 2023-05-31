@@ -58,8 +58,28 @@ const MemberContents = (props: IMemberPropsValue) => {
         <S.MemberContentsContainer>한줄 자기소개 :</S.MemberContentsContainer>
         <S.MemberEachContent>{props.introduce}</S.MemberEachContent>
         <S.DetailBtnWrap>
-          <S.UserDetailBtn>포트폴리오</S.UserDetailBtn>
-          <S.UserDetailBtn>포트폴리오 링크</S.UserDetailBtn>
+          <S.UserDetailBtn
+            onClick={() => {
+              if (!props.portfolio) {
+                alert("포트폴리오가 없습니다.");
+                return;
+              }
+              window.open(props.portfolio);
+            }}
+          >
+            포트폴리오
+          </S.UserDetailBtn>
+          <S.UserDetailBtn
+            onClick={() => {
+              if (!props.link) {
+                alert("포트폴리오 링크가 없습니다.");
+                return;
+              }
+              window.open(props.link);
+            }}
+          >
+            포트폴리오 링크
+          </S.UserDetailBtn>
         </S.DetailBtnWrap>
       </S.MemberContents>
     </S.MemberContainer>
