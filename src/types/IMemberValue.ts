@@ -6,6 +6,8 @@ export interface IMemberValue {
   schoolNumber: string;
   phoneNumber: string;
   introduce: string;
+  portfolio?: string;
+  link?: string;
 }
 export interface IMemberPropsValue {
   state: IMemberBoxValue[];
@@ -16,4 +18,6 @@ export interface IMemberPropsValue {
   schoolNumber: string;
   phoneNumber: string;
   introduce: string;
+  portfolio?: string;
+  link?: string;
 }

@@ -27,6 +27,7 @@ const MemberContents = (props: IMemberPropsValue) => {
     }),
     end: (item, monitor) => {
       const a = monitor.getDropResult<IMonitorProps>();
+      console.log("props : ", props.state);
       if (item && a) {
         ChangeValue({
           state: props.state,
@@ -56,6 +57,10 @@ const MemberContents = (props: IMemberPropsValue) => {
         </S.MemberContentsContainer>
         <S.MemberContentsContainer>한줄 자기소개 :</S.MemberContentsContainer>
         <S.MemberEachContent>{props.introduce}</S.MemberEachContent>
+        <S.DetailBtnWrap>
+          <S.UserDetailBtn>포트폴리오</S.UserDetailBtn>
+          <S.UserDetailBtn>포트폴리오 링크</S.UserDetailBtn>
+        </S.DetailBtnWrap>
       </S.MemberContents>
     </S.MemberContainer>
   );
