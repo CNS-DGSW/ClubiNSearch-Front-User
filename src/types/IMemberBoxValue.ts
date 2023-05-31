@@ -10,5 +10,5 @@ export interface IMemberBoxPropsValue {
   setState: Dispatch<SetStateAction<IMemberBoxValue[]>>;
   title: string;
   Boxindex: number;
-  member?: IMemberValue[];
+  member: IMemberValue[];
 }

@@ -18,7 +18,7 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
 
   const DeleteMemberContainer = () => {
     if (!window.confirm(props.title + "을/를 삭제하시겠습니까?")) return;
-    if (props.member) {
+    if (props.member[0]) {
       alert("남은 지원자를 이동시키거나 삭제해주세요.");
       return;
     }
