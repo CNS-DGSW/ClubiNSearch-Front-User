@@ -80,7 +80,7 @@ const Manager = () => {
   };
   const [memberContentsValue, setMemberContentsValue] = useState<
     IMemberBoxValue[]
-  >([MemberBox1, MemberBox2, MemberBox3]);
+  >([MemberBox1, MemberBox2, MemberBox3, { title: "ddd", member: [] }]);
 
   const [modal, setModal] = useState<boolean>(false);
   return (
