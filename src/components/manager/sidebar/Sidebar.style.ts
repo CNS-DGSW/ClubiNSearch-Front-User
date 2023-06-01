@@ -70,11 +70,17 @@ export const DetailBtn = styled(Image)`
 export const PositionTitleContaiver = styled.nav`
   display: flex;
   ailgn-items: center;
-  width: 100%;
+  width: 86%;
   height: 2.25rem;
+  padding: 0% 7%;
   align-items: center;
+  background-color: ${(props: IisActiveProps) =>
+    props.isActive ? "#ebebeb" : "transparent"};
   &:hover {
     background-color: #ebebeb;
+  }
+  &:active {
+    background-color: #dbdbdb;
   }
 `;
 
