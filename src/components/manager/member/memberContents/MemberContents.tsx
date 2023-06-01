@@ -18,7 +18,7 @@ const MemberContents = (props: IMemberPropsValue) => {
     props.setState(copy);
   };
 
-  const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
+  const [{}, drag] = useDrag(() => ({
     type: "BOX",
     item: { name: props.name },
     collect: (monitor: any) => ({
@@ -30,11 +30,15 @@ const MemberContents = (props: IMemberPropsValue) => {
       console.log("props : ", props.state);
       if (item && a) {
         ChangeValue({
-          state: props.state,
-          setState: props.setState,
-          containerIndex: a.index,
-          userIndex: props.userIndex,
-          BeforeContainerIndex: props.BeforeContainerIndex,
+          State: {
+            stateValue: props.state,
+            setState: props.setState,
+          },
+          Dnd: {
+            containerIndex: a.index,
+            userIndex: props.userIndex,
+            BeforeContainerIndex: props.BeforeContainerIndex,
+          },
         });
       }
     },

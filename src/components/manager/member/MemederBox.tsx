@@ -4,9 +4,10 @@ import * as S from "./MemberBox.style";
 import TrashCanIcon from "@/asset/TrashCanIcon.svg";
 import MemberContents from "./memberContents/MemberContents";
 import { useDrop } from "react-dnd";
+import ChangeValue from "@/util/ChangeValue";
 
 const MemederBox = (props: IMemberBoxPropsValue) => {
-  const [collectedProps, drop] = useDrop(() => ({
+  const [, drop] = useDrop(() => ({
     accept: "BOX",
     drop: () => ({ index: props.Boxindex }),
     collect: (monitor) => ({
@@ -15,17 +16,6 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
       endDrop: monitor.getDropResult(),
     }),
   }));
-
-  const DeleteMemberContainer = () => {
-    if (!window.confirm(props.title + "을/를 삭제하시겠습니까?")) return;
-    if (props.member[0]) {
-      alert("남은 지원자를 이동시키거나 삭제해주세요.");
-      return;
-    }
-    let copy = [...props.state];
-    copy.splice(props.Boxindex, 1);
-    props.setState(copy);
-  };
 
   return (
     <S.MainContainer>
@@ -37,7 +27,14 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
             <S.TrashCanIcon
               src={TrashCanIcon}
               alt=""
-              onClick={DeleteMemberContainer}
+              onClick={() =>
+                ChangeValue({
+                  State: { stateValue: props.state, setState: props.setState },
+                  Delete: {
+                    Containerindex: props.Boxindex,
+                  },
+                })
+              }
             />
           </S.TitleLeftContainer>
         </S.TitleConatainer>
