@@ -7,6 +7,7 @@ import Sidebar from "./sidebar/Sidebar";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Modal from "./common/modal/Modal";
+import NullMember from "./nullMember/NullMember";
 
 const Manager = () => {
   const MemberBox1: IMemberBoxValue = {
@@ -80,7 +81,8 @@ const Manager = () => {
   };
   const [memberContentsValue, setMemberContentsValue] = useState<
     IMemberBoxValue[]
-  >([MemberBox1, MemberBox2, MemberBox3, { title: "ddd", member: [] }]);
+  >([]);
+  //[MemberBox1, MemberBox2, MemberBox3, { title: "ddd", member: [] }]
 
   const [modal, setModal] = useState<boolean>(false);
   return (
@@ -90,18 +92,22 @@ const Manager = () => {
         <S.ContentsBox>
           <Title setModal={setModal} />
           <S.MemberContentsContainer>
-            {memberContentsValue.map((value, index) => {
-              return (
-                <MemederBox
-                  key={index}
-                  state={memberContentsValue}
-                  setState={setMemberContentsValue}
-                  Boxindex={index}
-                  title={value.title}
-                  member={value.member}
-                />
-              );
-            })}
+            {memberContentsValue[0] ? (
+              memberContentsValue.map((value, index) => {
+                return (
+                  <MemederBox
+                    key={index}
+                    state={memberContentsValue}
+                    setState={setMemberContentsValue}
+                    Boxindex={index}
+                    title={value.title}
+                    member={value.member}
+                  />
+                );
+              })
+            ) : (
+              <NullMember />
+            )}
           </S.MemberContentsContainer>
         </S.ContentsBox>
       </S.ManagerMainContainer>
