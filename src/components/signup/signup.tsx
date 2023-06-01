@@ -1,9 +1,10 @@
-import TitleBig from "@/asset/TitleBig.svg"
+import * as S from "./signup.style"
 
+// 회원가입
 const signup = () => {
     return (
         <>
-
+            
         </>
     )
 }
