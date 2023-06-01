@@ -1,16 +1,81 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Title from "./contentsBox/Title";
 import * as S from "./Manager.style";
 import MemederBox from "./member/MemederBox";
 import { IMemberBoxValue } from "@/types/IMemberBoxValue";
+import { IRecruitment } from "@/types/IRecruitment";
 import Sidebar from "./sidebar/Sidebar";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Modal from "./common/modal/Modal";
 import NullMember from "./nullMember/NullMember";
+import API from "@/util/api";
 
 const Manager = () => {
-  const MemberBox1: IMemberBoxValue = {
+  const [sidebarValue, setSidebarValue] = useState<IRecruitment[]>([]);
+  const [memberContentsValue, setMemberContentsValue] = useState<
+    IMemberBoxValue[]
+  >([
+    {
+      title: "📩 지원 접수",
+      member: [],
+    },
+  ]);
+  useEffect(() => {
+    API.get(`api/recruitment/`)
+      .then((value) => {
+        let arr: IRecruitment[] = [];
+        let copy = [...value.data];
+        copy.map((val) => {
+          arr.push({ ...val, isActive: false });
+          console.log(arr);
+        });
+        setSidebarValue(arr);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
+  const [modal, setModal] = useState<boolean>(false);
+  return (
+    <DndProvider backend={HTML5Backend}>
+      <S.ManagerMainContainer>
+        <Sidebar stateValue={sidebarValue} setStateValue={setSidebarValue} />
+        <S.ContentsBox>
+          <Title setModal={setModal} />
+          <S.MemberContentsContainer>
+            {memberContentsValue[0] ? (
+              memberContentsValue.map((value, index) => {
+                return (
+                  <MemederBox
+                    key={index}
+                    state={memberContentsValue}
+                    setState={setMemberContentsValue}
+                    Boxindex={index}
+                    title={value.title}
+                    member={value.member}
+                  />
+                );
+              })
+            ) : (
+              <NullMember />
+            )}
+          </S.MemberContentsContainer>
+        </S.ContentsBox>
+      </S.ManagerMainContainer>
+      {modal && (
+        <Modal
+          setModal={setModal}
+          setMemberContentsValue={setMemberContentsValue}
+        />
+      )}
+    </DndProvider>
+  );
+};
+
+export default Manager;
+
+/*
+const MemberBox1: IMemberBoxValue = {
     title: "📩 지원 접수",
     member: [
       {
@@ -79,46 +144,5 @@ const Manager = () => {
       },
     ],
   };
-  const [memberContentsValue, setMemberContentsValue] = useState<
-    IMemberBoxValue[]
-  >([]);
-  //[MemberBox1, MemberBox2, MemberBox3, { title: "ddd", member: [] }]
-
-  const [modal, setModal] = useState<boolean>(false);
-  return (
-    <DndProvider backend={HTML5Backend}>
-      <S.ManagerMainContainer>
-        <Sidebar />
-        <S.ContentsBox>
-          <Title setModal={setModal} />
-          <S.MemberContentsContainer>
-            {memberContentsValue[0] ? (
-              memberContentsValue.map((value, index) => {
-                return (
-                  <MemederBox
-                    key={index}
-                    state={memberContentsValue}
-                    setState={setMemberContentsValue}
-                    Boxindex={index}
-                    title={value.title}
-                    member={value.member}
-                  />
-                );
-              })
-            ) : (
-              <NullMember />
-            )}
-          </S.MemberContentsContainer>
-        </S.ContentsBox>
-      </S.ManagerMainContainer>
-      {modal && (
-        <Modal
-          setModal={setModal}
-          setMemberContentsValue={setMemberContentsValue}
-        />
-      )}
-    </DndProvider>
-  );
-};
-
-export default Manager;
+*/
+//[MemberBox1, MemberBox2, MemberBox3, { title: "ddd", member: [] }]
