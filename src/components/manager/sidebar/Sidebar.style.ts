@@ -158,5 +158,5 @@ export const FavPosition = styled.div`
 `;
 
 export const PositionMainContainer = styled.nav`
-  margin: 0.5rem 0;
+  padding: 0.5rem 0;
 `;

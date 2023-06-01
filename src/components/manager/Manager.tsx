@@ -10,14 +10,51 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 import Modal from "./common/modal/Modal";
 import NullMember from "./nullMember/NullMember";
 import API from "@/util/api";
+import { useRouter } from "next/router";
+import { GetServerSideProps } from "next";
+import { IServerMemberBoxValue } from "@/types/IServerMemberBoxValue";
 
+const GetMembers = ({ id }: { id: string }) => {
+  API.get(`/api/resume/list/${id}`)
+    .then((e) => {
+      console.log(e);
+      return [...e.data];
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+  return [];
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const { params } = context;
+  const { id } = params as { id: string };
+
+  const postData: IServerMemberBoxValue[] = await GetMembers({ id });
+
+  return {
+    props: {
+      postData,
+    },
+  };
+};
 const Manager = () => {
+  const router = useRouter();
+  const [pageId, setPageId] = useState<number>(0);
   const [sidebarValue, setSidebarValue] = useState<IRecruitment[]>([]);
   const [memberContentsValue, setMemberContentsValue] = useState<
     IMemberBoxValue[]
   >([
     {
       title: "📩 지원 접수",
+      member: [],
+    },
+    {
+      title: "👩‍💻 면접",
+      member: [],
+    },
+    {
+      title: "🖥️ 최종 심사",
       member: [],
     },
   ]);
@@ -28,18 +65,42 @@ const Manager = () => {
         let copy = [...value.data];
         copy.map((val) => {
           arr.push({ ...val, isActive: false });
-          console.log(arr);
         });
         setSidebarValue(arr);
       })
       .catch((error) => console.log(error));
+    API.get(`/api/resume/list/${pageId}`)
+      .then((e) => {
+        console.log(e);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }, []);
+  // useEffect(() => {
+  //   API.get(`/api/resume/list/${pageId}`)
+  //     .then((e) => {
+  //       console.log(e);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // }, [pageId]);
+  // useEffect(() => {
+  //   const { id } = router.query;
+  //   setPageId(Number(id));
+  // });
 
   const [modal, setModal] = useState<boolean>(false);
   return (
     <DndProvider backend={HTML5Backend}>
       <S.ManagerMainContainer>
-        <Sidebar stateValue={sidebarValue} setStateValue={setSidebarValue} />
+        <Sidebar
+          stateValue={sidebarValue}
+          setStateValue={setSidebarValue}
+          pageid={pageId}
+          setPageId={setPageId}
+        />
         <S.ContentsBox>
           <Title setModal={setModal} />
           <S.MemberContentsContainer>

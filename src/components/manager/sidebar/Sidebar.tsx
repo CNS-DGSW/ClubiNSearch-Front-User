@@ -2,8 +2,11 @@ import React, { Dispatch, SetStateAction } from "react";
 import * as S from "./Sidebar.style";
 import { Logo, AnnounceIcon, EditButton } from "./useSideBar";
 import { IRecruitment } from "@/types/IRecruitment";
+import Link from "next/link";
 
 interface ISidebarProps {
+  setPageId: Dispatch<SetStateAction<number>>;
+  pageid: number;
   stateValue: IRecruitment[];
   setStateValue: Dispatch<SetStateAction<IRecruitment[]>>;
 }
@@ -29,9 +32,16 @@ const Sidebar = (props: ISidebarProps) => {
           {props.stateValue.map((value) => {
             return (
               <S.PositionMainContainer>
-                <S.PositionTitleContaiver isActive={value.isActive}>
-                  <S.PositionTitle>{value.title}</S.PositionTitle>
-                </S.PositionTitleContaiver>
+                <Link
+                  href={`/manager/${value.id}`}
+                  onClick={() => props.setPageId(value.id)}
+                >
+                  <S.PositionTitleContaiver
+                    isActive={value.id === props.pageid}
+                  >
+                    <S.PositionTitle>{value.title}</S.PositionTitle>
+                  </S.PositionTitleContaiver>
+                </Link>
               </S.PositionMainContainer>
             );
           })}
