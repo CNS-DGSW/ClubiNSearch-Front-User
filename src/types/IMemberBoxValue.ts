@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import { IMemberValue } from "./IMemberValue";
+
 export interface IMemberBoxValue {
   title: string;
   member: IMemberValue[];
