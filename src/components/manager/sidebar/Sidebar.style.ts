@@ -120,7 +120,7 @@ export const AnnounceTitleContainer = styled.div`
   align-items: center;
   font-weight: bold;
   color: #777777;
-  fon-size: 1rem;
+  fon-size: 0.8rem;
   width : 32%;
   padding 0% 10%;
 `;
@@ -137,14 +137,14 @@ export const AnnounceImage = styled(Image)`
   height: 2rem;
 `;
 export const AnnounceIcon = styled(Image)`
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1rem;
+  height: 1rem;
 `;
 
 export const FileIcon = styled(Image)`
   width: 1.125rem;
   height: 1.125rem;
-  margin-right: 0.5rem;
+  margin-right: 0.2rem;
 `;
 
 export const FavPosition = styled.div`
