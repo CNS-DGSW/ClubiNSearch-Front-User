@@ -2,7 +2,6 @@ import React, { Dispatch, SetStateAction } from "react";
 import * as S from "./Sidebar.style";
 import { Logo, AnnounceIcon, EditButton } from "./useSideBar";
 import { IRecruitment } from "@/types/IRecruitment";
-import Link from "next/link";
 
 interface ISidebarProps {
   setPageId: Dispatch<SetStateAction<number>>;
