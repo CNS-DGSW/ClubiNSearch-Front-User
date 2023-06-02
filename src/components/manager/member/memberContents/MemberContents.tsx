@@ -64,7 +64,7 @@ const MemberContents = (props: IMemberPropsValue) => {
         <S.DetailBtnWrap>
           <S.UserDetailBtn
             onClick={() => {
-              if (!props.portfolio) {
+              if (props.portfolio === "") {
                 alert("포트폴리오가 없습니다.");
                 return;
               }
@@ -75,7 +75,7 @@ const MemberContents = (props: IMemberPropsValue) => {
           </S.UserDetailBtn>
           <S.UserDetailBtn
             onClick={() => {
-              if (!props.link) {
+              if (props.link === "") {
                 alert("포트폴리오 링크가 없습니다.");
                 return;
               }

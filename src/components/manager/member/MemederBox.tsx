@@ -51,6 +51,8 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
                 schoolNumber={value.schoolNumber}
                 phoneNumber={value.phoneNumber}
                 introduce={value.introduce}
+                link={value.link}
+                portfolio={value.portfolio}
               ></MemberContents>
             );
           })}
