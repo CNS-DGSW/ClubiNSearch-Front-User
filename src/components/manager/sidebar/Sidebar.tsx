@@ -32,7 +32,7 @@ const Sidebar = (props: ISidebarProps) => {
           {props.stateValue.map((value) => {
             return (
               <S.PositionMainContainer>
-                <Link
+                <S.LinkTag
                   href={`/manager/${value.id}`}
                   onClick={() => props.setPageId(value.id)}
                 >
@@ -41,7 +41,7 @@ const Sidebar = (props: ISidebarProps) => {
                   >
                     <S.PositionTitle>{value.title}</S.PositionTitle>
                   </S.PositionTitleContaiver>
-                </Link>
+                </S.LinkTag>
               </S.PositionMainContainer>
             );
           })}

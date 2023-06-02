@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Logo from "../../../asset/CNSLogo.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 interface IisActiveProps {
   isActive: boolean;
@@ -151,6 +152,10 @@ export const FileIcon = styled(Image)`
   width: 1.125rem;
   height: 1.125rem;
   margin-right: 0.2rem;
+`;
+
+export const LinkTag = styled(Link)`
+  text-decoration: none;
 `;
 
 export const FavPosition = styled.div`
