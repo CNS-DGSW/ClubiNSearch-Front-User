@@ -21,7 +21,16 @@ const Manager = () => {
   >([
     {
       title: "📩 지원 접수",
-      member: [],
+      member: [
+        {
+          name: "엄준식",
+          schoolNumber: "2307",
+          phoneNumber: "010-6207-7445",
+          introduce: "엄",
+          portfolio: "https://www.naver.com",
+          link: "",
+        },
+      ],
     },
     {
       title: "👩‍💻 면접",
@@ -47,7 +56,6 @@ const Manager = () => {
   }, []);
   useEffect(() => {
     const { id } = router.query;
-    console.log("router: ", id);
     if (id) {
       API.get(`api/resume/list/${id}`)
         .then((e) => {
