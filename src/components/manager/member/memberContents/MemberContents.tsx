@@ -56,8 +56,7 @@ const MemberContents = (props: IMemberPropsValue) => {
           학번 :<S.MemberEachContent>{props.schoolNumber}</S.MemberEachContent>
         </S.MemberContentsContainer>
         <S.MemberContentsContainer>
-          연락처 :{" "}
-          <S.MemberEachContent>{props.phoneNumber}</S.MemberEachContent>
+          연락처 :<S.MemberEachContent>{props.phoneNumber}</S.MemberEachContent>
         </S.MemberContentsContainer>
         <S.MemberContentsContainer>한줄 자기소개 :</S.MemberContentsContainer>
         <S.MemberEachContent>{props.introduce}</S.MemberEachContent>
