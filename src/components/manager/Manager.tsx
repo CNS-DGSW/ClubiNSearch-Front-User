@@ -11,33 +11,7 @@ import Modal from "./common/modal/Modal";
 import NullMember from "./nullMember/NullMember";
 import API from "@/util/api";
 import { useRouter } from "next/router";
-import { GetServerSideProps } from "next";
-import { IServerMemberBoxValue } from "@/types/IServerMemberBoxValue";
 
-const GetMembers = ({ id }: { id: string }) => {
-  API.get(`/api/resume/list/${id}`)
-    .then((e) => {
-      console.log(e);
-      return [...e.data];
-    })
-    .catch((e) => {
-      console.log(e);
-    });
-  return [];
-};
-
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { params } = context;
-  const { id } = params as { id: string };
-
-  const postData: IServerMemberBoxValue[] = await GetMembers({ id });
-
-  return {
-    props: {
-      postData,
-    },
-  };
-};
 const Manager = () => {
   const router = useRouter();
   const [pageId, setPageId] = useState<number>(0);
@@ -58,6 +32,7 @@ const Manager = () => {
       member: [],
     },
   ]);
+
   useEffect(() => {
     API.get(`api/recruitment/`)
       .then((value) => {
@@ -69,14 +44,20 @@ const Manager = () => {
         setSidebarValue(arr);
       })
       .catch((error) => console.log(error));
-    API.get(`/api/resume/list/${pageId}`)
-      .then((e) => {
-        console.log(e);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
   }, []);
+  useEffect(() => {
+    const { id } = router.query;
+    console.log("router: ", id);
+    if (id) {
+      API.get(`api/resume/list/${id}`)
+        .then((e) => {
+          console.log(e);
+        })
+        .catch((e) => {
+          console.log("err", e);
+        });
+    }
+  }, [router]);
   // useEffect(() => {
   //   API.get(`/api/resume/list/${pageId}`)
   //     .then((e) => {
