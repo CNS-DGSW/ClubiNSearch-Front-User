@@ -6,8 +6,8 @@ export interface IMemberValue {
   schoolNumber: string;
   phoneNumber: string;
   introduce: string;
-  portfolio?: string;
-  link?: string;
+  portfolio: string;
+  link: string;
 }
 export interface IMemberPropsValue {
   state: IMemberBoxValue[];
@@ -18,6 +18,31 @@ export interface IMemberPropsValue {
   schoolNumber: string;
   phoneNumber: string;
   introduce: string;
-  portfolio?: string;
-  link?: string;
+  portfolio: string;
+  link: string;
+}
+
+export interface IServerMemberValue {
+  id: number;
+  name: string;
+  studentNo: string;
+  contact: string;
+  introduction: string;
+  link: string;
+  fileUrl: string;
+}
+//state: "SUBMIT";
+
+export interface IServerMemberPropsValue {
+  state: IMemberBoxValue[];
+  setState: Dispatch<SetStateAction<IMemberBoxValue[]>>;
+  userIndex: number;
+  BeforeContainerIndex: number;
+  id: number;
+  name: string;
+  studentNo: string;
+  contact: string;
+  introduction: string;
+  link: string;
+  fileUrl: string;
 }
