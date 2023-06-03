@@ -57,6 +57,7 @@ const Manager = () => {
   useEffect(() => {
     const { id } = router.query;
     if (id) {
+      setPageId(Number(id));
       API.get(`api/resume/list/${id}`)
         .then((e) => {
           console.log(e);
@@ -88,7 +89,6 @@ const Manager = () => {
           stateValue={sidebarValue}
           setStateValue={setSidebarValue}
           pageid={pageId}
-          setPageId={setPageId}
         />
         <S.ContentsBox>
           <Title setModal={setModal} />
