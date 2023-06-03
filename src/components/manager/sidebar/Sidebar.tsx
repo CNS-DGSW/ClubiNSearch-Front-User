@@ -4,7 +4,6 @@ import { Logo, AnnounceIcon, EditButton } from "./useSideBar";
 import { IRecruitment } from "@/types/IRecruitment";
 
 interface ISidebarProps {
-  setPageId: Dispatch<SetStateAction<number>>;
   pageid: number;
   stateValue: IRecruitment[];
   setStateValue: Dispatch<SetStateAction<IRecruitment[]>>;
@@ -30,14 +29,9 @@ const Sidebar = (props: ISidebarProps) => {
         <S.SubContentsContainer>
           {props.stateValue.map((value) => {
             return (
-              <S.PositionMainContainer>
-                <S.LinkTag
-                  href={`/manager/${value.id}`}
-                  onClick={() => props.setPageId(value.id)}
-                >
-                  <S.PositionTitleContaiver
-                    isActive={value.id === props.pageid}
-                  >
+              <S.PositionMainContainer isActive={value.id === props.pageid}>
+                <S.LinkTag href={`/manager/${value.id}`}>
+                  <S.PositionTitleContaiver>
                     <S.PositionTitle>{value.title}</S.PositionTitle>
                   </S.PositionTitleContaiver>
                 </S.LinkTag>

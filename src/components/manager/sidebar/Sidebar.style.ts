@@ -75,14 +75,6 @@ export const PositionTitleContaiver = styled.nav`
   height: 2.25rem;
   padding: 0% 7%;
   align-items: center;
-  background-color: ${(props: IisActiveProps) =>
-    props.isActive ? "#ebebeb" : "transparent"};
-  &:hover {
-    background-color: #ebebeb;
-  }
-  &:active {
-    background-color: #dbdbdb;
-  }
 `;
 
 export const PositionTitle = styled.p`
@@ -164,4 +156,12 @@ export const FavPosition = styled.div`
 
 export const PositionMainContainer = styled.nav`
   padding: 0.5rem 0;
+  background-color: ${(props: IisActiveProps) =>
+    props.isActive ? "#ebebeb" : "transparent"};
+  &:hover {
+    background-color: #ebebeb;
+  }
+  &:active {
+    background-color: #dbdbdb;
+  }
 `;
