@@ -1,5 +1,5 @@
 import { IMemberBoxPropsValue } from "@/types/IMemberBoxValue";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./MemberBox.style";
 import TrashCanIcon from "@/asset/TrashCanIcon.svg";
 import MemberContents from "./memberContents/MemberContents";
@@ -24,7 +24,7 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
           <S.Title>{props.title}</S.Title>
           <S.TitleLeftContainer>
             <S.TitleDateInput type="date" placeholder="날짜 선택" />
-            <S.TrashCanIcon
+            {/* <S.TrashCanIcon
               src={TrashCanIcon}
               alt=""
               onClick={() =>
@@ -35,7 +35,7 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
                   },
                 })
               }
-            />
+            /> */}
           </S.TitleLeftContainer>
         </S.TitleConatainer>
         <S.MemberContainer ref={drop}>
