@@ -24,6 +24,7 @@ export const ContentWrapper = styled.div`
 // `
 
 export const TitleLogo = styled(Image)`
+    margin-top: 6vh;
 `
 
 export const Title = styled.div`
@@ -39,7 +40,7 @@ export const AllWithoutTitle = styled.div`
 `
 
 export const InputWrapper = styled.div`
-    margin: 2vh 0;
+    margin: 2.8vh 0;
 
 `
 
@@ -54,12 +55,15 @@ export const Input = styled.input`
     width: 23rem;
     height: 2rem;
 
+    padding-left: 0.5rem;
+
     border: 1px solid #C0C0C0;
     border-radius: 5px;
     :hover{
         outline: none;
     }
     :focus{
+        border: 1px solid #1556F7;
         outline: none;
     }
 `
@@ -78,7 +82,7 @@ export const SubmitBtn = styled.button`
 `
 
 export const GrayLabel = styled.p`
-    margin-top: 0.5rem;
+    margin-top: 1rem;
 
     font-weight: 700;
     font-size: 0.9rem;

@@ -12,7 +12,9 @@ const signin = () => {
 
                 <S.AllWithoutTitle>
                     <S.InputWrapper>
-                        <S.InputLabel>아이디</S.InputLabel>
+                        <S.InputLabel>
+                            아이디
+                        </S.InputLabel>
                         <S.Input></S.Input>
                     </S.InputWrapper>
 
