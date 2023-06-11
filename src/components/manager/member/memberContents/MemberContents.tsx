@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as S from "./MemberContents.style";
 import TrashCanIcon from "@/asset/TrashCanIcon.svg";
 import { IMemberPropsValue } from "@/types/IMemberValue";
@@ -11,6 +11,14 @@ interface IMonitorProps {
 }
 
 const MemberContents = (props: IMemberPropsValue) => {
+  const [copyStateValue, setCopyStateValue] = useState<IMemberBoxValue[]>([
+    ...props.state,
+  ]);
+
+  useEffect(() => {
+    setCopyStateValue([...props.state]);
+  }, [props.state]);
+
   const DeleteMember = () => {
     if (!window.confirm(props.name + " 지원자를 삭제하시겠습니까?")) return;
     let copy: IMemberBoxValue[] = [...props.state];
@@ -27,12 +35,11 @@ const MemberContents = (props: IMemberPropsValue) => {
     }),
     end: (item, monitor) => {
       const a = monitor.getDropResult<IMonitorProps>();
-      console.log("props : ", props.state);
       if (item && a) {
         ChangeValue({
           State: {
-            stateValue: props.state,
-            setState: props.setState,
+            stateValue: copyStateValue,
+            setState: setCopyStateValue,
           },
           Dnd: {
             containerIndex: a.index,
@@ -40,9 +47,11 @@ const MemberContents = (props: IMemberPropsValue) => {
             BeforeContainerIndex: props.BeforeContainerIndex,
           },
         });
+        props.setState(copyStateValue);
       }
     },
   }));
+
   return (
     <S.MemberContainer ref={drag}>
       <S.MemberContents>
