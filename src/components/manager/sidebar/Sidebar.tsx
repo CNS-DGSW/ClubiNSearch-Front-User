@@ -23,7 +23,7 @@ const Sidebar = (props: ISidebarProps) => {
             <p>공고 리스트</p>
           </S.AnnounceTitleContainer>
           <S.AnnounceEditContainer>
-            <S.AnnounceImage src={EditButton} alt="editBtn" />
+            {/* <S.AnnounceImage src={EditButton} alt="editBtn" /> */}
           </S.AnnounceEditContainer>
         </S.AnnounceContentsContainer>
         <S.SubContentsContainer>
