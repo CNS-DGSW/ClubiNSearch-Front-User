@@ -35,7 +35,7 @@ export const Title = styled.div`
     color: #394050;
 `
 
-export const AllWithoutTitle = styled.div`
+export const AllWithoutTitle = styled.form`
     margin-top: 4vh;
 `
 

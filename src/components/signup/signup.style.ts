@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
     justify-content: center;
 `
 
-export const ContentWrapper = styled.div`
+export const ContentWrapper = styled.form`
 `
 
 export const TitleLogo = styled(Image)`
@@ -62,6 +62,12 @@ export const Input = styled.input`
     
     border: 1px solid #C0C0C0;
     border-radius: 5px;
+
+    ::placeholder{
+        font-weight: 700;
+        font-size: 11px;
+        color: #C0C0C0;
+    }
     :hover{
         outline: none;
     }
