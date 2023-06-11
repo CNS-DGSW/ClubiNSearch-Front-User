@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from "react";
-import Title from "./contentsBox/Title";
+import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
+// import Title from "./contentsBox/Title";
 import * as S from "./Manager.style";
+import * as TitleStyle from "./contentsBox/Title.style";
+import PlusButton from "./common/PlusButton";
+import SearchIcon from "@/asset/managerPage/SearchIcon.svg";
+
 import MemederBox from "./member/MemederBox";
 import { IMemberBoxValue } from "@/types/IMemberBoxValue";
 import { IRecruitment } from "@/types/IRecruitment";
@@ -123,6 +127,33 @@ const Manager = () => {
 };
 
 export default Manager;
+
+const Title = ({
+  setModal,
+}: {
+  setModal: Dispatch<SetStateAction<boolean>>;
+}) => {
+  const [search, setSearch] = useState<string>();
+  return (
+    <TitleStyle.ContentsContainer>
+      <TitleStyle.Title>프론트 엔드 개발자</TitleStyle.Title>
+      <TitleStyle.SearchPlusButtonWrap>
+        <TitleStyle.SearchBoxContainer>
+          <TitleStyle.SearchImageIcon src={SearchIcon} alt="" />
+          <>
+            <TitleStyle.SearchInput
+              type="text"
+              placeholder="검색"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </>
+        </TitleStyle.SearchBoxContainer>
+        {/* <PlusButton setModal={setModal} /> */}
+      </TitleStyle.SearchPlusButtonWrap>
+    </TitleStyle.ContentsContainer>
+  );
+};
 
 /*
 const MemberBox1: IMemberBoxValue = {
