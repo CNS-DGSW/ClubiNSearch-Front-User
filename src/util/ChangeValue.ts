@@ -58,7 +58,7 @@ const DeleteMemberContainer = ({
   )
     return;
   if (props.State.stateValue[props.Delete.Containerindex].member[0]) {
-    alert("남은 지원자를 이동시키거나 삭제해주세요.");
+    alert("남은 지원자를 이동시킨뒤 삭제해주세요.");
     return;
   }
   copy.splice(props.Delete.Containerindex, 1);

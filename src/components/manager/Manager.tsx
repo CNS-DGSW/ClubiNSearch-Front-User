@@ -65,18 +65,16 @@ const Manager = () => {
           <Title setModal={setModal} />
           <S.MemberContentsContainer>
             {memberContentsValue[0] ? (
-              memberContentsValue.map((value, index) => {
-                return (
-                  <MemederBox
-                    key={index}
-                    state={memberContentsValue}
-                    setState={setMemberContentsValue}
-                    Boxindex={index}
-                    title={value.title}
-                    member={value.member}
-                  />
-                );
-              })
+              memberContentsValue.map((value, index) => (
+                <MemederBox
+                  key={index}
+                  state={memberContentsValue}
+                  setState={setMemberContentsValue}
+                  Boxindex={index}
+                  title={value.title}
+                  member={value.member}
+                />
+              ))
             ) : (
               <NullMember />
             )}
