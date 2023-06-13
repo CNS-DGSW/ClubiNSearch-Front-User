@@ -15,6 +15,7 @@ import Modal from "./common/modal/Modal";
 import NullMember from "./nullMember/NullMember";
 import API from "@/util/api";
 import { useRouter } from "next/router";
+import { AxiosRequestConfig } from "axios";
 
 const Manager = () => {
   const router = useRouter();
@@ -60,9 +61,13 @@ const Manager = () => {
   }, []);
   useEffect(() => {
     const { id } = router.query;
+    const Token: string | null = localStorage.getItem("accessToken");
     if (id) {
       setPageId(Number(id));
-      API.get(`api/resume/list/${id}`)
+      if (!Token) return;
+      API.get(`api/resume/list/${id}`, {
+        headers: { Authorization: `Bearer ${Token}` },
+      })
         .then((e) => {
           console.log(e);
         })
@@ -71,19 +76,6 @@ const Manager = () => {
         });
     }
   }, [router]);
-  // useEffect(() => {
-  //   API.get(`/api/resume/list/${pageId}`)
-  //     .then((e) => {
-  //       console.log(e);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // }, [pageId]);
-  // useEffect(() => {
-  //   const { id } = router.query;
-  //   setPageId(Number(id));
-  // });
 
   const [modal, setModal] = useState<boolean>(false);
   return (
