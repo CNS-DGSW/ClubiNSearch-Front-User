@@ -1,4 +1,4 @@
-import { ChangeEvent, ChangeEventHandler, Dispatch, SetStateAction } from "react";
+import { ChangeEventHandler, Dispatch, SetStateAction } from "react";
 import * as S from "./InfoInputStyle";
 
 interface IInformation {
