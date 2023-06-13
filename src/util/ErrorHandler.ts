@@ -89,12 +89,3 @@ const ErrorHandler = (contentValue: IContentsValue) => {
 };
 
 export default ErrorHandler;
-
-// return [
-//   !regName.test(contentValue.name) && contentValue.name !== "",
-//   regSchoolNumber.test(contentValue.schoolNumber) &&
-//     contentValue.schoolNumber.length === 4,
-//   regPhone.test(contentValue.phoneNumber),
-//   !(contentValue.introduce === "") || contentValue.introduce.length > 3,
-//   contentValue.link === "https://" || regUrl.test(contentValue.link),
-// ];

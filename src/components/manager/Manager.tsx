@@ -1,10 +1,8 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
-// import Title from "./contentsBox/Title";
 import * as S from "./Manager.style";
 import * as TitleStyle from "./contentsBox/Title.style";
 import PlusButton from "./common/PlusButton";
 import SearchIcon from "@/asset/managerPage/SearchIcon.svg";
-
 import MemederBox from "./member/MemederBox";
 import { IMemberBoxValue } from "@/types/IMemberBoxValue";
 import { IRecruitment } from "@/types/IRecruitment";
@@ -15,7 +13,6 @@ import Modal from "./common/modal/Modal";
 import NullMember from "./nullMember/NullMember";
 import API from "@/util/api";
 import { useRouter } from "next/router";
-import { AxiosRequestConfig } from "axios";
 
 const Manager = () => {
   const router = useRouter();
@@ -23,29 +20,7 @@ const Manager = () => {
   const [sidebarValue, setSidebarValue] = useState<IRecruitment[]>([]);
   const [memberContentsValue, setMemberContentsValue] = useState<
     IMemberBoxValue[]
-  >([
-    {
-      title: "📩 지원 접수",
-      member: [
-        {
-          name: "엄준식",
-          schoolNumber: "2307",
-          phoneNumber: "010-6207-7445",
-          introduce: "엄",
-          portfolio: "https://www.naver.com",
-          link: "",
-        },
-      ],
-    },
-    {
-      title: "👩‍💻 면접",
-      member: [],
-    },
-    {
-      title: "🖥️ 최종 심사",
-      member: [],
-    },
-  ]);
+  >([]);
 
   useEffect(() => {
     API.get(`api/recruitment/`)
