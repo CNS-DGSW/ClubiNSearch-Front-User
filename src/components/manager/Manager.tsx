@@ -30,7 +30,7 @@ const Manager = () => {
       member: [],
     },
     {
-      title: "3c",
+      title: "3",
       member: [],
     },
   ]);
@@ -57,14 +57,14 @@ const Manager = () => {
         headers: { Authorization: `Bearer ${Token}` },
       })
         .then((e) => {
-          let copy = [...memberContentsValue];
-          copy[0].member = [...e.data];
-          setMemberContentsValue([...copy]);
           console.log(e);
+          if (e.data) {
+            let copy = [...memberContentsValue];
+            copy[0].member = [...e.data];
+            setMemberContentsValue([...copy]);
+          }
         })
-        .catch((e) => {
-          console.log("err", e);
-        });
+        .catch((_) => {});
     }
   }, [router]);
 
