@@ -48,11 +48,11 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
                 userIndex={index}
                 BeforeContainerIndex={props.Boxindex}
                 name={value.name}
-                schoolNumber={value.schoolNumber}
-                phoneNumber={value.phoneNumber}
-                introduce={value.introduce}
+                schoolNumber={value.studentNo}
+                phoneNumber={value.contact}
+                introduce={value.introduction}
                 link={value.link}
-                portfolio={value.portfolio}
+                portfolio={value.fileUrl}
               ></MemberContents>
             );
           })}
