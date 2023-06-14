@@ -72,22 +72,26 @@ const MemberContents = (props: IMemberPropsValue) => {
         <S.DetailBtnWrap>
           <S.UserDetailBtn
             onClick={() => {
-              if (props.portfolio === "") {
+              if (props.portfolio === "" || props.portfolio == null) {
                 alert("포트폴리오가 없습니다.");
                 return;
+              } else {
+                window.open(props.portfolio);
               }
-              window.open(props.portfolio);
             }}
           >
             포트폴리오
           </S.UserDetailBtn>
           <S.UserDetailBtn
             onClick={() => {
-              if (props.link === "") {
+              console.log(props.link.length);
+
+              if (props.link.length <= 8 || props.link == null) {
                 alert("포트폴리오 링크가 없습니다.");
                 return;
+              } else {
+                window.open(props.link);
               }
-              window.open(props.link);
             }}
           >
             포트폴리오 링크
