@@ -10,22 +10,27 @@ import { useRouter } from "next/router";
 import API from "@/util/api";
 
 //Pick을 써서 file를 골라냄
-type GetObjectPickType<T, U extends keyof T> = T[U];
+// type GetObjectPickType<T, U extends keyof T> = T[U];
 //Partial을 써서 portfolio의 속성에 null을 추가함
-type ApplyAllNull<T> = { [t in keyof T]: T[t] | null };
-
+// type ApplyAllNull<T> = { [t in keyof T]: T[t] | null };
 //위의 과정을 IPortfolioValue에 넣어서 새 타입을 만듬
 // type IPortfolioValue = ApplyAllNull<GetObjectPickType<IContentsValue, "file">>; //IContentsValue라는 타입과 "portfolio"의 유니온 타입을 넘겨줌
+
+interface File extends Blob {
+  readonly lastModified: number;
+  readonly name: string;
+}
 
 const ApplyForm = () => {
   const router = useRouter();
   const [pageId, setPageId] = useState<string | null>(null);
+  const [pageTitle, setPageTitle] = useState<string>("");
 
   const [name, setName] = useState<string>("");
   const [schoolNumber, setSchoolNumber] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [introduce, setIntroduce] = useState<string>("");
-  const [file, setfile] = useState<any>();
+  const [file, setfile] = useState<File>();
 
   const [link, setLink] = useState<string>("https://");
   const [check, setCheck] = useState<boolean>();
@@ -35,6 +40,11 @@ const ApplyForm = () => {
   useEffect(() => {
     const { id } = router.query;
     setPageId(String(id));
+    if (id) {
+      API.get(`/api/recruitment/${id}`).then((response) => {
+        setPageTitle(response.data.title);
+      });
+    }
   }, [router]);
 
   const ServerHandler = (e: FormEvent<HTMLFormElement>) => {
@@ -60,44 +70,19 @@ const ApplyForm = () => {
       )
         alert("형식에 맞게 써주세요.");
       else {
-        const formData = new FormData();
-        formData.append("recruitmentId", String(pageId));
-        formData.append("name", name);
-        formData.append("studentNo", schoolNumber);
-        formData.append("contact", phoneNumber);
-        formData.append("introduction", introduce);
-        formData.append("link", link);
-        formData.append("file", file);
-
-        console.log(
-          {
-            recruitmentId: pageId,
-            name: name,
-            studentNo: schoolNumber,
-            contact: phoneNumber,
-            introduction: introduce,
-            link: link,
-            file: file,
-          },
-          formData
-        );
-        const copy = {
-          recruitmentId: pageId,
-          name: name,
-          studentNo: schoolNumber,
-          contact: phoneNumber,
-          introduction: introduce,
-          link: link,
-          file: file,
-        };
-
-        API.post(`/api/resume/submit`, formData)
-          .then((e) => {
-            console.log(e);
-          })
-          .catch((e) => {
-            console.log(e);
+        if (window.confirm("제출하시겠습니까?")) {
+          const formData = new FormData();
+          formData.append("recruitmentId", String(pageId));
+          formData.append("name", name);
+          formData.append("studentNo", schoolNumber);
+          formData.append("contact", phoneNumber);
+          formData.append("introduction", introduce);
+          formData.append("link", link);
+          formData.append("file", file || "");
+          API.post(`/api/resume/submit`, formData).then((_) => {
+            alert("제출되었습니다!");
           });
+        }
       }
     } else {
       alert("개인정보 수집 동의에 동의해주세요.");
@@ -109,7 +94,7 @@ const ApplyForm = () => {
       <S.MainWrapDiv>
         <nav>
           <S.title>지원서 작성하기</S.title>
-          <S.subTitle>CNS 프론트 엔드 ( 아이다 신개발 론칭 )</S.subTitle>
+          <S.subTitle>{pageTitle}</S.subTitle>
         </nav>
         <form onSubmit={ServerHandler}>
           <InfoInput
