@@ -31,35 +31,38 @@ const signin = () => {
         })
     }
 
-    return (
-        <>
-            <S.ContentWrapper>
-                <S.TitleLogo alt="title" src={TitleBig}/>
-                <S.Title>관리자 로그인</S.Title>
+  return (
+    <>
+      <S.ContentWrapper>
+        <S.TitleLogo alt="title" src={TitleBig} />
+        <S.Title>관리자 로그인</S.Title>
 
-                <S.AllWithoutTitle>
-                    <S.InputWrapper>
-                        <S.InputLabel>
-                            아이디
-                        </S.InputLabel>
-                        <S.Input onChange={(e)=>{setId(e.target.value)}} />
-                    </S.InputWrapper>
+        <S.AllWithoutTitle>
+          <S.InputWrapper>
+            <S.InputLabel>아이디</S.InputLabel>
+            <S.Input
+              onChange={(e) => {
+                setId(e.target.value);
+              }}
+            />
+          </S.InputWrapper>
 
-                    <S.InputWrapper>
-                        <S.InputLabel>비밀번호</S.InputLabel>
-                        <S.Input onChange={(e)=>{setPassword(e.target.value)}} />
-                    </S.InputWrapper>
+          <S.InputWrapper>
+            <S.InputLabel>비밀번호</S.InputLabel>
+            <S.Input
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+          </S.InputWrapper>
 
-                    <S.SubmitBtn type="submit" onClick={onSubmit}>로그인</S.SubmitBtn>
+          <S.SubmitBtn type="submit" onClick={onSubmit}>
+            로그인
+          </S.SubmitBtn>
 
                     <div>
                         <S.GrayLink href="/signup">회원가입</S.GrayLink>
                     </div>
                 </S.AllWithoutTitle>
 
-            </S.ContentWrapper>
-        </>
-    )
-}
-
-export default signin
+export default signin;

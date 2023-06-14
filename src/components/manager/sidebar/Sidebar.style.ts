@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import Logo from "../../../asset/CNSLogo.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 interface IisActiveProps {
   isActive: boolean;
@@ -70,12 +71,10 @@ export const DetailBtn = styled(Image)`
 export const PositionTitleContaiver = styled.nav`
   display: flex;
   ailgn-items: center;
-  width: 100%;
+  width: 86%;
   height: 2.25rem;
+  padding: 0% 7%;
   align-items: center;
-  &:hover {
-    background-color: #ebebeb;
-  }
 `;
 
 export const PositionTitle = styled.p`
@@ -90,7 +89,8 @@ export const PositionName = styled.div`
   align-items: center;
   font-weight: bold;
   font-size: 1rem;
-  width: 100%;
+  width: 80%;
+  padding: 0% 10%;
   height: 2.5rem;
   &:hover {
     background-color: #ebebeb;
@@ -113,42 +113,22 @@ export const AnnounceContentsContainer = styled.nav`
   justify-content: space-between;
 `;
 
-export const FavoriteTitleContainer = styled.div`
-  display: flex;
-  justify-content:space-between;
-  align-items: center;
-  font-weight: bold;
-  color: #777777;
-  fon-size: 1rem;
-  width : 80%;
-  padding 0% 10%;
-`;
-
 export const AnnounceTitleContainer = styled.div`
   display: flex;
   justify-content:space-between;
   align-items: center;
   font-weight: bold;
   color: #777777;
-  fon-size: 1rem;
+  fon-size: 0.8rem;
   width : 32%;
   padding 0% 10%;
 `;
 
 export const AnnounceEditContainer = styled.div`
   display: flex;
-  justify-content:space-between;
   align-items: center;
-  width : 22%;
+  width : 10%;
   padding 0% 10%;
-`;
-
-export const FavoriteDetailButton = styled(Image)`
-  width: 1rem;
-  height: 0.5rem;
-  transform: rotate(
-    ${(props: IisActiveProps) => (props.isActive ? "180deg" : "0deg")}
-  );
 `;
 
 export const AnnounceImage = styled(Image)`
@@ -156,16 +136,32 @@ export const AnnounceImage = styled(Image)`
   height: 2rem;
 `;
 export const AnnounceIcon = styled(Image)`
-  width: 1.25rem;
-  height: 1.25rem;
+  width: 1rem;
+  height: 1rem;
 `;
 
 export const FileIcon = styled(Image)`
   width: 1.125rem;
   height: 1.125rem;
-  margin-right: 0.5rem;
+  margin-right: 0.2rem;
+`;
+
+export const LinkTag = styled(Link)`
+  text-decoration: none;
 `;
 
 export const FavPosition = styled.div`
   margin: 1rem 0rem 0rem 0.5rem;
+`;
+
+export const PositionMainContainer = styled.nav`
+  padding: 0.5rem 0;
+  background-color: ${(props: IisActiveProps) =>
+    props.isActive ? "#ebebeb" : "transparent"};
+  &:hover {
+    background-color: #ebebeb;
+  }
+  &:active {
+    background-color: #dbdbdb;
+  }
 `;

@@ -1,13 +1,13 @@
 import { IMemberBoxPropsValue } from "@/types/IMemberBoxValue";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./MemberBox.style";
 import TrashCanIcon from "@/asset/TrashCanIcon.svg";
 import MemberContents from "./memberContents/MemberContents";
 import { useDrop } from "react-dnd";
+import ChangeValue from "@/util/ChangeValue";
 
 const MemederBox = (props: IMemberBoxPropsValue) => {
-  const [menuClick, setMenuClick] = useState<boolean>(false);
-  const [collectedProps, drop] = useDrop(() => ({
+  const [, drop] = useDrop(() => ({
     accept: "BOX",
     drop: () => ({ index: props.Boxindex }),
     collect: (monitor) => ({
@@ -16,6 +16,7 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
       endDrop: monitor.getDropResult(),
     }),
   }));
+
   return (
     <S.MainContainer>
       <S.SubContainer>
@@ -23,11 +24,18 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
           <S.Title>{props.title}</S.Title>
           <S.TitleLeftContainer>
             <S.TitleDateInput type="date" placeholder="날짜 선택" />
-            <S.TrashCanIcon
+            {/* <S.TrashCanIcon
               src={TrashCanIcon}
               alt=""
-              onClick={() => setMenuClick(true)}
-            />
+              onClick={() =>
+                ChangeValue({
+                  State: { stateValue: props.state, setState: props.setState },
+                  Delete: {
+                    Containerindex: props.Boxindex,
+                  },
+                })
+              }
+            /> */}
           </S.TitleLeftContainer>
         </S.TitleConatainer>
         <S.MemberContainer ref={drop}>
@@ -40,9 +48,11 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
                 userIndex={index}
                 BeforeContainerIndex={props.Boxindex}
                 name={value.name}
-                schoolNumber={value.schoolNumber}
-                phoneNumber={value.phoneNumber}
-                introduce={value.introduce}
+                schoolNumber={value.studentNo}
+                phoneNumber={value.contact}
+                introduce={value.introduction}
+                link={value.link}
+                portfolio={value.fileUrl}
               ></MemberContents>
             );
           })}

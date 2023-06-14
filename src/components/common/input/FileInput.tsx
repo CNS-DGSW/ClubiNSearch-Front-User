@@ -1,14 +1,15 @@
-import Image from "next/image";
 import React, { Dispatch, SetStateAction, ChangeEvent, useState } from "react";
 import * as S from "@/components/common/input/FileInputStyle";
 import fileImage from "../../../asset/file.svg";
-interface IPortfolioValue {
-  name: string | null;
-  url: string | null;
+
+interface File extends Blob {
+  readonly lastModified: number;
+  readonly name: string;
 }
+
 interface IFileInputProps {
-  value: IPortfolioValue;
-  setValue: Dispatch<SetStateAction<IPortfolioValue>>;
+  value: File | undefined;
+  setValue: Dispatch<SetStateAction<any>>;
   title: string;
   isEssential: boolean;
   placehorderContext: string;
@@ -20,18 +21,8 @@ interface IFileInputProps {
 const FileInput = (props: IFileInputProps) => {
   const [isContext, setIsContext] = useState<boolean>(false);
   const ImageOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    try {
-      const file = event.target.files;
-      console.log(file);
-
-      if (file) {
-        const fileResource = file[0];
-
-        const Image = URL.createObjectURL(fileResource);
-        props.setValue({ name: fileResource.name, url: Image });
-        setIsContext(true);
-      }
-    } catch {}
+    const file = event.target.files?.[0];
+    props.setValue(file);
   };
 
   return (
@@ -44,7 +35,7 @@ const FileInput = (props: IFileInputProps) => {
         <S.FileInputStyle type="file" onChange={ImageOnChangeHandler} />
         <S.FileImageStyle src={fileImage} alt="file" />
         <S.FileInputContext isContext={isContext}>
-          {props.value.name ? props.value.name : props.placehorderContext}
+          {props.value ? props.value.name : props.placehorderContext}
         </S.FileInputContext>
       </S.FileInputLabel>
       <S.ErrorAlert isError={true}>{props.errorAlertContext}</S.ErrorAlert>

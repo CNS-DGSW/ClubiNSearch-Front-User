@@ -3,9 +3,6 @@ export interface IContentsValue {
   schoolNumber: string;
   phoneNumber: string;
   introduce: string;
-  portfolio?: {
-    name: string;
-    url: string;
-  } | null;
+  file?: any;
   link: string;
 }

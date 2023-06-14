@@ -1,37 +1,15 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import * as S from "./Sidebar.style";
-import {
-  Logo,
-  detailBtn,
-  FavoritedetailBtn,
-  AnnounceIcon,
-  EditButton,
-  FileIcon,
-} from "./useSideBar";
-import PlusButton from "../common/PlusButton";
+import { Logo, AnnounceIcon, EditButton } from "./useSideBar";
+import { IRecruitment } from "@/types/IRecruitment";
 
-const Sidebar = () => {
-  const [favPosition, setFavPosition] = useState<boolean>(false);
-  const [position, setPosition] = useState([
-    {
-      name: "디자인",
-      active: false,
-      index: 0,
-      List: [{ name: "웹 디자인", active: false }],
-    },
-    {
-      name: "개발",
-      active: false,
-      index: 0,
-      List: [
-        { name: "프론트엔드 개발자", active: false },
-        { name: "백엔드 개발자", active: false },
-        { name: "안드로이드 개발자", active: false },
-        { name: "iOS 개발자", active: false },
-      ],
-    },
-  ]);
+interface ISidebarProps {
+  pageid: number;
+  stateValue: IRecruitment[];
+  setStateValue: Dispatch<SetStateAction<IRecruitment[]>>;
+}
 
+const Sidebar = (props: ISidebarProps) => {
   return (
     <S.MainContainer>
       <S.TitleContainer>
@@ -45,84 +23,19 @@ const Sidebar = () => {
             <p>공고 리스트</p>
           </S.AnnounceTitleContainer>
           <S.AnnounceEditContainer>
-            <S.AnnounceImage src={EditButton} alt="editBtn" />
-            <PlusButton />
+            {/* <S.AnnounceImage src={EditButton} alt="editBtn" /> */}
           </S.AnnounceEditContainer>
         </S.AnnounceContentsContainer>
         <S.SubContentsContainer>
-          <S.FavoriteTitleContainer
-            onClick={() => {
-              setFavPosition(!favPosition);
-            }}
-          >
-            <p>즐겨찾기</p>
-            <S.FavoriteDetailButton
-              src={FavoritedetailBtn}
-              alt="dd"
-              isActive={favPosition}
-            />
-          </S.FavoriteTitleContainer>
-
-          <>
-            {favPosition &&
-              position.map((value) => {
-                return (
-                  <>
-                    {value.List.map((value) => {
-                      if (value.active) {
-                        return (
-                          <S.PositionName>
-                            <S.PositionRadioBtn
-                              type="checkbox"
-                              checked={value.active}
-                              onClick={() => {
-                                value.active = !value.active;
-                              }}
-                            />
-                            <p>{value.name}</p>
-                          </S.PositionName>
-                        );
-                      }
-                    })}
-                  </>
-                );
-              })}
-          </>
-        </S.SubContentsContainer>
-        <S.SubContentsContainer>
-          {position.map((value, index) => {
+          {props.stateValue.map((value) => {
             return (
-              <>
-                <S.PositionTitleContaiver
-                  onClick={() => {
-                    console.log(value.active);
-                    let copyPosition = [...position];
-                    copyPosition[index].active = !copyPosition[index].active;
-                    setPosition([...copyPosition]);
-                  }}
-                >
-                  <S.DetailBtn
-                    src={detailBtn}
-                    alt="Image"
-                    isActive={value.active}
-                  />
-                  <S.FileIcon src={FileIcon} alt="dd" />
-                  <S.PositionTitle>{value.name}</S.PositionTitle>
-                </S.PositionTitleContaiver>
-                {value.active &&
-                  value.List.map((value) => {
-                    return (
-                      <S.PositionName>
-                        <S.PositionRadioBtn
-                          type="checkbox"
-                          checked={value.active}
-                          onClick={() => (value.active = !value.active)}
-                        />
-                        <p>{value.name}</p>
-                      </S.PositionName>
-                    );
-                  })}
-              </>
+              <S.PositionMainContainer isActive={value.id === props.pageid}>
+                <S.LinkTag href={`/manager/${value.id}`}>
+                  <S.PositionTitleContaiver>
+                    <S.PositionTitle>{value.title}</S.PositionTitle>
+                  </S.PositionTitleContaiver>
+                </S.LinkTag>
+              </S.PositionMainContainer>
             );
           })}
         </S.SubContentsContainer>
