@@ -2,8 +2,13 @@ import React, { Dispatch, SetStateAction, ChangeEvent, useState } from "react";
 import * as S from "@/components/common/input/FileInputStyle";
 import fileImage from "../../../asset/file.svg";
 
+interface File extends Blob {
+  readonly lastModified: number;
+  readonly name: string;
+}
+
 interface IFileInputProps {
-  value: any;
+  value: File | undefined;
   setValue: Dispatch<SetStateAction<any>>;
   title: string;
   isEssential: boolean;
@@ -16,7 +21,7 @@ interface IFileInputProps {
 const FileInput = (props: IFileInputProps) => {
   const [isContext, setIsContext] = useState<boolean>(false);
   const ImageOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files;
+    const file = event.target.files?.[0];
     props.setValue(file);
   };
 
@@ -30,7 +35,7 @@ const FileInput = (props: IFileInputProps) => {
         <S.FileInputStyle type="file" onChange={ImageOnChangeHandler} />
         <S.FileImageStyle src={fileImage} alt="file" />
         <S.FileInputContext isContext={isContext}>
-          {props.value ? null : props.placehorderContext}
+          {props.value ? props.value.name : props.placehorderContext}
         </S.FileInputContext>
       </S.FileInputLabel>
       <S.ErrorAlert isError={true}>{props.errorAlertContext}</S.ErrorAlert>
