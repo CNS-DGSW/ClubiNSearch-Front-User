@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import { IMemberValue } from "@/types/IMemberBoxValue";
+import { IMemberValue } from "@/types/IMemberValue";
 
 interface IMember {
   title: string;
