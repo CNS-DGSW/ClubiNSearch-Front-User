@@ -2,38 +2,30 @@ import FileInput from "@/components/common/input/FileInput";
 import Footer from "@/components/common/footer/Footer";
 import InfoInput from "@/components/common/input/InfoInput";
 import ErrorHandler from "@/util/ErrorHandler";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import cnsComputer from "../../asset/cnsComputer.svg";
 import * as S from "./apply.style";
-import { IContentsValue } from "@/types/IContentsValue";
 import { IErrorValue } from "@/types/IErrorValue";
 import { useRouter } from "next/router";
+import API from "@/util/api";
 
-//Pick을 써서 portfolio를 골라냄
+//Pick을 써서 file를 골라냄
 type GetObjectPickType<T, U extends keyof T> = T[U];
 //Partial을 써서 portfolio의 속성에 null을 추가함
 type ApplyAllNull<T> = { [t in keyof T]: T[t] | null };
 
 //위의 과정을 IPortfolioValue에 넣어서 새 타입을 만듬
-type IPortfolioValue = ApplyAllNull<GetObjectPickType<IContentsValue, "file">>; //IContentsValue라는 타입과 "portfolio"의 유니온 타입을 넘겨줌
+// type IPortfolioValue = ApplyAllNull<GetObjectPickType<IContentsValue, "file">>; //IContentsValue라는 타입과 "portfolio"의 유니온 타입을 넘겨줌
 
 const ApplyForm = () => {
   const router = useRouter();
-  const [pageId, setPageId] = useState<number | null>(null);
-  const [contentsValue, setContentsValue] = useState<IContentsValue>({
-    name: "",
-    schoolNumber: "",
-    phoneNumber: "",
-    introduce: "",
-    file: null,
-    link: "",
-  });
+  const [pageId, setPageId] = useState<string | null>(null);
 
   const [name, setName] = useState<string>("");
   const [schoolNumber, setSchoolNumber] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [introduce, setIntroduce] = useState<string>("");
-  const [portfolio, setPortfolio] = useState<any>();
+  const [file, setfile] = useState<any>();
 
   const [link, setLink] = useState<string>("https://");
   const [check, setCheck] = useState<boolean>();
@@ -41,27 +33,24 @@ const ApplyForm = () => {
     useState<IErrorValue | null>(null);
 
   useEffect(() => {
-    setContentsValue({
-      name: name,
-      schoolNumber: schoolNumber,
-      phoneNumber: phoneNumber,
-      introduce: introduce,
-      link: link,
-    });
-  }, [name, schoolNumber, phoneNumber, introduce, link]);
-
-  useEffect(() => {
     const { id } = router.query;
-    setPageId(Number(id));
+    setPageId(String(id));
   }, [router]);
 
-  const ServerHandler = () => {
+  const ServerHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     console.log(pageId);
 
     if (check) {
       alert("제출하시겠습니까?");
-      const initError: IErrorValue = ErrorHandler(contentsValue);
-      console.log(initError);
+      const initError: IErrorValue = ErrorHandler({
+        name: name,
+        schoolNumber: schoolNumber,
+        phoneNumber: phoneNumber,
+        introduce: introduce,
+        file: file,
+        link: link,
+      });
       setErrorCheckHandler({ ...initError });
       if (
         initError.introduce.isError ||
@@ -70,6 +59,46 @@ const ApplyForm = () => {
         initError.schoolNumber.isError
       )
         alert("형식에 맞게 써주세요.");
+      else {
+        const formData = new FormData();
+        formData.append("recruitmentId", String(pageId));
+        formData.append("name", name);
+        formData.append("studentNo", schoolNumber);
+        formData.append("contact", phoneNumber);
+        formData.append("introduction", introduce);
+        formData.append("link", link);
+        formData.append("file", file);
+
+        console.log(
+          {
+            recruitmentId: pageId,
+            name: name,
+            studentNo: schoolNumber,
+            contact: phoneNumber,
+            introduction: introduce,
+            link: link,
+            file: file,
+          },
+          formData
+        );
+        const copy = {
+          recruitmentId: pageId,
+          name: name,
+          studentNo: schoolNumber,
+          contact: phoneNumber,
+          introduction: introduce,
+          link: link,
+          file: file,
+        };
+
+        API.post(`/api/resume/submit`, formData)
+          .then((e) => {
+            console.log(e);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
     } else {
       alert("개인정보 수집 동의에 동의해주세요.");
     }
@@ -144,8 +173,8 @@ const ApplyForm = () => {
             isError={errorCheckHandler?.introduce.isError}
           />
           <FileInput
-            value={portfolio}
-            setValue={setPortfolio}
+            value={file}
+            setValue={setfile}
             title="포트폴리오 (선택사항)"
             isEssential={false}
             placehorderContext="pdf형식을 권장합니다."
