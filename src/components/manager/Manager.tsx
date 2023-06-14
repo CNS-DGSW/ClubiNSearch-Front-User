@@ -20,7 +20,20 @@ const Manager = () => {
   const [sidebarValue, setSidebarValue] = useState<IRecruitment[]>([]);
   const [memberContentsValue, setMemberContentsValue] = useState<
     IMemberBoxValue[]
-  >([]);
+  >([
+    {
+      title: "1",
+      member: [],
+    },
+    {
+      title: "2",
+      member: [],
+    },
+    {
+      title: "3c",
+      member: [],
+    },
+  ]);
 
   useEffect(() => {
     API.get(`api/recruitment/`)
@@ -44,6 +57,9 @@ const Manager = () => {
         headers: { Authorization: `Bearer ${Token}` },
       })
         .then((e) => {
+          let copy = [...memberContentsValue];
+          copy[0].member = [...e.data];
+          setMemberContentsValue([...copy]);
           console.log(e);
         })
         .catch((e) => {
