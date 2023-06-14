@@ -70,19 +70,18 @@ const ApplyForm = () => {
       )
         alert("형식에 맞게 써주세요.");
       else {
-        if (window.confirm("제출하시겠습니까?")) {
-          const formData = new FormData();
-          formData.append("recruitmentId", String(pageId));
-          formData.append("name", name);
-          formData.append("studentNo", schoolNumber);
-          formData.append("contact", phoneNumber);
-          formData.append("introduction", introduce);
-          formData.append("link", link);
-          formData.append("file", file || "");
-          API.post(`/api/resume/submit`, formData).then((_) => {
-            alert("제출되었습니다!");
-          });
-        }
+        const formData = new FormData();
+        formData.append("recruitmentId", String(pageId));
+        formData.append("name", name);
+        formData.append("studentNo", schoolNumber);
+        formData.append("contact", phoneNumber);
+        formData.append("introduction", introduce);
+        formData.append("link", link);
+        formData.append("file", file || "");
+        API.post(`/api/resume/submit`, formData).then((_) => {
+          alert("제출되었습니다!");
+          router.push("/");
+        });
       }
     } else {
       alert("개인정보 수집 동의에 동의해주세요.");
