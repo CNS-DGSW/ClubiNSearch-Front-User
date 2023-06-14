@@ -17,16 +17,7 @@ const FileInput = (props: IFileInputProps) => {
   const [isContext, setIsContext] = useState<boolean>(false);
   const ImageOnChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files;
-    console.log(file);
     props.setValue(file);
-
-    // if (file) {
-    //   const fileResource = file[0];
-
-    //   const Image = URL.createObjectURL(fileResource);
-    //   // props.setValue({ name: fileResource.name, url: Image });
-    //   setIsContext(true);
-    // }
   };
 
   return (
