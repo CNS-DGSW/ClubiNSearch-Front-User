@@ -110,3 +110,11 @@ export const CheckAgree = styled.input`
 export const AgreeLabel = styled.label`
     margin-left: 1vh;
 `
+
+export const ErrorMsg = styled.div`
+    margin: 0.4rem;
+    color: #ff4f4f;
+    font-size: 0.7rem;
+`
+
+

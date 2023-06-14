@@ -1,5 +1,6 @@
 import styled, {GlobalStyleComponent, createGlobalStyle} from "styled-components";
 import Image from "next/image"
+import Link from "next/link";
 
 // export const Wrapper = styled.div`
 //     display: flex;
@@ -69,6 +70,8 @@ export const Input = styled.input`
 `
 
 export const SubmitBtn = styled.button`
+    margin-bottom: 0.5rem;
+
     width: 23rem;
     height: 3rem;
     background-color: rgba(21, 86, 247, 0.8);
@@ -81,11 +84,10 @@ export const SubmitBtn = styled.button`
 
 `
 
-export const GrayLabel = styled.p`
-    margin-top: 1rem;
+export const GrayLink = styled(Link)`
 
     font-weight: 700;
     font-size: 0.9rem;
     color: #C0C0C0;
-
+    text-decoration: none;
 `
