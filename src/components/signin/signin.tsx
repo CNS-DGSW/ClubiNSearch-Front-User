@@ -60,9 +60,12 @@ const signin = () => {
             로그인
           </S.SubmitBtn>
 
-                    <div>
-                        <S.GrayLink href="/signup">회원가입</S.GrayLink>
-                    </div>
-                </S.AllWithoutTitle>
-
-export default signin;
+                <div>
+                    <S.GrayLink href="/signup">회원가입</S.GrayLink>
+                </div>
+            </S.AllWithoutTitle>
+            </S.ContentWrapper>
+        </>
+    )
+}
+export default signin
