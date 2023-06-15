@@ -45,8 +45,9 @@ const Manager = () => {
         });
         setSidebarValue(arr);
       })
-      .catch((error) => console.log(error));
+      .catch((_) => {});
   }, []);
+
   useEffect(() => {
     const { id } = router.query;
     const Token: string | null = localStorage.getItem("accessToken");
@@ -57,14 +58,19 @@ const Manager = () => {
         headers: { Authorization: `Bearer ${Token}` },
       })
         .then((e) => {
-          console.log(e);
+          console.log(e, Token);
           if (e.data) {
-            let copy = [...memberContentsValue];
+            let copy: IMemberBoxValue[] = [...memberContentsValue];
             copy[0].member = [...e.data];
             setMemberContentsValue([...copy]);
           }
         })
-        .catch((_) => {});
+        .catch((e) => {
+          console.log(e);
+          if (e.response?.data?.message === "조회 결과가 존재하지 않습니다") {
+            console.log("dds");
+          }
+        });
     }
   }, [router]);
 
@@ -78,7 +84,7 @@ const Manager = () => {
           pageid={pageId}
         />
         <S.ContentsBox>
-          <Title setModal={setModal} />
+          <Title setModal={setModal} pageid={pageId} />
           <S.MemberContentsContainer>
             {memberContentsValue[0] ? (
               memberContentsValue.map((value, index) => (
@@ -111,13 +117,23 @@ export default Manager;
 
 const Title = ({
   setModal,
+  pageid,
 }: {
   setModal: Dispatch<SetStateAction<boolean>>;
+  pageid: number;
 }) => {
   const [search, setSearch] = useState<string>();
+  const [title, setTitle] = useState<string>();
+  useEffect(() => {
+    API.get(`api/recruitment/${pageid}`)
+      .then((value) => {
+        setTitle(value.data.title);
+      })
+      .catch((_) => {});
+  }, [pageid]);
   return (
     <TitleStyle.ContentsContainer>
-      <TitleStyle.Title>프론트 엔드 개발자</TitleStyle.Title>
+      <TitleStyle.Title>{title}</TitleStyle.Title>
       <TitleStyle.SearchPlusButtonWrap>
         <TitleStyle.SearchBoxContainer>
           <TitleStyle.SearchImageIcon src={SearchIcon} alt="" />
