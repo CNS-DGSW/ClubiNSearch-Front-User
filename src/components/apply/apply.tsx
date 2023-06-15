@@ -52,7 +52,7 @@ const ApplyForm = () => {
     console.log(pageId);
 
     if (check) {
-      alert("제출하시겠습니까?");
+      if (!window.confirm("제출하시겠습니까?")) return;
       const initError: IErrorValue = ErrorHandler({
         name: name,
         schoolNumber: schoolNumber,
@@ -78,10 +78,15 @@ const ApplyForm = () => {
         formData.append("introduction", introduce);
         formData.append("link", link);
         formData.append("file", file || "");
-        API.post(`/api/resume/submit`, formData).then((_) => {
-          alert("제출되었습니다!");
-          router.push("/");
-        });
+        API.post(`/api/resume/submit`, formData)
+          .then((_) => {
+            alert("제출되었습니다!");
+            router.push("/");
+          })
+          .catch((e) => {
+            console.log(e);
+            console.log(pageId);
+          });
       }
     } else {
       alert("개인정보 수집 동의에 동의해주세요.");
