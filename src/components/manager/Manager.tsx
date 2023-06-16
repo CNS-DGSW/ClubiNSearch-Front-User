@@ -20,20 +20,27 @@ const Manager = () => {
   const [sidebarValue, setSidebarValue] = useState<IRecruitment[]>([]);
   const [memberContentsValue, setMemberContentsValue] = useState<
     IMemberBoxValue[]
-  >([
-    {
-      title: "1",
-      member: [],
-    },
-    {
-      title: "2",
-      member: [],
-    },
-    {
-      title: "3",
-      member: [],
-    },
-  ]);
+  >([]);
+
+  const ServerConnect = async ({
+    Token,
+    id,
+  }: {
+    Token: string;
+    id: string | string[];
+  }) => {
+    let copy: IMemberBoxValue[] = [];
+    await API.get(`api/resume/admin/list/${id}`, {
+      headers: { Authorization: `Bearer ${Token}` },
+    })
+      .then((e) => {
+        if (e.data) {
+          copy = [...e.data];
+        }
+      })
+      .catch((_) => {});
+    setMemberContentsValue([...copy]);
+  };
 
   useEffect(() => {
     API.get(`api/recruitment/`)
@@ -54,23 +61,7 @@ const Manager = () => {
     if (id) {
       setPageId(Number(id));
       if (!Token) return;
-      API.get(`api/resume/list/${id}`, {
-        headers: { Authorization: `Bearer ${Token}` },
-      })
-        .then((e) => {
-          console.log(e, Token);
-          if (e.data) {
-            let copy: IMemberBoxValue[] = [...memberContentsValue];
-            copy[0].member = [...e.data];
-            setMemberContentsValue([...copy]);
-          }
-        })
-        .catch((e) => {
-          console.log(e);
-          if (e.response?.data?.message === "조회 결과가 존재하지 않습니다") {
-            console.log("dds");
-          }
-        });
+      ServerConnect({ Token, id });
     }
   }, [router]);
 
@@ -93,7 +84,7 @@ const Manager = () => {
                   state={memberContentsValue}
                   setState={setMemberContentsValue}
                   Boxindex={index}
-                  title={value.title}
+                  title={value.state}
                   member={value.member}
                 />
               ))
@@ -146,7 +137,7 @@ const Title = ({
             />
           </>
         </TitleStyle.SearchBoxContainer>
-        {/* <PlusButton setModal={setModal} /> */}
+        <PlusButton setModal={setModal} />
       </TitleStyle.SearchPlusButtonWrap>
     </TitleStyle.ContentsContainer>
   );
