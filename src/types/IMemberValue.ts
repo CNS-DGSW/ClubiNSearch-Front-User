@@ -20,6 +20,7 @@ export interface IMemberPropsValue {
   introduce: string;
   portfolio: string;
   link: string;
+  resumeId: number;
 }
 
 export interface IServerMemberValue {
@@ -30,6 +31,7 @@ export interface IServerMemberValue {
   introduction: string;
   link: string;
   fileUrl: string;
+  resumeId: number;
 }
 //state: "SUBMIT";
 

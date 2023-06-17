@@ -1,5 +1,6 @@
 import React, { SetStateAction, Dispatch } from "react";
 import { IMemberBoxValue } from "@/types/IMemberBoxValue";
+import API from "./api";
 
 interface IChangeValue {
   State: {
@@ -52,7 +53,7 @@ const DeleteMemberContainer = ({
   if (!props.Delete) return;
   if (
     !window.confirm(
-      props.State.stateValue[props.Delete.Containerindex].title +
+      props.State.stateValue[props.Delete.Containerindex].state +
         "을(를) 삭제하시겠습니까?"
     )
   )
@@ -74,7 +75,7 @@ const ChangeValue = (props: IChangeValue) => {
   } else if (props.Delete) {
     DeleteMemberContainer({ copy, props });
   }
-  props.State.setState(copy);
+  props.State.setState([...copy]);
 };
 
 export default ChangeValue;
