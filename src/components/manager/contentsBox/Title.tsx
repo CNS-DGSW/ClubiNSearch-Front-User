@@ -2,7 +2,6 @@ import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
 import * as S from "./Title.style";
 import SearchIcon from "@/asset/managerPage/SearchIcon.svg";
 import PlusButton from "../common/PlusButton";
-import { useRouter } from "next/router";
 import { IMemberBoxValue } from "@/types/IMemberBoxValue";
 import API from "@/util/api";
 
@@ -15,7 +14,6 @@ const Title = ({
   setModal: Dispatch<SetStateAction<boolean>>;
   pageid: number;
 }) => {
-  const router = useRouter();
   const [search, setSearch] = useState<string>("");
   const [title, setTitle] = useState<string>();
 
@@ -32,13 +30,7 @@ const Title = ({
     return copy2;
   };
 
-  const ServerConnect = ({
-    Token,
-    id,
-  }: {
-    Token: string;
-    id: string | string[];
-  }) => {
+  const ServerConnect = (Token: string, id: number) => {
     let copy: IMemberBoxValue[] = [];
     API.get(`api/resume/admin/list/${id}`, {
       headers: { Authorization: `Bearer ${Token}` },
@@ -57,23 +49,22 @@ const Title = ({
   };
 
   useEffect(() => {
+    console.log("dddddddd");
+
+    const Token: string | null = localStorage.getItem("accessToken");
+    if (pageid) {
+      if (!Token) return;
+      ServerConnect(Token, pageid);
+    }
+  }, [search]);
+
+  useEffect(() => {
     API.get(`api/recruitment/${pageid}`)
       .then((value) => {
         setTitle(value.data.title);
       })
       .catch((_) => {});
   }, [pageid]);
-
-  useEffect(() => {
-    const { id } = router.query;
-    console.log("dddddddd");
-
-    const Token: string | null = localStorage.getItem("accessToken");
-    if (id) {
-      if (!Token) return;
-      ServerConnect({ Token, id });
-    }
-  }, [router, search]);
 
   return (
     <S.ContentsContainer>
