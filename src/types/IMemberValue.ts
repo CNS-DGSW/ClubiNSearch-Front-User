@@ -8,6 +8,7 @@ export interface IMemberValue {
   introduce: string;
   portfolio: string;
   link: string;
+  resuneId: number;
 }
 export interface IMemberPropsValue {
   state: IMemberBoxValue[];

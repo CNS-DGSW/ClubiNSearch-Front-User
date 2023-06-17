@@ -30,27 +30,31 @@ const MemberContents = (props: IMemberPropsValue) => {
 
   useEffect(() => {
     if (containerIndex !== undefined) {
-      console.log("continer", containerIndex);
       ServerConnect(props.state[containerIndex].state);
       setContainerIndex(undefined);
     }
   }, [containerIndex]);
 
   const ServerConnect = async (state: string) => {
-    console.log(state);
-
-    // try {
-    //   const Token: string | null = localStorage.getItem("accessToken");
-    //   if (!Token) return;
-    //   const data = await API.post(`api/resume/admin/state`, {
-    //     headers: { Authorization: `Bearer ${Token}` },
-    //     id: props.resumeId,
-    //     state: state,
-    //   });
-    //   console.log(data);
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    const id: string = String(props.resumeId);
+    try {
+      const Token: string | null = localStorage.getItem("accessToken");
+      if (!Token) return;
+      const data = await API.post(
+        `api/resume/admin/state`,
+        {
+          id: id,
+          state: state,
+        },
+        {
+          headers: { Authorization: `Bearer ${Token}` },
+        }
+      );
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+    console.log(props.name, id, state, props.userIndex);
   };
 
   const [{}, drag] = useDrag(() => ({
@@ -60,11 +64,10 @@ const MemberContents = (props: IMemberPropsValue) => {
       isDragging: monitor.isDragging(),
       handlerId: monitor.getHandlerId(),
     }),
-    end: (item, monitor) => {
+    end: async (item, monitor) => {
       const a = monitor.getDropResult<IMonitorProps>();
       if (a !== null) {
-        setContainerIndex(a.index);
-        ChangeValue({
+        await ChangeValue({
           State: {
             stateValue: copyStateValue,
             setState: setCopyStateValue,
@@ -75,6 +78,7 @@ const MemberContents = (props: IMemberPropsValue) => {
             BeforeContainerIndex: props.BeforeContainerIndex,
           },
         });
+        setContainerIndex(a.index);
         // console.log(props.resumeId, props.state[a.index].state, a.index);
       }
     },
@@ -88,7 +92,13 @@ const MemberContents = (props: IMemberPropsValue) => {
           alt=""
           onClick={DeleteMember}
         />
-        <S.MemberName>{props.name}</S.MemberName>
+        <S.MemberName
+          onClick={() => {
+            console.log(props.name, props.resumeId, props.userIndex);
+          }}
+        >
+          {props.name}
+        </S.MemberName>
         <S.MemberContentsContainer>
           학번 :<S.MemberEachContent>{props.schoolNumber}</S.MemberEachContent>
         </S.MemberContentsContainer>
