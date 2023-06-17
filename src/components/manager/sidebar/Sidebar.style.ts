@@ -115,12 +115,11 @@ export const AnnounceContentsContainer = styled.nav`
 
 export const AnnounceTitleContainer = styled.div`
   display: flex;
-  justify-content:space-between;
   align-items: center;
   font-weight: bold;
   color: #777777;
   fon-size: 0.8rem;
-  width : 32%;
+  width :100%;
   padding 0% 10%;
 `;
 
@@ -138,6 +137,7 @@ export const AnnounceImage = styled(Image)`
 export const AnnounceIcon = styled(Image)`
   width: 1rem;
   height: 1rem;
+  margin-right: 0.75rem;
 `;
 
 export const FileIcon = styled(Image)`
