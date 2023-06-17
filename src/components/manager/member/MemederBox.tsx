@@ -23,19 +23,21 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
         <S.TitleConatainer>
           <S.Title>{props.title}</S.Title>
           <S.TitleLeftContainer>
-            <S.TitleDateInput type="date" placeholder="날짜 선택" />
-            {/* <S.TrashCanIcon
+            <S.TrashCanIcon
               src={TrashCanIcon}
               alt=""
-              onClick={() =>
+              onClick={() => {
                 ChangeValue({
-                  State: { stateValue: props.state, setState: props.setState },
+                  State: {
+                    stateValue: props.state,
+                    setState: props.setState,
+                  },
                   Delete: {
                     Containerindex: props.Boxindex,
                   },
-                })
-              }
-            /> */}
+                });
+              }}
+            />
           </S.TitleLeftContainer>
         </S.TitleConatainer>
         <S.MemberContainer ref={drop}>
@@ -53,6 +55,7 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
                 introduce={value.introduction}
                 link={value.link}
                 portfolio={value.fileUrl}
+                resumeId={value.resumeId}
               ></MemberContents>
             );
           })}
