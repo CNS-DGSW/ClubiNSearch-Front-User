@@ -5,8 +5,6 @@ import { IMemberPropsValue } from "@/types/IMemberValue";
 import { useDrag } from "react-dnd";
 import ChangeValue from "@/util/ChangeValue";
 import { IMemberBoxValue } from "@/types/IMemberBoxValue";
-import API from "@/util/api";
-
 interface IMonitorProps {
   index: number;
 }
@@ -16,7 +14,6 @@ const MemberContents = (props: IMemberPropsValue) => {
     ...props.state,
   ]);
 
-  const [containerIndex, setContainerIndex] = useState<number>();
   useEffect(() => {
     setCopyStateValue([...props.state]);
   }, [props.state]);
@@ -28,35 +25,6 @@ const MemberContents = (props: IMemberPropsValue) => {
     props.setState(copy);
   };
 
-  useEffect(() => {
-    if (containerIndex !== undefined) {
-      ServerConnect(props.state[containerIndex].state);
-      setContainerIndex(undefined);
-    }
-  }, [containerIndex]);
-
-  const ServerConnect = async (state: string) => {
-    const id: string = String(props.resumeId);
-    try {
-      const Token: string | null = localStorage.getItem("accessToken");
-      if (!Token) return;
-      const data = await API.post(
-        `api/resume/admin/state`,
-        {
-          id: id,
-          state: state,
-        },
-        {
-          headers: { Authorization: `Bearer ${Token}` },
-        }
-      );
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
-    console.log(props.name, id, state, props.userIndex);
-  };
-
   const [{}, drag] = useDrag(() => ({
     type: "BOX",
     item: { name: props.name },
@@ -64,22 +32,24 @@ const MemberContents = (props: IMemberPropsValue) => {
       isDragging: monitor.isDragging(),
       handlerId: monitor.getHandlerId(),
     }),
-    end: async (item, monitor) => {
+    end: (item, monitor) => {
       const a = monitor.getDropResult<IMonitorProps>();
       if (a !== null) {
-        await ChangeValue({
+        console.log("dd", copyStateValue);
+
+        ChangeValue({
           State: {
             stateValue: copyStateValue,
             setState: setCopyStateValue,
           },
           Dnd: {
+            resumeId: String(props.resumeId),
+            state: props.state[a.index].state,
             containerIndex: a.index,
             userIndex: props.userIndex,
             BeforeContainerIndex: props.BeforeContainerIndex,
           },
         });
-        setContainerIndex(a.index);
-        // console.log(props.resumeId, props.state[a.index].state, a.index);
       }
     },
   }));
