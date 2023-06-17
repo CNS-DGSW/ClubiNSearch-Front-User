@@ -1,6 +1,5 @@
 import React, { SetStateAction, Dispatch } from "react";
 import { IMemberBoxValue } from "@/types/IMemberBoxValue";
-import API from "./api";
 
 interface IChangeValue {
   State: {

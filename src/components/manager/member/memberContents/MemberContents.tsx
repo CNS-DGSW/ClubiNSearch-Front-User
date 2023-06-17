@@ -30,7 +30,7 @@ const MemberContents = (props: IMemberPropsValue) => {
 
   useEffect(() => {
     if (containerIndex !== undefined) {
-      console.log(containerIndex);
+      console.log("continer", containerIndex);
       ServerConnect(props.state[containerIndex].state);
       setContainerIndex(undefined);
     }
@@ -39,18 +39,18 @@ const MemberContents = (props: IMemberPropsValue) => {
   const ServerConnect = async (state: string) => {
     console.log(state);
 
-    try {
-      const Token: string | null = localStorage.getItem("accessToken");
-      if (!Token) return;
-      const data = await API.post(`api/resume/admin/state`, {
-        headers: { Authorization: `Bearer ${Token}` },
-        id: props.resumeId,
-        state: state,
-      });
-      console.log(data);
-    } catch (error) {
-      console.log(error);
-    }
+    // try {
+    //   const Token: string | null = localStorage.getItem("accessToken");
+    //   if (!Token) return;
+    //   const data = await API.post(`api/resume/admin/state`, {
+    //     headers: { Authorization: `Bearer ${Token}` },
+    //     id: props.resumeId,
+    //     state: state,
+    //   });
+    //   console.log(data);
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const [{}, drag] = useDrag(() => ({
@@ -62,7 +62,6 @@ const MemberContents = (props: IMemberPropsValue) => {
     }),
     end: (item, monitor) => {
       const a = monitor.getDropResult<IMonitorProps>();
-
       if (a !== null) {
         setContainerIndex(a.index);
         ChangeValue({
