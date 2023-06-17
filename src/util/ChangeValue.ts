@@ -1,5 +1,6 @@
 import React, { SetStateAction, Dispatch } from "react";
 import { IMemberBoxValue } from "@/types/IMemberBoxValue";
+import API from "./api";
 
 interface IChangeValue {
   State: {
@@ -10,11 +11,34 @@ interface IChangeValue {
     containerIndex: number;
     userIndex: number;
     BeforeContainerIndex: number;
+    resumeId: string;
+    state: string;
   };
   Delete?: {
     Containerindex: number;
   };
 }
+
+const ServerConnect = async (id: string, state: string) => {
+  try {
+    const Token: string | null = localStorage.getItem("accessToken");
+    if (!Token) return;
+    const data = await API.post(
+      `api/resume/admin/state`,
+      {
+        id: id,
+        state: state,
+      },
+      {
+        headers: { Authorization: `Bearer ${Token}` },
+      }
+    );
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+  console.log(state, id);
+};
 
 const DeleteValue = ({
   copy,
@@ -35,6 +59,11 @@ const AddValue = ({
   props: IChangeValue;
 }) => {
   if (!props.Dnd) return;
+  console.log(
+    props.State.stateValue[props.Dnd.BeforeContainerIndex].member[
+      props.Dnd.userIndex
+    ]
+  );
   copy[props.Dnd.containerIndex].member.push(
     props.State.stateValue[props.Dnd.BeforeContainerIndex].member[
       props.Dnd.userIndex
@@ -62,13 +91,21 @@ const DeleteMemberContainer = ({
     return;
   }
   copy.splice(props.Delete.Containerindex, 1);
-  console.log("cp : ", copy);
   props.State.setState(copy);
 };
 
 const ChangeValue = (props: IChangeValue) => {
   let copy: IMemberBoxValue[] = [...props.State.stateValue];
+
   if (props.Dnd) {
+    const state: string =
+      props.State.stateValue[props.Dnd.containerIndex].state;
+    const resumeId: string = String(
+      props.State.stateValue[props.Dnd.BeforeContainerIndex].member[
+        props.Dnd.userIndex
+      ].resumeId
+    );
+    ServerConnect(resumeId, state);
     AddValue({ copy, props });
     DeleteValue({ copy, props });
   } else if (props.Delete) {
