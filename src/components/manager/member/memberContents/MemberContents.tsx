@@ -5,6 +5,7 @@ import { IMemberPropsValue } from "@/types/IMemberValue";
 import { useDrag } from "react-dnd";
 import ChangeValue from "@/util/ChangeValue";
 import { IMemberBoxValue } from "@/types/IMemberBoxValue";
+import API from "@/util/api";
 
 interface IMonitorProps {
   index: number;
@@ -15,6 +16,7 @@ const MemberContents = (props: IMemberPropsValue) => {
     ...props.state,
   ]);
 
+  const [containerIndex, setContainerIndex] = useState<number>();
   useEffect(() => {
     setCopyStateValue([...props.state]);
   }, [props.state]);
@@ -26,6 +28,31 @@ const MemberContents = (props: IMemberPropsValue) => {
     props.setState(copy);
   };
 
+  useEffect(() => {
+    if (containerIndex !== undefined) {
+      console.log(containerIndex);
+      ServerConnect(props.state[containerIndex].state);
+      setContainerIndex(undefined);
+    }
+  }, [containerIndex]);
+
+  const ServerConnect = async (state: string) => {
+    console.log(state);
+
+    try {
+      const Token: string | null = localStorage.getItem("accessToken");
+      if (!Token) return;
+      const data = await API.post(`api/resume/admin/state`, {
+        headers: { Authorization: `Bearer ${Token}` },
+        id: props.resumeId,
+        state: state,
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const [{}, drag] = useDrag(() => ({
     type: "BOX",
     item: { name: props.name },
@@ -35,7 +62,9 @@ const MemberContents = (props: IMemberPropsValue) => {
     }),
     end: (item, monitor) => {
       const a = monitor.getDropResult<IMonitorProps>();
-      if (item && a) {
+
+      if (a !== null) {
+        setContainerIndex(a.index);
         ChangeValue({
           State: {
             stateValue: copyStateValue,
@@ -47,7 +76,7 @@ const MemberContents = (props: IMemberPropsValue) => {
             BeforeContainerIndex: props.BeforeContainerIndex,
           },
         });
-        props.setState(copyStateValue);
+        // console.log(props.resumeId, props.state[a.index].state, a.index);
       }
     },
   }));
