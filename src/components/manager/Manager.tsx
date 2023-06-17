@@ -22,24 +22,31 @@ const Manager = () => {
     IMemberBoxValue[]
   >([]);
 
-  const ServerConnect = async ({
+  const ServerConnect = ({
     Token,
     id,
   }: {
     Token: string;
     id: string | string[];
   }) => {
+    console.log("실행");
+
     let copy: IMemberBoxValue[] = [];
-    await API.get(`api/resume/admin/list/${id}`, {
+    API.get(`api/resume/admin/list/${id}`, {
       headers: { Authorization: `Bearer ${Token}` },
     })
       .then((e) => {
         if (e.data) {
+          console.log(e.data);
+
           copy = [...e.data];
+          console.log(copy);
+          setMemberContentsValue([...copy]);
         }
       })
-      .catch((_) => {});
-    setMemberContentsValue([...copy]);
+      .catch(() => {
+        setMemberContentsValue([]);
+      });
   };
 
   useEffect(() => {
@@ -47,6 +54,7 @@ const Manager = () => {
       .then((value) => {
         let arr: IRecruitment[] = [];
         let copy = [...value.data];
+
         copy.map((val) => {
           arr.push({ ...val, isActive: false });
         });
@@ -61,6 +69,8 @@ const Manager = () => {
     if (id) {
       setPageId(Number(id));
       if (!Token) return;
+      console.log(id);
+
       ServerConnect({ Token, id });
     }
   }, [router]);
