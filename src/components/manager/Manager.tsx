@@ -13,6 +13,7 @@ import Modal from "./common/modal/Modal";
 import NullMember from "./nullMember/NullMember";
 import API from "@/util/api";
 import { useRouter } from "next/router";
+import Title from "./contentsBox/Title";
 
 const Manager = () => {
   const router = useRouter();
@@ -21,7 +22,6 @@ const Manager = () => {
   const [memberContentsValue, setMemberContentsValue] = useState<
     IMemberBoxValue[]
   >([]);
-
   const ServerConnect = ({
     Token,
     id,
@@ -29,18 +29,16 @@ const Manager = () => {
     Token: string;
     id: string | string[];
   }) => {
-    console.log("실행");
-
+    // console.log("실행");
     let copy: IMemberBoxValue[] = [];
     API.get(`api/resume/admin/list/${id}`, {
       headers: { Authorization: `Bearer ${Token}` },
     })
       .then((e) => {
         if (e.data) {
-          console.log(e.data);
-
+          // console.log(e.data);
           copy = [...e.data];
-          console.log(copy);
+          // console.log(copy);
           setMemberContentsValue([...copy]);
         }
       })
@@ -54,7 +52,6 @@ const Manager = () => {
       .then((value) => {
         let arr: IRecruitment[] = [];
         let copy = [...value.data];
-
         copy.map((val) => {
           arr.push({ ...val, isActive: false });
         });
@@ -85,7 +82,11 @@ const Manager = () => {
           pageid={pageId}
         />
         <S.ContentsBox>
-          <Title setModal={setModal} pageid={pageId} />
+          <Title
+            setStateValue={setMemberContentsValue}
+            setModal={setModal}
+            pageid={pageId}
+          />
           <S.MemberContentsContainer>
             {memberContentsValue[0] ? (
               memberContentsValue.map((value, index) => (
@@ -115,40 +116,3 @@ const Manager = () => {
 };
 
 export default Manager;
-
-const Title = ({
-  setModal,
-  pageid,
-}: {
-  setModal: Dispatch<SetStateAction<boolean>>;
-  pageid: number;
-}) => {
-  const [search, setSearch] = useState<string>();
-  const [title, setTitle] = useState<string>();
-  useEffect(() => {
-    API.get(`api/recruitment/${pageid}`)
-      .then((value) => {
-        setTitle(value.data.title);
-      })
-      .catch((_) => {});
-  }, [pageid]);
-  return (
-    <TitleStyle.ContentsContainer>
-      <TitleStyle.Title>{title}</TitleStyle.Title>
-      <TitleStyle.SearchPlusButtonWrap>
-        <TitleStyle.SearchBoxContainer>
-          <TitleStyle.SearchImageIcon src={SearchIcon} alt="" />
-          <>
-            <TitleStyle.SearchInput
-              type="text"
-              placeholder="검색"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </>
-        </TitleStyle.SearchBoxContainer>
-        <PlusButton setModal={setModal} />
-      </TitleStyle.SearchPlusButtonWrap>
-    </TitleStyle.ContentsContainer>
-  );
-};
