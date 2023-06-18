@@ -12,4 +12,5 @@ export interface IMemberBoxPropsValue {
   title: string;
   Boxindex: number;
   member: IServerMemberValue[];
+  pageId: string;
 }
