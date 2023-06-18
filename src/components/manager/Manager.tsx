@@ -1,6 +1,5 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import * as S from "./Manager.style";
-import * as TitleStyle from "./contentsBox/Title.style";
 import PlusButton from "./common/PlusButton";
 import SearchIcon from "@/asset/managerPage/SearchIcon.svg";
 import MemederBox from "./member/MemederBox";
@@ -29,16 +28,13 @@ const Manager = () => {
     Token: string;
     id: string | string[];
   }) => {
-    // console.log("실행");
     let copy: IMemberBoxValue[] = [];
     API.get(`api/resume/admin/list/${id}`, {
       headers: { Authorization: `Bearer ${Token}` },
     })
       .then((e) => {
         if (e.data) {
-          // console.log(e.data);
           copy = [...e.data];
-          // console.log(copy);
           setMemberContentsValue([...copy]);
         }
       })
@@ -66,8 +62,6 @@ const Manager = () => {
     if (id) {
       setPageId(Number(id));
       if (!Token) return;
-      console.log(id);
-
       ServerConnect({ Token, id });
     }
   }, [router]);
@@ -91,6 +85,7 @@ const Manager = () => {
             {memberContentsValue[0] ? (
               memberContentsValue.map((value, index) => (
                 <MemederBox
+                  pageId={String(pageId) || ""}
                   key={index}
                   state={memberContentsValue}
                   setState={setMemberContentsValue}

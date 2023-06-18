@@ -1,30 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import * as S from "./MemberContents.style";
-import TrashCanIcon from "@/asset/TrashCanIcon.svg";
 import { IMemberPropsValue } from "@/types/IMemberValue";
 import { useDrag } from "react-dnd";
 import ChangeValue from "@/util/ChangeValue";
-import { IMemberBoxValue } from "@/types/IMemberBoxValue";
 interface IMonitorProps {
   index: number;
+  pageId: string | string[];
 }
 
 const MemberContents = (props: IMemberPropsValue) => {
-  const [copyStateValue, setCopyStateValue] = useState<IMemberBoxValue[]>([
-    ...props.state,
-  ]);
-
-  useEffect(() => {
-    setCopyStateValue([...props.state]);
-  }, [props.state]);
-
-  const DeleteMember = () => {
-    if (!window.confirm(props.name + " 지원자를 삭제하시겠습니까?")) return;
-    let copy: IMemberBoxValue[] = [...props.state];
-    copy[props.BeforeContainerIndex].member.splice(props.userIndex, 1);
-    props.setState(copy);
-  };
-
   const [{}, drag] = useDrag(() => ({
     type: "BOX",
     item: { name: props.name },
@@ -35,12 +19,10 @@ const MemberContents = (props: IMemberPropsValue) => {
     end: (item, monitor) => {
       const a = monitor.getDropResult<IMonitorProps>();
       if (a !== null) {
-        console.log("dd", copyStateValue);
-
         ChangeValue({
           State: {
-            stateValue: copyStateValue,
-            setState: setCopyStateValue,
+            stateValue: props.state,
+            setState: props.setState,
           },
           Dnd: {
             resumeId: String(props.resumeId),
@@ -57,14 +39,9 @@ const MemberContents = (props: IMemberPropsValue) => {
   return (
     <S.MemberContainer ref={drag}>
       <S.MemberContents>
-        <S.MemberDeleteButton
-          src={TrashCanIcon}
-          alt=""
-          onClick={DeleteMember}
-        />
         <S.MemberName
           onClick={() => {
-            console.log(props.name, props.resumeId, props.userIndex);
+            console.log(props.state);
           }}
         >
           {props.name}
@@ -92,8 +69,6 @@ const MemberContents = (props: IMemberPropsValue) => {
           </S.UserDetailBtn>
           <S.UserDetailBtn
             onClick={() => {
-              console.log(props.link.length);
-
               if (props.link.length <= 8 || props.link == null) {
                 alert("포트폴리오 링크가 없습니다.");
                 return;
