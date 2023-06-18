@@ -23,6 +23,7 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
         </S.TitleConatainer>
         <S.MemberContainer ref={drop}>
           {props.member?.map((value, index) => {
+            console.log("mem", value);
             return (
               <MemberContents
                 key={index}
@@ -30,13 +31,7 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
                 setState={props.setState}
                 userIndex={index}
                 BeforeContainerIndex={props.Boxindex}
-                name={value.name}
-                schoolNumber={value.studentNo}
-                phoneNumber={value.contact}
-                introduce={value.introduction}
-                link={value.link}
-                portfolio={value.fileUrl}
-                resumeId={value.resumeId}
+                memberValue={value}
               ></MemberContents>
             );
           })}

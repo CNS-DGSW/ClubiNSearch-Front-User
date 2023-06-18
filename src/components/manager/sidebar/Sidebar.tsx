@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from "react";
 import * as S from "./Sidebar.style";
-import { Logo, AnnounceIcon, EditButton } from "./useSideBar";
+import { Logo, AnnounceIcon } from "./useSideBar";
 import { IRecruitment } from "@/types/IRecruitment";
 
 interface ISidebarProps {
@@ -22,9 +22,6 @@ const Sidebar = (props: ISidebarProps) => {
             <S.AnnounceIcon src={AnnounceIcon} alt="announceIcon" />
             <p>공고 리스트</p>
           </S.AnnounceTitleContainer>
-          <S.AnnounceEditContainer>
-            {/* <S.AnnounceImage src={EditButton} alt="editBtn" /> */}
-          </S.AnnounceEditContainer>
         </S.AnnounceContentsContainer>
         <S.SubContentsContainer>
           {props.stateValue.map((value) => {

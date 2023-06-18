@@ -10,12 +10,12 @@ interface IMonitorProps {
 const MemberContents = (props: IMemberPropsValue) => {
   const [{}, drag] = useDrag(() => ({
     type: "BOX",
-    item: { name: props.name },
+    item: {},
     collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),
       handlerId: monitor.getHandlerId(),
     }),
-    end: (item, monitor) => {
+    end: (_, monitor) => {
       const a = monitor.getDropResult<IMonitorProps>();
       if (a !== null) {
         ChangeValue({
@@ -24,7 +24,7 @@ const MemberContents = (props: IMemberPropsValue) => {
             setState: props.setState,
           },
           Dnd: {
-            resumeId: String(props.resumeId),
+            resumeId: String(props.memberValue.resumeId),
             state: props.state[a.index].state,
             containerIndex: a.index,
             userIndex: props.userIndex,
@@ -43,24 +43,33 @@ const MemberContents = (props: IMemberPropsValue) => {
             console.log(props.state);
           }}
         >
-          {props.name}
+          {props.memberValue.name}
         </S.MemberName>
         <S.MemberContentsContainer>
-          학번 :<S.MemberEachContent>{props.schoolNumber}</S.MemberEachContent>
+          학번 :
+          <S.MemberEachContent>
+            {props.memberValue.studentNo}
+          </S.MemberEachContent>
         </S.MemberContentsContainer>
         <S.MemberContentsContainer>
-          연락처 :<S.MemberEachContent>{props.phoneNumber}</S.MemberEachContent>
+          연락처 :
+          <S.MemberEachContent>{props.memberValue.contact}</S.MemberEachContent>
         </S.MemberContentsContainer>
         <S.MemberContentsContainer>한줄 자기소개 :</S.MemberContentsContainer>
-        <S.MemberEachContent>{props.introduce}</S.MemberEachContent>
+        <S.MemberEachContent>
+          {props.memberValue.introduction}
+        </S.MemberEachContent>
         <S.DetailBtnWrap>
           <S.UserDetailBtn
             onClick={() => {
-              if (props.portfolio === "" || props.portfolio == null) {
+              if (
+                props.memberValue.fileUrl === "" ||
+                props.memberValue.fileUrl == null
+              ) {
                 alert("포트폴리오가 없습니다.");
                 return;
               } else {
-                window.open(props.portfolio);
+                window.open(props.memberValue.fileUrl);
               }
             }}
           >
@@ -68,11 +77,14 @@ const MemberContents = (props: IMemberPropsValue) => {
           </S.UserDetailBtn>
           <S.UserDetailBtn
             onClick={() => {
-              if (props.link.length <= 8 || props.link == null) {
+              if (
+                props.memberValue.link.length <= 8 ||
+                props.memberValue.link == null
+              ) {
                 alert("포트폴리오 링크가 없습니다.");
                 return;
               } else {
-                window.open(props.link);
+                window.open(props.memberValue.link);
               }
             }}
           >

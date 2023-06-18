@@ -1,7 +1,5 @@
-import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./Manager.style";
-import PlusButton from "./common/PlusButton";
-import SearchIcon from "@/asset/managerPage/SearchIcon.svg";
 import MemederBox from "./member/MemederBox";
 import { IMemberBoxValue } from "@/types/IMemberBoxValue";
 import { IRecruitment } from "@/types/IRecruitment";
@@ -85,7 +83,6 @@ const Manager = () => {
             {memberContentsValue[0] ? (
               memberContentsValue.map((value, index) => (
                 <MemederBox
-                  pageId={String(pageId) || ""}
                   key={index}
                   state={memberContentsValue}
                   setState={setMemberContentsValue}

@@ -55,10 +55,6 @@ const AddValue = ({
   props: IChangeValue;
 }) => {
   let copy2 = [...copy];
-  console.log(
-    copy[props.Dnd.BeforeContainerIndex].member[props.Dnd.userIndex],
-    copy2[props.Dnd.BeforeContainerIndex].member[props.Dnd.userIndex]
-  );
   copy[props.Dnd.containerIndex].member.push(
     copy2[props.Dnd.BeforeContainerIndex].member[props.Dnd.userIndex]
   );
