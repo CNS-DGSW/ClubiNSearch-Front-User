@@ -5,7 +5,6 @@ import { useDrag } from "react-dnd";
 import ChangeValue from "@/util/ChangeValue";
 interface IMonitorProps {
   index: number;
-  pageId: string | string[];
 }
 
 const MemberContents = (props: IMemberPropsValue) => {

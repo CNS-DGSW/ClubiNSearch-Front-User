@@ -25,7 +25,6 @@ export interface IServerMemberValue {
   fileUrl: string;
   resumeId: number;
 }
-//state: "SUBMIT";
 
 export interface IServerMemberPropsValue {
   state: IMemberBoxValue[];
