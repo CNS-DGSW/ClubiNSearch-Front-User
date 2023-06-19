@@ -19,11 +19,8 @@ export default function Header() {
         <S.NavItem>지원서 작성</S.NavItem>
         <S.NavItem>자주 묻는 질문</S.NavItem>
         <S.NavItem>
-          <S.StyledLink href="/signin">
-          로그인
-          </S.StyledLink>
+          <S.StyledLink href="/signin">로그인</S.StyledLink>
         </S.NavItem>
-        
       </S.Nav>
     </header>
   );
