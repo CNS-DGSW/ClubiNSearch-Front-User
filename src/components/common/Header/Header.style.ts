@@ -1,3 +1,5 @@
+
+import Link from "next/link";
 import styled from "styled-components";
 
 export const Nav = styled.div`
@@ -23,3 +25,7 @@ export const headerLogo = styled.div`
     flex-grow: 1;
 `
 
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: #767676;
+`

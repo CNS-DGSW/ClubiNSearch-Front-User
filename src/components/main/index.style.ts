@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-items: center;
-    width: 100vw;
+    /* width: 100vw; */
     height: calc(100vh - 5rem); //왜 header만 빠지는데 5rem이나 빼줘야 모니터 100%에 맞는거지?
 `
 

@@ -12,5 +12,5 @@ type IErrorValueGeneric<T extends string> = {
 //설명
 //이게 유니온 타입(숫자 혹은 문자열이 들어갈 수 있다함)
 export type IErrorValue = IErrorValueGeneric<
-  "name" | "schoolNumber" | "phoneNumber" | "introduce" | "link"
+  "name" | "schoolNumber" | "phoneNumber" | "introduce"
 >; //1. 위에있는 값들을 T에 넣어서

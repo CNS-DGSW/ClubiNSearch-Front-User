@@ -1,11 +1,15 @@
+import { Dispatch, SetStateAction } from "react";
+import { IMemberValue, IServerMemberValue } from "./IMemberValue";
+
 export interface IMemberBoxValue {
-  title: string;
-  member?: IMemberValue[];
+  state: string;
+  member: IServerMemberValue[];
 }
 
-export interface IMemberValue {
-  name: string;
-  schoolNumber: string;
-  phoneNumber: string;
-  introduce: string;
+export interface IMemberBoxPropsValue {
+  state: IMemberBoxValue[];
+  setState: Dispatch<SetStateAction<IMemberBoxValue[]>>;
+  title: string;
+  Boxindex: number;
+  member: IServerMemberValue[];
 }

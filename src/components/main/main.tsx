@@ -1,5 +1,5 @@
 // import fs from 'fs';
-import Ask from '../common/Ask/Ask.tsx';
+import Ask from '../common/Ask/Ask';
 import Image from 'next/image';
 import Ad from '../../asset/Ad.svg';
 import SearchIcon from '../../asset/SearchIcon.svg';
@@ -10,9 +10,10 @@ import { useEffect, useRef, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import * as S from "./index.style";
 import axios from 'axios';
-import API from "@/util/api.ts"
+import API from "@/util/api"
+import {recuitment , EmploymentType} from "@/types/Recuitment"
 
-export default function Main({ getposts, posi }) {
+export default function Main({ getposts, posi }: {getposts: recuitment[] ,posi: string[]} ) {
   // 한 페이지에 보여줄 게시글 개수
   const ONEPAGEPOST = 7;
   const [posts, setPosts] = useState(getposts);
@@ -61,14 +62,14 @@ export default function Main({ getposts, posi }) {
     setItemOffset(newOffset);
   };
 
-  const ShowPosts = thisPagePosts.map(({id,title,position,employmentType},index)=>{
+  const ShowPosts = thisPagePosts.map((post : recuitment,index : number)=>{
       return (
-      <S.EachPostBox key={id}>
-        <Link href={`/Detail/${id}`}>
-          {title}
+      <S.EachPostBox key={post.id}>
+        <Link href={`/Detail/${post.id}`}>
+          {post.title}
         </Link>
-        <S.PostPositionHow>{position}</S.PostPositionHow>
-        <S.PostPositionHow>{employmentType}</S.PostPositionHow>
+        <S.PostPositionHow>{post.position}</S.PostPositionHow>
+        <S.PostPositionHow>{post.employmentType}</S.PostPositionHow>
       </S.EachPostBox>
       )
     })
@@ -90,13 +91,13 @@ export default function Main({ getposts, posi }) {
         <S.SearchBox>
           <S.SearchPosition>
             <Image src={SearchIcon} alt='SearchIcon'/>
-            <S.SearchTitleInput placeholder='포지션 역할 검색하기' value={search.title} onChange={(e)=>setSearch({title : e.target.value})}/>
+            <S.SearchTitleInput placeholder='포지션 역할 검색하기' value={search.title} onChange={(e)=>setSearch((prevState)=>{return{ ...prevState , title : e.target.value}})}/>
           </S.SearchPosition>
           
           <S.ChoosePositionHow value={search.position} onChange={(e)=>setSearch((prevState)=>{return{ ...prevState , position : e.target.value}})}>
           <option value="" >채용 포지션</option>
             {
-              posi.map((p, index)=>(
+              posi.map((p : string, index:number)=>(
                 (posi.indexOf(p) === index) && <option key={p} value={p}>{p}</option>
               )) 
             }
