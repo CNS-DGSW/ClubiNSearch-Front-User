@@ -74,11 +74,7 @@ const Manager = () => {
           pageid={pageId}
         />
         <S.ContentsBox>
-          <Title
-            setStateValue={setMemberContentsValue}
-            setModal={setModal}
-            pageid={pageId}
-          />
+          <Title setStateValue={setMemberContentsValue} pageid={pageId} />
           <S.MemberContentsContainer>
             {memberContentsValue[0] ? (
               memberContentsValue.map((value, index) => (
