@@ -3,6 +3,8 @@ import { DateStateType } from "../../../types/writeValue";
 import * as S from "./Write.style";
 import Position from "../Select/Position";
 import MainWrite from "@/components/announcement/MainWrite/Write";
+import axios from "axios";
+import { atom } from "recoil";
 
 const Write = () => {
   const [Data, setData] = useState<DateStateType>({
@@ -10,6 +12,8 @@ const Write = () => {
     position: "",
     startDate: "",
     endDate: "",
+    employmentType: "",
+    detailContent: "",
   });
 
   const { title, position, startDate, endDate } = Data;
@@ -59,7 +63,7 @@ const Write = () => {
           </S.titleContent>
         </S.titleContainer>
       </S.allContainer>
-      <MainWrite />
+      <MainWrite Data={Data} />
     </div>
   );
 };

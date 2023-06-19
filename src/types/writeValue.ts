@@ -3,4 +3,6 @@ export interface DateStateType {
   position: string;
   startDate: String;
   endDate: String;
+  employmentType: String;
+  detailContent: String;
 }
