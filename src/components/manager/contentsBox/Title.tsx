@@ -1,17 +1,14 @@
 import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
 import * as S from "./Title.style";
 import SearchIcon from "@/asset/managerPage/SearchIcon.svg";
-import PlusButton from "../common/PlusButton";
 import { IMemberBoxValue } from "@/types/IMemberBoxValue";
 import API from "@/util/api";
 
 const Title = ({
   setStateValue,
-  setModal,
   pageid,
 }: {
   setStateValue: Dispatch<SetStateAction<IMemberBoxValue[]>>;
-  setModal: Dispatch<SetStateAction<boolean>>;
   pageid: number;
 }) => {
   const [search, setSearch] = useState<string>("");
@@ -37,7 +34,6 @@ const Title = ({
     })
       .then((e) => {
         if (e.data) {
-          // console.log(e.data);
           copy = [...e.data];
           DeleteMember(copy);
           setStateValue([...copy]);
@@ -49,8 +45,6 @@ const Title = ({
   };
 
   useEffect(() => {
-    console.log("dddddddd");
-
     const Token: string | null = localStorage.getItem("accessToken");
     if (pageid) {
       if (!Token) return;
@@ -81,7 +75,6 @@ const Title = ({
             />
           </>
         </S.SearchBoxContainer>
-        {/* <PlusButton setModal={setModal} /> */}
       </S.SearchPlusButtonWrap>
     </S.ContentsContainer>
   );

@@ -23,7 +23,6 @@ const MemederBox = (props: IMemberBoxPropsValue) => {
         </S.TitleConatainer>
         <S.MemberContainer ref={drop}>
           {props.member?.map((value, index) => {
-            console.log("mem", value);
             return (
               <MemberContents
                 key={index}

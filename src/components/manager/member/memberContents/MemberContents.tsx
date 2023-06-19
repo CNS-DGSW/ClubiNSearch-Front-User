@@ -38,13 +38,7 @@ const MemberContents = (props: IMemberPropsValue) => {
   return (
     <S.MemberContainer ref={drag}>
       <S.MemberContents>
-        <S.MemberName
-          onClick={() => {
-            console.log(props.state);
-          }}
-        >
-          {props.memberValue.name}
-        </S.MemberName>
+        <S.MemberName>{props.memberValue.name}</S.MemberName>
         <S.MemberContentsContainer>
           학번 :
           <S.MemberEachContent>
