@@ -7,15 +7,35 @@ interface IChangeValue {
     stateValue: IMemberBoxValue[];
     setState: Dispatch<SetStateAction<IMemberBoxValue[]>>;
   };
-  Dnd?: {
+  Dnd: {
     containerIndex: number;
     userIndex: number;
     BeforeContainerIndex: number;
-  };
-  Delete?: {
-    Containerindex: number;
+    resumeId: string;
+    state: string;
   };
 }
+
+const ChangeServerMember = async (id: string, state: string) => {
+  try {
+    const Token: string | null = localStorage.getItem("accessToken");
+    if (!Token) return;
+    const data = await API.post(
+      `api/resume/admin/state`,
+      {
+        id: id,
+        state: state,
+      },
+      {
+        headers: { Authorization: `Bearer ${Token}` },
+      }
+    );
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+  console.log(state, id);
+};
 
 const DeleteValue = ({
   copy,
@@ -24,7 +44,6 @@ const DeleteValue = ({
   copy: IMemberBoxValue[];
   props: IChangeValue;
 }) => {
-  if (!props.Dnd) return;
   copy[props.Dnd.BeforeContainerIndex].member.splice(props.Dnd.userIndex, 1);
 };
 
@@ -35,46 +54,38 @@ const AddValue = ({
   copy: IMemberBoxValue[];
   props: IChangeValue;
 }) => {
-  if (!props.Dnd) return;
+  let copy2 = [...copy];
   copy[props.Dnd.containerIndex].member.push(
-    props.State.stateValue[props.Dnd.BeforeContainerIndex].member[
-      props.Dnd.userIndex
-    ]
+    copy2[props.Dnd.BeforeContainerIndex].member[props.Dnd.userIndex]
   );
 };
 
-const DeleteMemberContainer = ({
-  copy,
-  props,
-}: {
-  copy: IMemberBoxValue[];
-  props: IChangeValue;
-}) => {
-  if (!props.Delete) return;
-  if (
-    !window.confirm(
-      props.State.stateValue[props.Delete.Containerindex].state +
-        "을(를) 삭제하시겠습니까?"
-    )
+const ChangeValue = async (props: IChangeValue) => {
+  const pageId = location.href.split("/"); //useRouter 쓰면 invaild hooks인가 뜸
+  const Token: string | null = localStorage.getItem("accessToken");
+  let copy: IMemberBoxValue[] = [];
+  await API.get(
+    `api/resume/admin/list/${pageId[location.href.split("/").length - 1]}`,
+    {
+      headers: { Authorization: `Bearer ${Token}` },
+    }
   )
-    return;
-  if (props.State.stateValue[props.Delete.Containerindex].member[0]) {
-    alert("남은 지원자를 이동시킨뒤 삭제해주세요.");
-    return;
-  }
-  copy.splice(props.Delete.Containerindex, 1);
-  console.log("cp : ", copy);
-  props.State.setState(copy);
-};
+    .then((e) => {
+      if (e.data) {
+        copy = [...e.data];
+        const state: string = copy[props.Dnd.containerIndex].state;
+        const resumeId: string = String(
+          copy[props.Dnd.BeforeContainerIndex].member[props.Dnd.userIndex]
+            .resumeId
+        );
+        ChangeServerMember(resumeId, state);
 
-const ChangeValue = (props: IChangeValue) => {
-  let copy: IMemberBoxValue[] = [...props.State.stateValue];
-  if (props.Dnd) {
-    AddValue({ copy, props });
-    DeleteValue({ copy, props });
-  } else if (props.Delete) {
-    DeleteMemberContainer({ copy, props });
-  }
+        AddValue({ copy, props });
+        DeleteValue({ copy, props });
+      }
+    })
+    .catch(() => {});
+
   props.State.setState([...copy]);
 };
 
