@@ -6,7 +6,6 @@ import { IRecruitment } from "@/types/IRecruitment";
 import Sidebar from "./sidebar/Sidebar";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import Modal from "./common/modal/Modal";
 import NullMember from "./nullMember/NullMember";
 import API from "@/util/api";
 import { useRouter } from "next/router";
@@ -64,7 +63,6 @@ const Manager = () => {
     }
   }, [router]);
 
-  const [modal, setModal] = useState<boolean>(false);
   return (
     <DndProvider backend={HTML5Backend}>
       <S.ManagerMainContainer>
@@ -93,12 +91,6 @@ const Manager = () => {
           </S.MemberContentsContainer>
         </S.ContentsBox>
       </S.ManagerMainContainer>
-      {modal && (
-        <Modal
-          setModal={setModal}
-          setMemberContentsValue={setMemberContentsValue}
-        />
-      )}
     </DndProvider>
   );
 };
