@@ -5,7 +5,7 @@ import API from "@/util/api"
 import { useRouter } from "next/router"
 
 // 회원가입
-const signup = () => {
+const Signup = () => {
     const router = useRouter()
 
     // useEffect(()=>{
@@ -269,4 +269,4 @@ const signup = () => {
     )
 }
 
-export default signup
+export default Signup

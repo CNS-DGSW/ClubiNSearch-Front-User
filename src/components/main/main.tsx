@@ -57,7 +57,7 @@ export default function Main({ getposts, posi }: {getposts: recuitment[] ,posi: 
 
   const thisPagePosts = posts.slice(itemOffset, itemOffset + 7);
 
-  const handlePageClick = (e) => {
+  const handlePageClick = (e:any) => {
     const newOffset = (e.selected * ONEPAGEPOST) % posts.length;
     setItemOffset(newOffset);
   };

@@ -81,7 +81,7 @@ const Manager = () => {
                   state={memberContentsValue}
                   setState={setMemberContentsValue}
                   Boxindex={index}
-                  title={value.state}
+                  title={value.title}
                   member={value.member}
                 />
               ))

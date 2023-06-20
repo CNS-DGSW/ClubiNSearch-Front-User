@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useRouter } from "next/router";
 
 // 로그인
-const signin = () => {
+const Signin = () => {
   const router = useRouter();
 
   const [id, setId] = useState<string>();
@@ -70,4 +70,4 @@ const signin = () => {
     </>
   );
 };
-export default signin;
+export default Signin;
