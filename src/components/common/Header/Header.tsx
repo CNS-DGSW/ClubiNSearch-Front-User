@@ -47,7 +47,7 @@ export default function Header() {
             <S.NavItem>
               <S.StyledLink href="/">채용 공고</S.StyledLink>
             </S.NavItem>
-            <S.NavItem>지원서 작성</S.NavItem>
+            <S.NavItem>공고 작성</S.NavItem>
             <S.NavItem>문의 하기</S.NavItem>
             <S.NavItem>내 정보</S.NavItem>
             <S.NavItem onClick={LogOutMethod}>로그아웃</S.NavItem>
