@@ -17,6 +17,7 @@ export const NavItem = styled.div`
     font-size: 0.875rem;
     line-height: 1rem;
     color: #767676;
+    cursor: pointer;
 
     margin-right: 2.5vw;
 `

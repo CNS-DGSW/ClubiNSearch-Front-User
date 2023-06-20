@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import * as S from "./signup.style"
 import axios from "axios"
 import API from "@/util/api"
+import { useRouter } from "next/router"
 
 // 회원가입
 const signup = () => {
+    const router = useRouter()
 
     // useEffect(()=>{
     //     API.get('/api/resume/list/9',{
@@ -151,9 +153,8 @@ const signup = () => {
         if(isContinue){
             API.post('/api/auth/join', UserInformation)
             .then((res)=>{
-                console.log(res)
                 alert("회원가입 성공")
-                
+                router.push('/signin')
             })
             .catch((err)=>{
                 console.error(err)
@@ -224,8 +225,10 @@ const signup = () => {
                 </S.InputWrapper>
 
                 <S.AgreeWrapper>
-                    <S.CheckAgree type="checkbox" onChange={()=>{setAccept(!accept)}}/>
-                    <S.AgreeLabel>개인정보 수집 및 이용에 동의합니다.</S.AgreeLabel>
+                    <S.AgreeLabel>
+                        <S.CheckAgree type="checkbox" onChange={()=>{setAccept(!accept)}} id="accept"/>
+                        개인정보 수집 및 이용에 동의합니다.
+                    </S.AgreeLabel>
                     {errOrNot.accept.isErr && <S.ErrorMsg>{errOrNot.accept.content}</S.ErrorMsg>}
                 </S.AgreeWrapper>
 

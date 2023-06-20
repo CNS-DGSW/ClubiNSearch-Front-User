@@ -4,9 +4,12 @@ import Image from "next/image";
 import { useState } from "react";
 import API from "@/util/api";
 import { useNavigate } from "react-router-dom";
+import { useRouter } from "next/router";
 
 // 로그인
 const signin = () => {
+  const router = useRouter();
+
   const [id, setId] = useState<string>();
   const [password, setPassword] = useState<string>();
   // const navigate = useNavigate();
@@ -23,7 +26,7 @@ const signin = () => {
         localStorage.setItem("refreshToken", res.data.refreshToken);
 
         alert("로그인 성공");
-        // navigate("/");
+        router.push('/')
       })
       .catch((err) => {
         console.error(err);
