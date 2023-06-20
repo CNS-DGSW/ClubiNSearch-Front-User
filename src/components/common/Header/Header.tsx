@@ -59,7 +59,7 @@ export default function Header() {
             </S.NavItem>
             <S.NavItem>문의 하기</S.NavItem>
             <S.NavItem>
-              <S.StyledLink href="/signin">로그인</S.StyledLink>
+              <S.StyledLink href="/signin">관리자 로그인</S.StyledLink>
             </S.NavItem>
           </>
         )}
