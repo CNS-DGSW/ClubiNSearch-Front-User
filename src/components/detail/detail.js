@@ -8,7 +8,7 @@ import matter from "gray-matter";
 import md from "markdown-it";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import {CGS} from "./detail.style"
+// import { CGS } from "./detail.style";
 
 export default function Detail({ data }) {
   const router = useRouter();
@@ -56,11 +56,8 @@ export default function Detail({ data }) {
           </S.EachBox>
 
           <S.ApplyLink href={`/apply/${pageId}`}>
-            <S.ApplyBtn>
-              지원하기
-            </S.ApplyBtn>
+            <S.ApplyBtn>지원하기</S.ApplyBtn>
           </S.ApplyLink>
-
         </S.Box>
       </S.ContentWrapper>
 
