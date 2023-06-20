@@ -51,7 +51,7 @@ const signin = () => {
 
           <S.InputWrapper>
             <S.InputLabel>비밀번호</S.InputLabel>
-            <S.Input
+            <S.Input type="password"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
