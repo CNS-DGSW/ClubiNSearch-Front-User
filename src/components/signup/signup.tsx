@@ -5,7 +5,7 @@ import API from "@/util/api"
 import { useRouter } from "next/router"
 
 // 회원가입
-const signup = () => {
+const Signup = () => {
     const router = useRouter()
 
     // useEffect(()=>{
@@ -24,7 +24,8 @@ const signup = () => {
         accountId : "",
         name : "",
         email : "",
-        password : ""
+        password : "",
+        authNumber : ""
     })
     const [accept, setAccept] = useState<boolean>(false)
 
@@ -46,6 +47,10 @@ const signup = () => {
             content : ""
         },
         accept : {
+            isErr : false,
+            content : ""
+        },
+        authNumber : {
             isErr : false,
             content : ""
         },
@@ -76,6 +81,10 @@ const signup = () => {
                 content : ""
             },
             accept : {
+                isErr : false,
+                content : ""
+            },
+            authNumber : {
                 isErr : false,
                 content : ""
             },
@@ -127,6 +136,13 @@ const signup = () => {
                 data.email.content = "규칙에 맞지 않습니다."
             }
             isContinue = false
+        }
+
+        // 인증번호
+        if(UserInformation.authNumber === ""){
+            data.authNumber.isErr = true
+            data.authNumber.content = "인증번호는 필수 입력 항목 입니다."
+            isContinue = false 
         }
 
         // 체크박스
@@ -224,6 +240,20 @@ const signup = () => {
                     {errOrNot.email.isErr && <S.ErrorMsg>{errOrNot.email.content}</S.ErrorMsg>}
                 </S.InputWrapper>
 
+                <S.InputWrapper>
+                    <S.InputLabel>
+                        <S.Label>인증번호</S.Label>
+                        <S.Require>*</S.Require>
+                    </S.InputLabel>
+                    <S.Input placeholder="인증번호를 입력해주세요."
+                    onChange={(e)=>{
+                        setUserInformation((prevState)=>{
+                            return{...prevState, authNumber : e.target.value }}
+                        )
+                    }}></S.Input>
+                    {errOrNot.authNumber.isErr && <S.ErrorMsg>{errOrNot.authNumber.content}</S.ErrorMsg>}
+                </S.InputWrapper>
+
                 <S.AgreeWrapper>
                     <S.AgreeLabel>
                         <S.CheckAgree type="checkbox" onChange={()=>{setAccept(!accept)}} id="accept"/>
@@ -239,4 +269,4 @@ const signup = () => {
     )
 }
 
-export default signup
+export default Signup
