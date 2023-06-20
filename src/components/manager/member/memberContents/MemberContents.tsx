@@ -25,7 +25,7 @@ const MemberContents = (props: IMemberPropsValue) => {
           },
           Dnd: {
             resumeId: String(props.memberValue.resumeId),
-            state: props.state[a.index].state,
+            state: props.state[a.index].title,
             containerIndex: a.index,
             userIndex: props.userIndex,
             BeforeContainerIndex: props.BeforeContainerIndex,

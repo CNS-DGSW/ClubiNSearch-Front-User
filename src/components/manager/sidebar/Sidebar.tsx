@@ -24,9 +24,9 @@ const Sidebar = (props: ISidebarProps) => {
           </S.AnnounceTitleContainer>
         </S.AnnounceContentsContainer>
         <S.SubContentsContainer>
-          {props.stateValue.map((value) => {
+          {props.stateValue.map((value,idx) => {
             return (
-              <S.PositionMainContainer isActive={value.id === props.pageid}>
+              <S.PositionMainContainer key={idx} isActive={value.id === props.pageid}>
                 <S.LinkTag href={`/manager/${value.id}`}>
                   <S.PositionTitleContaiver>
                     <S.PositionTitle>{value.title}</S.PositionTitle>
