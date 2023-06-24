@@ -1,28 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import * as S from "./Write.style";
-import axios from "axios";
 import API from "@/util/api";
 import {
   clubNameAtom,
-  employmentTypeAtom,
+  titleAtom,
   positionAtom,
   startDateAtom,
   endDateAtom,
-  titleAtom,
+  employmentTypeAtom,
   detailContentAtom,
 } from "@/atom/WriteAtom";
-import { atom, useRecoilState, useRecoilValue } from "recoil";
-import { WriteType } from "@/types/WriteValue";
+import { useRecoilState } from "recoil";
 
 const Write = () => {
-  const [clubName] = useRecoilState(clubNameAtom);
-  const [employmentType] = useRecoilState(employmentTypeAtom);
-  const [position] = useRecoilState(positionAtom);
-  const [startDate] = useRecoilState(startDateAtom);
-  const [endDate] = useRecoilState(endDateAtom);
-
-  const [title, setTitle] = useRecoilState(titleAtom);
-  const [detailContent, setDetailContent] = useRecoilState(detailContentAtom);
+  const [clubName] = useRecoilState<string>(clubNameAtom);
+  const [employmentType] = useRecoilState<string>(employmentTypeAtom);
+  const [position] = useRecoilState<string>(positionAtom);
+  const [startDate] = useRecoilState<string>(startDateAtom);
+  const [endDate] = useRecoilState<string>(endDateAtom);
+  const [title, setTitle] = useRecoilState<string>(titleAtom);
+  const [detailContent, setDetailContent] =
+    useRecoilState<string>(detailContentAtom);
 
   const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
@@ -44,14 +42,17 @@ const Write = () => {
       endDate: endDate,
       isOpen: true,
     };
-    try {
-      const response = await API.post("/api/recruitment/create", payload);
-      console.log(response.data);
-      alert("작성한 공고가 게시되었습니다.");
-    } catch (error) {
-      console.error(error);
-      console.log(payload);
-    }
+
+    console.log("dfdfdf", payload);
+
+    await API.post("/api/recruitment/create", payload)
+      .then((e) => {
+        console.log(e);
+        alert("작성하신 공고가 게시되었습니다.");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (

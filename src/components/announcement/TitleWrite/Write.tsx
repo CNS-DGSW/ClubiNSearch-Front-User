@@ -1,18 +1,10 @@
-import { useState, useEffect } from "react";
-import { WriteType } from "@/types/WriteValue";
 import * as S from "./Write.style";
 import Position from "../Select/Position";
 import ClubName from "../Select/ClubName";
 import EmploymentType from "../Select/EmploymentType";
 import MainWrite from "@/components/announcement/MainWrite/Write";
-import axios from "axios";
-import { atom, useRecoilState, useRecoilValue } from "recoil";
-import {
-  titleAtom,
-  positionAtom,
-  startDateAtom,
-  endDateAtom,
-} from "@/atom/WriteAtom";
+import { useRecoilState } from "recoil";
+import { titleAtom, startDateAtom, endDateAtom } from "@/atom/WriteAtom";
 
 const Write = () => {
   const [title, setTitle] = useRecoilState(titleAtom);
