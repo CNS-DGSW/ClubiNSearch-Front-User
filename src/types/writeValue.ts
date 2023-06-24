@@ -1,8 +1,10 @@
-export interface DateStateType {
+export interface WriteType {
+  clubName: string;
   title: string;
   position: string;
-  startDate: String;
-  endDate: String;
-  employmentType: String;
-  detailContent: String;
+  employmentType: string;
+  detailContent: string;
+  startDate: string;
+  endDate: string;
+  isOpen: boolean;
 }

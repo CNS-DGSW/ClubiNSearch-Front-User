@@ -12,9 +12,9 @@ export default function Header() {
             <Image src={headerLogo} alt="logo" width={179} height={35} />
           </Link>
         </S.headerLogo>
-        <Link href="/AnnouncementWrite" style={{ textDecoration: "none" }}>
+        <S.StyledLink href="/AnnouncementWrite">
           <S.NavItem>채용 공고</S.NavItem>
-        </Link>
+        </S.StyledLink>
         <S.NavItem>팀 문화</S.NavItem>
         <S.NavItem>지원서 작성</S.NavItem>
         <S.NavItem>자주 묻는 질문</S.NavItem>

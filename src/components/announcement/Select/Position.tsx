@@ -1,15 +1,19 @@
 import React from "react";
 import * as S from "./Position.style";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
+import { positionAtom } from "@/atom/WriteAtom";
 
-const Position = ({ position, setPosition }: any) => {
-  const positionChange = (event: any) => {
-    const newPosition = event.target.value;
-    setPosition((prevDate: any) => ({ ...prevDate, position: newPosition }));
+const Position = () => {
+  const [position, setPosition] = useRecoilState(positionAtom);
+
+  const handlePositionChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setPosition(event.target.value);
   };
-
   return (
     <div>
-      <S.positionSelect value={position} onChange={positionChange}>
+      <S.positionSelect value={position} onChange={handlePositionChange}>
         <option>포지션을 선택해주세요.</option>
         <option value="Front-End">Front-End</option>
         <option value="Back-End">Back-End</option>

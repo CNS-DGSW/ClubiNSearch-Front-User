@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^38.0.1",
+    "@ckeditor/ckeditor5-react": "^6.0.0",
     "@types/react-dom": "18.0.11",
+    "@uiw/react-md-editor": "^3.23.3",
     "axios": "^1.4.0",
     "babel-preset-next": "^1.4.0",
+    "ckeditor4-react": "^4.2.0",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "fs": "^0.0.1-security",
@@ -22,7 +26,7 @@
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "18.2.0",
-    "react-markdown": "^8.0.5",
+    "react-markdown": "^8.0.7",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.10.0",
     "recoil": "^0.7.7",

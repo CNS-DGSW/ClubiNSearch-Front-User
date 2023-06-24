@@ -1,32 +1,56 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as S from "./Write.style";
 import axios from "axios";
+import API from "@/util/api";
+import {
+  clubNameAtom,
+  employmentTypeAtom,
+  positionAtom,
+  startDateAtom,
+  endDateAtom,
+  titleAtom,
+  detailContentAtom,
+} from "@/atom/WriteAtom";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
+import { WriteType } from "@/types/WriteValue";
 
-const Write = ({ Data }: any) => {
-  const { title, position, startDate, endDate, employmentType, detailContent } =
-    Data;
+const Write = () => {
+  const [clubName] = useRecoilState(clubNameAtom);
+  const [employmentType] = useRecoilState(employmentTypeAtom);
+  const [position] = useRecoilState(positionAtom);
+  const [startDate] = useRecoilState(startDateAtom);
+  const [endDate] = useRecoilState(endDateAtom);
 
-  const DateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setData((prevData) => ({ ...prevData, [name]: value }));
-    console.log(title);
+  const [title, setTitle] = useRecoilState(titleAtom);
+  const [detailContent, setDetailContent] = useRecoilState(detailContentAtom);
+
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  };
+  const handleDetailContentChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    setDetailContent(event.target.value);
   };
 
   const handleSubmit = async () => {
+    const payload = {
+      clubName: clubName,
+      title: title,
+      position: position,
+      employmentType: employmentType,
+      detailContent: detailContent,
+      startDate: startDate,
+      endDate: endDate,
+      isOpen: true,
+    };
     try {
-      const payload = {
-        title: title,
-        position: position,
-        startDate: startDate,
-        endDate: endDate,
-        employmentType: employmentType,
-        detailContent: detailContent,
-      };
-
-      const response = await axios.post("/api/recruitment/create", payload);
+      const response = await API.post("/api/recruitment/create", payload);
       console.log(response.data);
+      alert("작성한 공고가 게시되었습니다.");
     } catch (error) {
-      console.log(error);
+      console.error(error);
+      console.log(payload);
     }
   };
 
@@ -41,10 +65,10 @@ const Write = ({ Data }: any) => {
           </S.content>
           <S.titleInput
             type="text"
-            name="employmentType"
+            name="title"
             placeholder="제목을 입력해주세요."
-            value={employmentType}
-            onChange={DateChange}
+            value={title}
+            onChange={handleTitleChange}
           ></S.titleInput>
           <S.content>
             <S.contentTitle>내용</S.contentTitle>
@@ -54,7 +78,7 @@ const Write = ({ Data }: any) => {
             placeholder="내용을 입력해주세요."
             name="detailContent"
             value={detailContent}
-            onChange={DateChange}
+            onChange={handleDetailContentChange}
           ></S.mainTextarea>
         </S.mainContent>
       </S.mainContainer>
@@ -62,7 +86,5 @@ const Write = ({ Data }: any) => {
     </S.allContainer>
   );
 };
+
 export default Write;
-function setData(arg0: (prevData: any) => any) {
-  throw new Error("Function not implemented.");
-}

@@ -1,27 +1,34 @@
 import { useState, useEffect } from "react";
-import { DateStateType } from "../../../types/writeValue";
+import { WriteType } from "@/types/WriteValue";
 import * as S from "./Write.style";
 import Position from "../Select/Position";
+import ClubName from "../Select/ClubName";
+import EmploymentType from "../Select/EmploymentType";
 import MainWrite from "@/components/announcement/MainWrite/Write";
 import axios from "axios";
-import { atom } from "recoil";
+import { atom, useRecoilState, useRecoilValue } from "recoil";
+import {
+  titleAtom,
+  positionAtom,
+  startDateAtom,
+  endDateAtom,
+} from "@/atom/WriteAtom";
 
 const Write = () => {
-  const [Data, setData] = useState<DateStateType>({
-    title: "",
-    position: "",
-    startDate: "",
-    endDate: "",
-    employmentType: "",
-    detailContent: "",
-  });
+  const [title, setTitle] = useRecoilState(titleAtom);
+  const [startDate, setStartDate] = useRecoilState(startDateAtom);
+  const [endDate, setEndDate] = useRecoilState(endDateAtom);
 
-  const { title, position, startDate, endDate } = Data;
-
-  const DateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setData((prevData) => ({ ...prevData, [name]: value }));
-    console.log(title);
+  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(event.target.value);
+  };
+  const handleStartDateChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setStartDate(event.target.value);
+  };
+  const handleEndDateChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setEndDate(event.target.value);
   };
 
   return (
@@ -31,21 +38,23 @@ const Write = () => {
         <S.titleContainer>
           <S.titleContent>
             <S.content>
-              <S.contentTitle>채용 공고 제목</S.contentTitle>
+              <S.contentTitle>채용 동아리</S.contentTitle>
               <S.contentPoint>*</S.contentPoint>
             </S.content>
-            <S.titleInput
-              type="text"
-              name="title"
-              value={title}
-              onChange={DateChange}
-              placeholder="공고 제목을 입력해주세요."
-            ></S.titleInput>
+            <ClubName />
+
+            <S.content>
+              <S.contentTitle>채용 직급</S.contentTitle>
+              <S.contentPoint>*</S.contentPoint>
+            </S.content>
+            <EmploymentType />
+
             <S.content>
               <S.contentTitle>채용 포지션</S.contentTitle>
               <S.contentPoint>*</S.contentPoint>
             </S.content>
-            <Position position={position} setPosition={setData} />
+            <Position />
+
             <S.content>
               <S.contentTitle>채용 기간</S.contentTitle>
               <S.contentPoint>*</S.contentPoint>
@@ -55,15 +64,20 @@ const Write = () => {
                 type="date"
                 name="startDate"
                 value={startDate}
-                onChange={DateChange}
+                onChange={handleStartDateChange}
               ></S.dateSelect>
               <S.dateSign> ~ </S.dateSign>
-              <S.dateSelect type="date"></S.dateSelect>
+              <S.dateSelect
+                type="date"
+                name="endDate"
+                value={endDate}
+                onChange={handleEndDateChange}
+              ></S.dateSelect>
             </S.selectContainer>
           </S.titleContent>
         </S.titleContainer>
       </S.allContainer>
-      <MainWrite Data={Data} />
+      <MainWrite />
     </div>
   );
 };

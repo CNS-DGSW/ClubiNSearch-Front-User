@@ -26,7 +26,7 @@ export const titleContainer = styled.div`
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background-color: ${BasicColor3};
   width: 38%;
-  height: 289px;
+  height: 380px;
   border-top: 15px solid ${BasicColor2};
   border-radius: 10px 10px 0px 0px;
 `;
