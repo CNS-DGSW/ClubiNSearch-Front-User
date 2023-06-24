@@ -19,11 +19,8 @@ const EmploymentType = () => {
         onChange={handleEmploymentTypeChange}
       >
         <option>채용 직급을 선택해주세요.</option>
-        <option value="인턴">인턴</option>
-        <option value="정규직">정규직</option>
-        <option value="계약직">계약직</option>
-        <option value="협업">협업</option>
-        <option value="기타">기타</option>
+        <option value="INTERN">인턴</option>
+        <option value="REGULAR">정규직</option>
       </S.employmentTypeSelect>
     </div>
   );

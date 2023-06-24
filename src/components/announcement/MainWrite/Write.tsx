@@ -45,7 +45,25 @@ const Write = () => {
 
     console.log("dfdfdf", payload);
 
-    await API.post("/api/recruitment/create", payload)
+    const Token: string | null = localStorage.getItem("accessToken");
+    await API.post(
+      "/api/recruitment/create",
+      {
+        clubName: clubName,
+        title: title,
+        position: position,
+        employmentType: employmentType,
+        detailContent: detailContent,
+        startDate: startDate,
+        endDate: endDate,
+        isOpen: true,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${Token}`,
+        },
+      }
+    )
       .then((e) => {
         console.log(e);
         alert("작성하신 공고가 게시되었습니다.");
