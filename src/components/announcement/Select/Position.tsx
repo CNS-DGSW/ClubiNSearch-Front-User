@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./Position.style";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
-import { positionAtom } from "@/atom/WriteAtom";
+import { positionAtom } from "@/store/WriteAtom";
 
 const Position = () => {
   const [position, setPosition] = useRecoilState(positionAtom);

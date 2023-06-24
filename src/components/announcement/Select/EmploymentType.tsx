@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./EmploymentType.style";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
-import { employmentTypeAtom } from "@/atom/WriteAtom";
+import { employmentTypeAtom } from "@/store/WriteAtom";
 
 const EmploymentType = () => {
   const [employmentType, setEmploymentType] =

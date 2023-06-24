@@ -1,7 +1,7 @@
 import React from "react";
 import * as S from "./ClubName.style";
 import { atom, useRecoilState, useRecoilValue } from "recoil";
-import { clubNameAtom } from "@/atom/WriteAtom";
+import { clubNameAtom } from "@/store/WriteAtom";
 
 const ClubName = () => {
   const [clubName, setClubName] = useRecoilState(clubNameAtom);

@@ -9,7 +9,7 @@ import {
   endDateAtom,
   employmentTypeAtom,
   detailContentAtom,
-} from "@/atom/WriteAtom";
+} from "@/store/WriteAtom";
 import { useRecoilState } from "recoil";
 
 const Write = () => {

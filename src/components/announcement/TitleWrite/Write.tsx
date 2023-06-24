@@ -4,7 +4,7 @@ import ClubName from "../Select/ClubName";
 import EmploymentType from "../Select/EmploymentType";
 import MainWrite from "@/components/announcement/MainWrite/Write";
 import { useRecoilState } from "recoil";
-import { titleAtom, startDateAtom, endDateAtom } from "@/atom/WriteAtom";
+import { titleAtom, startDateAtom, endDateAtom } from "@/store/WriteAtom";
 
 const Write = () => {
   const [title, setTitle] = useRecoilState(titleAtom);
