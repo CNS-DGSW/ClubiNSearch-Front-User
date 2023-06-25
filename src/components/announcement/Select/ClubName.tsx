@@ -19,7 +19,7 @@ const ClubName = () => {
         <option value="B1nd">B1nd</option>
         <option value="두카미">두카미</option>
         <option value="3D">3D</option>
-        <option value="ART">ART</option>
+        <option value="ALT">ALT</option>
         <option value="기타"></option>
       </S.clubNameSelect>
     </div>
