@@ -116,5 +116,5 @@ export const StatusButton = styled.button`
   border-radius: 5px;
   color: ${(props: IIsEdit) => (props.isEdit ? `#ffffff` : BasicColor5)};
   background-color: ${(props: IIsEdit) =>
-    props.isEdit ? BasicColor4 : `#ffffff`};
+    props.isEdit ? BasicColor4 : `transparent`};
 `;
