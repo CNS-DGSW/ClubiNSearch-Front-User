@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./Write.style";
 import API from "@/util/api";
 import {
@@ -11,8 +11,10 @@ import {
   detailContentAtom,
 } from "@/store/WriteAtom";
 import { useRecoilState } from "recoil";
+import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 
 const Write = () => {
+  const [isEditMarkdown, setIsEditMarkdown] = useState<boolean>(true);
   const [clubName] = useRecoilState<string>(clubNameAtom);
   const [employmentType] = useRecoilState<string>(employmentTypeAtom);
   const [position] = useRecoilState<string>(positionAtom);
@@ -74,35 +76,59 @@ const Write = () => {
   };
 
   return (
-    <S.allContainer>
+    <>
       <S.mainContainer>
-        <S.mainContent>
-          <S.mainTitle>작성</S.mainTitle>
-          <S.content>
-            <S.contentTitle>제목</S.contentTitle>
-            <S.contentPoint>*</S.contentPoint>
-          </S.content>
-          <S.titleInput
-            type="text"
-            name="title"
-            placeholder="제목을 입력해주세요."
-            value={title}
-            onChange={handleTitleChange}
-          ></S.titleInput>
-          <S.content>
-            <S.contentTitle>내용</S.contentTitle>
-            <S.contentPoint>*</S.contentPoint>
-          </S.content>
-          <S.mainTextarea
-            placeholder="내용을 입력해주세요."
-            name="detailContent"
-            value={detailContent}
-            onChange={handleDetailContentChange}
-          ></S.mainTextarea>
-        </S.mainContent>
+        <S.mainTitle>작성</S.mainTitle>
+        <S.content>
+          <S.contentTitle>제목</S.contentTitle>
+          <S.contentPoint>*</S.contentPoint>
+        </S.content>
+        <S.titleInput
+          type="text"
+          name="title"
+          placeholder="제목을 입력해주세요."
+          value={title}
+          onChange={handleTitleChange}
+        ></S.titleInput>
+        <S.content>
+          <S.contentTitle>내용</S.contentTitle>
+          <S.contentPoint>*</S.contentPoint>
+        </S.content>
+        <S.EditTextareaForm>
+          <>
+            <S.StatusButton
+              isEdit={isEditMarkdown}
+              onClick={() => setIsEditMarkdown(true)}
+            >
+              Edit
+            </S.StatusButton>
+            <S.StatusButton
+              isEdit={!isEditMarkdown}
+              onClick={() => setIsEditMarkdown(false)}
+            >
+              Preview
+            </S.StatusButton>
+          </>
+          <S.MarkdownViewWrap>
+            {isEditMarkdown ? (
+              <S.mainTextarea
+                placeholder="내용을 입력해주세요."
+                name="detailContent"
+                value={detailContent}
+                onChange={handleDetailContentChange}
+              ></S.mainTextarea>
+            ) : (
+              <S.PreviewMarkdown>
+                <ReactMarkdown>
+                  {detailContent ? detailContent : "표시할 내용이 없습니다."}
+                </ReactMarkdown>
+              </S.PreviewMarkdown>
+            )}
+          </S.MarkdownViewWrap>
+        </S.EditTextareaForm>
       </S.mainContainer>
       <S.subButton onClick={handleSubmit}>게시하기</S.subButton>
-    </S.allContainer>
+    </>
   );
 };
 
