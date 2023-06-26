@@ -12,6 +12,7 @@ import {
 } from "@/store/WriteAtom";
 import { useRecoilState } from "recoil";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import remarkGfm from "remark-gfm";
 
 const Write = () => {
   const [isEditMarkdown, setIsEditMarkdown] = useState<boolean>(true);
@@ -112,16 +113,19 @@ const Write = () => {
           <S.MarkdownViewWrap>
             {isEditMarkdown ? (
               <S.mainTextarea
-                placeholder="내용을 입력해주세요."
+                placeholder="내용을 입력해주세요. (기본 마크다운 문법 사용가능)"
                 name="detailContent"
                 value={detailContent}
                 onChange={handleDetailContentChange}
               ></S.mainTextarea>
             ) : (
               <S.PreviewMarkdown>
-                <ReactMarkdown>
-                  {detailContent ? detailContent : "표시할 내용이 없습니다."}
-                </ReactMarkdown>
+                <ReactMarkdown
+                  children={
+                    detailContent ? detailContent : "표시할 내용이 없습니다."
+                  }
+                  remarkPlugins={[remarkGfm]}
+                />
               </S.PreviewMarkdown>
             )}
           </S.MarkdownViewWrap>
