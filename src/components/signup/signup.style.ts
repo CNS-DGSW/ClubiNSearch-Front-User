@@ -101,14 +101,14 @@ export const GrayLabel = styled.p`
 
 export const AgreeWrapper = styled.div`
     margin: 2vh 0;
-`
+    `
 
 export const CheckAgree = styled.input`
+    margin-right: 1vh;
 
 `
 
 export const AgreeLabel = styled.label`
-    margin-left: 1vh;
 `
 
 export const ErrorMsg = styled.div`

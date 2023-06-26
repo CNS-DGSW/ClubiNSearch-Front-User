@@ -78,7 +78,6 @@ const ApplyForm = () => {
         formData.append("introduction", introduce);
         formData.append("link", link);
         formData.append("file", file || "");
-
         API.post(`/api/resume/submit`, formData)
           .then((_) => {
             alert("제출되었습니다!");

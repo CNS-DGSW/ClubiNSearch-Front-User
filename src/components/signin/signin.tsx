@@ -1,15 +1,16 @@
-import * as S from "./signin.style";
-import TitleBig from "@/asset/TitleBig.svg";
-import Image from "next/image";
-import { useState } from "react";
-import API from "@/util/api";
-// import { useNavigate } from "react-router-dom"
+import * as S from "./signin.style"
+import TitleBig from "@/asset/TitleBig.svg"
+import Image from "next/image"
+import { useState } from "react"
+import API from "@/util/api"
+import { useNavigate } from "react-router-dom"
+
 
 // 로그인
 const signin = () => {
-  const [id, setId] = useState<string>();
-  const [password, setPassword] = useState<string>();
-  // const navigate = useNavigate();
+    const [id,setId] = useState<string>();
+    const [password, setPassword] = useState<string>();
+    const navigate = useNavigate();
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -22,13 +23,13 @@ const signin = () => {
         localStorage.setItem("accessToken", res.data.accessToken);
         localStorage.setItem("refreshToken", res.data.refreshToken);
 
-        alert("로그인 성공");
-        // navigate('/')
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+            alert('로그인 성공')
+            navigate('/')
+        })
+        .catch((err)=>{
+            console.error(err)
+        })
+    }
 
   return (
     <>
@@ -48,7 +49,7 @@ const signin = () => {
 
           <S.InputWrapper>
             <S.InputLabel>비밀번호</S.InputLabel>
-            <S.Input
+            <S.Input type="password"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
@@ -59,12 +60,12 @@ const signin = () => {
             로그인
           </S.SubmitBtn>
 
-          <div>
-            <S.GrayLink href="/signup">회원가입</S.GrayLink>
-          </div>
-        </S.AllWithoutTitle>
-      </S.ContentWrapper>
-    </>
-  );
-};
-export default signin;
+                <div>
+                    <S.GrayLink href="/signup">회원가입</S.GrayLink>
+                </div>
+            </S.AllWithoutTitle>
+            </S.ContentWrapper>
+        </>
+    )
+}
+export default signin

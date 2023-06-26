@@ -1,8 +1,12 @@
-import styled from "styled-components";
+import Link from "next/link";
+import styled, { createGlobalStyle } from "styled-components";
 
-export const ImportFont = styled.div`
-    @import url('https://fonts.googleapis.com/css2?family=Andika:ital@0;1&family=Inter:wght@400;700&family=Raleway&display=swap');
-`
+export const CGS = createGlobalStyle`
+    @font-face {
+        font-family: "Inter";
+        src: url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+    }
+`;
 
 export const AdWrapper = styled.div`
     width: 100%;
@@ -18,7 +22,7 @@ export const AdWrapper = styled.div`
 `
 
 export const Content = styled.div`
-    width: 50vw;
+    width: 75%;
     word-break: keep-all;
     margin-bottom: 3vh;
 
@@ -34,22 +38,21 @@ export const Content = styled.div`
 `
 
 export const Box = styled.div`
-    width: 251px;
-    height: 167px;
+    width: 15vw;
+    height: 11rem;
     margin-top: 10vh;
 `
 
 export const ContentWrapper = styled.div`
     margin-top: 4rem;
-    margin-left: 10vw;
-    margin-right: 10vw;
+    margin-left: 22vw;
+    margin-right: 22vw;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
 `
 
 export const EachBox = styled.div`
-    margin-top: 0.8rem;
-    margin-bottom: 0.8rem;
+    margin : 1rem 0;
 
     display: flex;
     position: relative;
@@ -57,46 +60,49 @@ export const EachBox = styled.div`
 
 export const Hr = styled.hr`
     background: #D9D9D9;
+    width: 15vw;
 `
 
 export const Label = styled.div`
     margin-left: 0.2rem;
     position: absolute;
 
+    //font-family: "Pangolin";
     font-family: 'Inter';
     font-weight: 700;
-    font-size: 0.6rem;
-    line-height: 0.7rem;
+    font-size: 0.9rem;
+    // line-height: 0.7rem;
     color: #858585;
 `
 
 export const Introduce = styled.div`
-    margin-left: 5.5rem;
+    margin-left: 37%;
 
     font-family: 'Inter';
     font-weight: 700;
-    font-size: 0.6rem;
-    line-height: 0.7rem;
+    font-size: 0.9rem;
+    //line-height: 0.7rem;
     
     color: #4980EE;
 `
 
 export const ApplyBtn = styled.button`
-    width: 15.6rem;
-    height: 2.1rem;
+    width: 15vw;
+    height: 3vh;
     border: hidden;
     border-radius: 5px;
     background-color: #4980EE;
     margin-top: 0.5rem;
     
-    > a{
-        text-decoration: none;
-        color:  #FFFFFF ;
-        font-family: 'Nanum Myeongjo';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 0.6rem;
-        line-height: 0.7rem;  
-    }
+    text-decoration: none;
+    color:  #FFFFFF ;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 0.9rem;
+    line-height: 0.7rem;  
+    `
+
+export const ApplyLink = styled(Link)`
 
 `

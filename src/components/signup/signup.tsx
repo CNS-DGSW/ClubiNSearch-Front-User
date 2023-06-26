@@ -2,9 +2,11 @@ import { useEffect, useState } from "react"
 import * as S from "./signup.style"
 import axios from "axios"
 import API from "@/util/api"
+import { useRouter } from "next/router"
 
 // 회원가입
-const signup = () => {
+const Signup = () => {
+    const router = useRouter()
 
     // useEffect(()=>{
     //     API.get('/api/resume/list/9',{
@@ -22,7 +24,8 @@ const signup = () => {
         accountId : "",
         name : "",
         email : "",
-        password : ""
+        password : "",
+        authNumber : ""
     })
     const [accept, setAccept] = useState<boolean>(false)
 
@@ -44,6 +47,10 @@ const signup = () => {
             content : ""
         },
         accept : {
+            isErr : false,
+            content : ""
+        },
+        authNumber : {
             isErr : false,
             content : ""
         },
@@ -74,6 +81,10 @@ const signup = () => {
                 content : ""
             },
             accept : {
+                isErr : false,
+                content : ""
+            },
+            authNumber : {
                 isErr : false,
                 content : ""
             },
@@ -127,6 +138,13 @@ const signup = () => {
             isContinue = false
         }
 
+        // 인증번호
+        if(UserInformation.authNumber === ""){
+            data.authNumber.isErr = true
+            data.authNumber.content = "인증번호는 필수 입력 항목 입니다."
+            isContinue = false 
+        }
+
         // 체크박스
         if(!accept){
             data.accept.isErr = true
@@ -151,9 +169,8 @@ const signup = () => {
         if(isContinue){
             API.post('/api/auth/join', UserInformation)
             .then((res)=>{
-                console.log(res)
                 alert("회원가입 성공")
-                
+                router.push('/signin')
             })
             .catch((err)=>{
                 console.error(err)
@@ -223,9 +240,25 @@ const signup = () => {
                     {errOrNot.email.isErr && <S.ErrorMsg>{errOrNot.email.content}</S.ErrorMsg>}
                 </S.InputWrapper>
 
+                <S.InputWrapper>
+                    <S.InputLabel>
+                        <S.Label>인증번호</S.Label>
+                        <S.Require>*</S.Require>
+                    </S.InputLabel>
+                    <S.Input placeholder="인증번호를 입력해주세요."
+                    onChange={(e)=>{
+                        setUserInformation((prevState)=>{
+                            return{...prevState, authNumber : e.target.value }}
+                        )
+                    }}></S.Input>
+                    {errOrNot.authNumber.isErr && <S.ErrorMsg>{errOrNot.authNumber.content}</S.ErrorMsg>}
+                </S.InputWrapper>
+
                 <S.AgreeWrapper>
-                    <S.CheckAgree type="checkbox" onChange={()=>{setAccept(!accept)}}/>
-                    <S.AgreeLabel>개인정보 수집 및 이용에 동의합니다.</S.AgreeLabel>
+                    <S.AgreeLabel>
+                        <S.CheckAgree type="checkbox" onChange={()=>{setAccept(!accept)}} id="accept"/>
+                        개인정보 수집 및 이용에 동의합니다.
+                    </S.AgreeLabel>
                     {errOrNot.accept.isErr && <S.ErrorMsg>{errOrNot.accept.content}</S.ErrorMsg>}
                 </S.AgreeWrapper>
 
@@ -236,4 +269,4 @@ const signup = () => {
     )
 }
 
-export default signup
+export default Signup
