@@ -83,6 +83,7 @@ export const PreviewMarkdown = styled.p`
   width: 100%;
   height: 20rem;
   font-size: 0.75rem;
+  overflow: auto;
 `;
 
 export const subButton = styled.button`
