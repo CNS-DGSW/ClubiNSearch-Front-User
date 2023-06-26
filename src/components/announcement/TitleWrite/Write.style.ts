@@ -6,10 +6,12 @@ const BasicColor3 = "##FFFFFF";
 const BasicColor4 = "#666666";
 const BasicColor5 = "#D9D9D9";
 
+export const MainContainer = styled.div`
+  margin: 5rem auto;
+  width: 27rem;
+`;
+
 export const parentTitle = styled.h1`
-  margin-left: 31%;
-  margin-top: 5%;
-  margin-bottom: 1.5%;
   font-family: "Inter";
   font-style: normal;
   font-weight: 700;
@@ -17,16 +19,11 @@ export const parentTitle = styled.h1`
   color: ${BasicColor1};
 `;
 
-export const allContainer = styled.div`
-  display: flex;
-`;
-
 export const titleContainer = styled.div`
-  margin: auto;
+  margin: 1rem auto;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   background-color: ${BasicColor3};
-  width: 38%;
-  height: 380px;
+  height: 22rem;
   border-top: 15px solid ${BasicColor2};
   border-radius: 10px 10px 0px 0px;
 `;

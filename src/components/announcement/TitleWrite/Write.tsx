@@ -24,53 +24,50 @@ const Write = () => {
   };
 
   return (
-    <div>
+    <S.MainContainer>
       <S.parentTitle>공고 작성하기</S.parentTitle>
-      <S.allContainer>
-        <S.titleContainer>
-          <S.titleContent>
-            <S.content>
-              <S.contentTitle>채용 동아리</S.contentTitle>
-              <S.contentPoint>*</S.contentPoint>
-            </S.content>
-            <ClubName />
+      <S.titleContainer>
+        <S.titleContent>
+          <S.content>
+            <S.contentTitle>채용 동아리</S.contentTitle>
+            <S.contentPoint>*</S.contentPoint>
+          </S.content>
+          <ClubName />
 
-            <S.content>
-              <S.contentTitle>채용 직급</S.contentTitle>
-              <S.contentPoint>*</S.contentPoint>
-            </S.content>
-            <EmploymentType />
+          <S.content>
+            <S.contentTitle>채용 직급</S.contentTitle>
+            <S.contentPoint>*</S.contentPoint>
+          </S.content>
+          <EmploymentType />
 
-            <S.content>
-              <S.contentTitle>채용 포지션</S.contentTitle>
-              <S.contentPoint>*</S.contentPoint>
-            </S.content>
-            <Position />
-
-            <S.content>
-              <S.contentTitle>채용 기간</S.contentTitle>
-              <S.contentPoint>*</S.contentPoint>
-            </S.content>
-            <S.selectContainer>
-              <S.dateSelect
-                type="date"
-                name="startDate"
-                value={startDate}
-                onChange={handleStartDateChange}
-              ></S.dateSelect>
-              <S.dateSign> ~ </S.dateSign>
-              <S.dateSelect
-                type="date"
-                name="endDate"
-                value={endDate}
-                onChange={handleEndDateChange}
-              ></S.dateSelect>
-            </S.selectContainer>
-          </S.titleContent>
-        </S.titleContainer>
-      </S.allContainer>
+          <S.content>
+            <S.contentTitle>채용 포지션</S.contentTitle>
+            <S.contentPoint>*</S.contentPoint>
+          </S.content>
+          <Position />
+          <S.content>
+            <S.contentTitle>채용 기간</S.contentTitle>
+            <S.contentPoint>*</S.contentPoint>
+          </S.content>
+          <S.selectContainer>
+            <S.dateSelect
+              type="date"
+              name="startDate"
+              value={startDate}
+              onChange={handleStartDateChange}
+            ></S.dateSelect>
+            <S.dateSign> ~ </S.dateSign>
+            <S.dateSelect
+              type="date"
+              name="endDate"
+              value={endDate}
+              onChange={handleEndDateChange}
+            ></S.dateSelect>
+          </S.selectContainer>
+        </S.titleContent>
+      </S.titleContainer>
       <MainWrite />
-    </div>
+    </S.MainContainer>
   );
 };
 
