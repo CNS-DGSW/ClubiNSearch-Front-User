@@ -5,6 +5,7 @@ export const MainFooter = styled.footer`
   height: 12rem;
   margin-top: 6rem;
   background-color: #f9fafb;
+  bottom: 0;
 `;
 
 export const ContentWrapNav = styled.nav`

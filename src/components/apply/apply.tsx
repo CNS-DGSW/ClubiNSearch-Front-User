@@ -77,7 +77,7 @@ const ApplyForm = () => {
         formData.append("contact", phoneNumber);
         formData.append("introduction", introduce);
         formData.append("link", link);
-        if (file) formData.append("file", file);
+        formData.append("file", file || "");
         API.post(`/api/resume/submit`, formData)
           .then((_) => {
             alert("제출되었습니다!");
