@@ -1,4 +1,4 @@
-import Signin from "@/components/signin/Signin"
+import Signin from "@/components/signin/signin"
 
 const signin = () => {
     return (
