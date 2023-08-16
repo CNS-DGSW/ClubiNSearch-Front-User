@@ -17,6 +17,7 @@ export default function Detail({ data }) {
 
   useEffect(() => {
     const { slug } = router.query;
+    console.log(data);
     setPageID(slug);
   }, [router]);
   return (
@@ -55,9 +56,20 @@ export default function Detail({ data }) {
             <S.Introduce>{position}</S.Introduce>
           </S.EachBox>
 
-          <S.ApplyLink href={`/apply/${pageId}`}>
+          <S.Hr />
+
+          <S.EachBox>
+            <S.Label>기간</S.Label>
+            <S.Introduce>
+              {data.startDate} ~ <br />
+              {data.endDate}
+            </S.Introduce>
+          </S.EachBox>
+
+          <Link href={`/apply/${pageId}`}>
             <S.ApplyBtn>지원하기</S.ApplyBtn>
-          </S.ApplyLink>
+          </Link>
+          <S.PeriodContext></S.PeriodContext>
         </S.Box>
       </S.ContentWrapper>
 
