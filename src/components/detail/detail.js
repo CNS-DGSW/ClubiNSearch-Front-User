@@ -8,11 +8,13 @@ import matter from "gray-matter";
 import md from "markdown-it";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { getToday } from "@/util/getToday";
 // import { CGS } from "./detail.style";
 
 export default function Detail({ data }) {
   const router = useRouter();
   const [pageId, setPageID] = useState(null);
+  const [isOverDate, setIsOverDate] = useState(false);
   const {
     title,
     clubName,
@@ -23,10 +25,23 @@ export default function Detail({ data }) {
     endDate,
   } = data;
 
+  const compareDate = () => {
+    const today = getToday();
+    const EachTodayDate = today.split("-");
+    const EachEndDate = endDate.split("-");
+    EachTodayDate.map((e, i) => {
+      if (Number(e) > Number(EachEndDate[i])) {
+        setIsOverDate(true);
+        return;
+      }
+    });
+  };
+
   useEffect(() => {
     const { slug } = router.query;
     console.log(data);
     setPageID(slug);
+    compareDate();
   }, [router]);
   return (
     <div>
@@ -74,9 +89,13 @@ export default function Detail({ data }) {
             </S.Introduce>
           </S.EachBox>
 
-          <Link href={`/apply/${pageId}`}>
-            <S.ApplyBtn>지원하기</S.ApplyBtn>
-          </Link>
+          {isOverDate ? (
+            <></>
+          ) : (
+            <Link href={`/apply/${pageId}`}>
+              <S.ApplyBtn>지원하기</S.ApplyBtn>
+            </Link>
+          )}
         </S.Box>
       </S.ContentWrapper>
 
