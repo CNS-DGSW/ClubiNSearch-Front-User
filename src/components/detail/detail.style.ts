@@ -104,5 +104,3 @@ export const ApplyBtn = styled.button`
   font-size: 0.9rem;
   line-height: 0.7rem;
 `;
-
-export const ApplyLink = styled(Link)``;

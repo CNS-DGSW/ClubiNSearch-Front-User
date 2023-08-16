@@ -13,7 +13,15 @@ import { useEffect, useState } from "react";
 export default function Detail({ data }) {
   const router = useRouter();
   const [pageId, setPageID] = useState(null);
-  const { title, clubName, position, detailContent, employmentType } = data;
+  const {
+    title,
+    clubName,
+    position,
+    detailContent,
+    employmentType,
+    startDate,
+    endDate,
+  } = data;
 
   useEffect(() => {
     const { slug } = router.query;
@@ -61,15 +69,14 @@ export default function Detail({ data }) {
           <S.EachBox>
             <S.Label>기간</S.Label>
             <S.Introduce>
-              {data.startDate} ~ <br />
-              {data.endDate}
+              {startDate} ~ <br />
+              {endDate}
             </S.Introduce>
           </S.EachBox>
 
           <Link href={`/apply/${pageId}`}>
             <S.ApplyBtn>지원하기</S.ApplyBtn>
           </Link>
-          <S.PeriodContext></S.PeriodContext>
         </S.Box>
       </S.ContentWrapper>
 
