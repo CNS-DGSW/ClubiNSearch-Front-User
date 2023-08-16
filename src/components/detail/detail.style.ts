@@ -38,6 +38,9 @@ export const Content = styled.div`
     color: #858585;
     font-weight: 700;
   }
+  > ul {
+    padding-left: 1rem;
+  }
 `;
 
 export const Box = styled.div`
