@@ -26,15 +26,17 @@ export default function Detail({ data }) {
   } = data;
 
   const compareDate = () => {
-    const today = getToday();
-    const EachTodayDate = today.split("-");
-    const EachEndDate = endDate.split("-");
-    EachTodayDate.map((e, i) => {
-      if (Number(e) > Number(EachEndDate[i])) {
-        setIsOverDate(true);
-        return;
-      }
-    });
+    if (EachEndDate) {
+      const today = getToday();
+      const EachTodayDate = today.split("-");
+      const EachEndDate = endDate.split("-");
+      EachTodayDate.map((e, i) => {
+        if (Number(e) > Number(EachEndDate[i])) {
+          setIsOverDate(true);
+          return;
+        }
+      });
+    }
   };
 
   useEffect(() => {
