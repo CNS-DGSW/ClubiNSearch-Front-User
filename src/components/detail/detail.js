@@ -92,7 +92,7 @@ export default function Detail({ data }) {
           </S.EachBox>
 
           {isOverDate ? (
-            <></>
+            <S.FinishApplyBtn>지원이 끝났습니다.</S.FinishApplyBtn>
           ) : (
             <Link href={`/apply/${pageId}`}>
               <S.ApplyBtn>지원하기</S.ApplyBtn>

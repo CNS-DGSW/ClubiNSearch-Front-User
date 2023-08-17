@@ -98,7 +98,22 @@ export const ApplyBtn = styled.button`
   border-radius: 5px;
   background-color: #4980ee;
   margin-top: 0.5rem;
+  text-decoration: none;
+  color: #ffffff;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 0.7rem;
+`;
 
+export const FinishApplyBtn = styled.button`
+  width: 18vw;
+  height: 5vh;
+  border: hidden;
+  border-radius: 5px;
+  background-color: #3763b9;
+  margin-top: 0.5rem;
   text-decoration: none;
   color: #ffffff;
   font-family: "Inter";
