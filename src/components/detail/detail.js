@@ -7,11 +7,13 @@ import md from "markdown-it";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getToday } from "@/util/getToday";
+import { isOverDate } from "@/store/atom";
+import { useRecoilState } from "recoil";
 
 export default function Detail({ data }) {
   const router = useRouter();
   const [pageId, setPageID] = useState(null);
-  const [isOverDate, setIsOverDate] = useState(false);
+  const [isOverDateRecoil, setIsOverDateRecoil] = useRecoilState(isOverDate);
   const {
     title,
     clubName,
@@ -32,12 +34,12 @@ export default function Detail({ data }) {
         Number(EachTodayDate[1]) < Number(EachStartDate[1]) &&
         Number(EachTodayDate[2]) < Number(EachStartDate[2])
       ) {
-        setIsOverDate(true);
+        setIsOverDateRecoil(true);
         return;
       }
       EachTodayDate.map((e, i) => {
         if (Number(e) > Number(EachEndDate[i])) {
-          setIsOverDate(true);
+          setIsOverDateRecoil(true);
           return;
         }
       });
@@ -93,7 +95,7 @@ export default function Detail({ data }) {
             </S.Introduce>
           </S.EachBox>
 
-          {isOverDate ? (
+          {isOverDateRecoil ? (
             <S.FinishApplyBtn>지원이 끝났습니다.</S.FinishApplyBtn>
           ) : (
             <Link href={`/apply/${pageId}`}>

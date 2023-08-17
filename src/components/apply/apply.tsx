@@ -8,6 +8,8 @@ import * as S from "./apply.style";
 import { IErrorValue } from "@/types/IErrorValue";
 import { useRouter } from "next/router";
 import API from "@/util/api";
+import { useRecoilValue } from "recoil";
+import { isOverDate } from "@/store/atom";
 
 //Pick을 써서 file를 골라냄
 // type GetObjectPickType<T, U extends keyof T> = T[U];
@@ -25,6 +27,7 @@ const ApplyForm = () => {
   const router = useRouter();
   const [pageId, setPageId] = useState<string | null>(null);
   const [pageTitle, setPageTitle] = useState<string>("");
+  const isOverDateRecoil = useRecoilValue<boolean>(isOverDate);
 
   const [name, setName] = useState<string>("");
   const [schoolNumber, setSchoolNumber] = useState<string>("");
@@ -53,6 +56,10 @@ const ApplyForm = () => {
 
     if (check) {
       if (!window.confirm("제출하시겠습니까?")) return;
+      if (isOverDateRecoil) {
+        alert("모집 기간이 아닙니다");
+        return;
+      }
       const initError: IErrorValue = ErrorHandler({
         name: name,
         schoolNumber: schoolNumber,
