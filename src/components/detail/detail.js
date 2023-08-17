@@ -43,6 +43,7 @@ export default function Detail({ data }) {
           return;
         }
       });
+      setIsOverDateRecoil(false);
     }
   };
 
