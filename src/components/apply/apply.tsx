@@ -52,8 +52,6 @@ const ApplyForm = () => {
 
   const ServerHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(pageId);
-
     if (check) {
       if (!window.confirm("제출하시겠습니까?")) return;
       if (isOverDateRecoil) {
@@ -77,6 +75,7 @@ const ApplyForm = () => {
       )
         alert("형식에 맞게 써주세요.");
       else {
+        alert("제출중 입니다. 조금만 기다려주세요.");
         const formData = new FormData();
         formData.append("recruitmentId", String(pageId));
         formData.append("name", name);
