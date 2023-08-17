@@ -35,7 +35,8 @@ export default function Main({
     title: "",
   });
   // 채용 형태 옵션들 (typescript로 바꾸고 enum으로 고치기)
-  const employmentTypeOption = ["인턴", "부원"];
+  const employmentTypeOption = ["INTERN", "REGULAR"];
+  const employmentTypeOption2 = ["인턴", "부원"];
 
   useEffect(() => {
     // 세 개 중에 값이 하나가 바뀌면 나머지에 다 undefined가 들어가는데 왜 그런지 모르겠어서 일단 if문으로 처리해둠
@@ -154,8 +155,8 @@ export default function Main({
             }
           >
             <option value="">채용 형태</option>
-            {employmentTypeOption.map((e, index) => (
-              <option value={e} key={e}>
+            {employmentTypeOption2.map((e, index) => (
+              <option value={employmentTypeOption[index]} key={index}>
                 {e}
               </option>
             ))}
