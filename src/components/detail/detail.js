@@ -3,13 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import Ask from "../common/Ask/Ask";
 import Ad from "../../asset/Ad.svg";
-import fs from "fs";
-import matter from "gray-matter";
 import md from "markdown-it";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { getToday } from "@/util/getToday";
-// import { CGS } from "./detail.style";
 
 export default function Detail({ data }) {
   const router = useRouter();
@@ -24,7 +21,6 @@ export default function Detail({ data }) {
     startDate,
     endDate,
   } = data;
-
   const compareDate = () => {
     if (EachEndDate) {
       const today = getToday();
@@ -44,6 +40,7 @@ export default function Detail({ data }) {
     console.log(data);
     setPageID(slug);
     compareDate();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [router]);
   return (
     <div>
@@ -61,28 +58,24 @@ export default function Detail({ data }) {
         </div>
         <S.Box>
           <S.Hr />
-
           <S.EachBox>
             <S.Label>소속</S.Label>
             <S.Introduce>{clubName}</S.Introduce>
           </S.EachBox>
 
           <S.Hr />
-
           <S.EachBox>
             <S.Label>채용 형태</S.Label>
             <S.Introduce>{employmentType}</S.Introduce>
           </S.EachBox>
 
           <S.Hr />
-
           <S.EachBox>
             <S.Label>직군</S.Label>
             <S.Introduce>{position}</S.Introduce>
           </S.EachBox>
 
           <S.Hr />
-
           <S.EachBox>
             <S.Label>기간</S.Label>
             <S.Introduce>
@@ -100,7 +93,6 @@ export default function Detail({ data }) {
           )}
         </S.Box>
       </S.ContentWrapper>
-
       <Ask />
     </div>
   );
