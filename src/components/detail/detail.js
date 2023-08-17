@@ -25,11 +25,12 @@ export default function Detail({ data }) {
     if (endDate) {
       const today = getToday();
       const EachTodayDate = today.split("-");
+      const EachStartDate = startDate.split("-");
       const EachEndDate = endDate.split("-");
       if (
-        Number(EachTodayDate[0]) < Number(EachEndDate[0]) &&
-        Number(EachTodayDate[1]) < Number(EachEndDate[1]) &&
-        Number(EachTodayDate[2]) < Number(EachEndDate[2])
+        Number(EachTodayDate[0]) < Number(EachStartDate[0]) &&
+        Number(EachTodayDate[1]) < Number(EachStartDate[1]) &&
+        Number(EachTodayDate[2]) < Number(EachStartDate[2])
       ) {
         setIsOverDate(true);
         return;
