@@ -26,6 +26,14 @@ export default function Detail({ data }) {
       const today = getToday();
       const EachTodayDate = today.split("-");
       const EachEndDate = endDate.split("-");
+      if (
+        Number(EachTodayDate[0]) < Number(EachEndDate[0]) &&
+        Number(EachTodayDate[1]) < Number(EachEndDate[1]) &&
+        Number(EachTodayDate[2]) < Number(EachEndDate[2])
+      ) {
+        setIsOverDate(true);
+        return;
+      }
       EachTodayDate.map((e, i) => {
         if (Number(e) > Number(EachEndDate[i])) {
           setIsOverDate(true);
