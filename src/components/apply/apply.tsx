@@ -84,16 +84,13 @@ const ApplyForm = () => {
         formData.append("contact", phoneNumber);
         formData.append("introduction", introduce);
         formData.append("link", link);
-        formData.append("file", file || "");
+        if (file) formData.append("file", file);
         API.post(`/api/resume/submit`, formData)
           .then((_) => {
             alert("제출되었습니다!");
             router.push("/");
           })
-          .catch((e) => {
-            console.log(e);
-            console.log(pageId);
-          });
+          .catch((_) => {});
       }
     } else {
       alert("개인정보 수집 동의에 동의해주세요.");
