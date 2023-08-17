@@ -22,7 +22,7 @@ export default function Detail({ data }) {
     endDate,
   } = data;
   const compareDate = () => {
-    if (EachEndDate) {
+    if (endDate) {
       const today = getToday();
       const EachTodayDate = today.split("-");
       const EachEndDate = endDate.split("-");
