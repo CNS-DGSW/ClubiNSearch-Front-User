@@ -3,15 +3,19 @@ import Ask from "../common/Ask/Ask";
 import Image from "next/image";
 import Ad from "../../asset/Ad.svg";
 import SearchIcon from "../../asset/SearchIcon.svg";
-import fs from "fs";
-import matter from "gray-matter";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import ReactPaginate from "react-paginate";
+import { useEffect, useState } from "react";
 import * as S from "./index.style";
-import axios from "axios";
 import API from "@/util/api";
-import { recuitment, EmploymentType } from "@/types/Recuitment";
+import { recuitment } from "@/types/Recuitment";
+
+const IntroduceClub = `우리는 “세상을 이롭게 하는 소프트웨어 개발자가 되겠다”는 같은 목표에 마음이 움직여
+이곳 “CNS”에 모이게 되었습니다. "CNS"는 모두가 협동하여 서로의 목표를 향해 나아갑니다.
+동료들과 함께 서로 도우며 불가능한 가능하게 하며 열정적으로 유능한 개발자로 성장하고 있습니다.
+가슴이 설레시나요?지금이 바로 “CNS”동아리에 합류할 때입니다.`;
+
+const IntroduceHeader = `가슴 뛰는 미래,
+내일이 있는 삶`;
 
 export default function Main({
   getposts,
@@ -24,9 +28,7 @@ export default function Main({
   const ONEPAGEPOST = 7;
   const [posts, setPosts] = useState(getposts);
   // 전체 페이지 수
-  const [totalPages, setTotalPages] = useState(
-    Math.ceil(posts.length / ONEPAGEPOST)
-  );
+  const [totalPages] = useState(Math.ceil(posts.length / ONEPAGEPOST));
   const [itemOffset, setItemOffset] = useState(0);
   // 게시글 제목, 포지션, 채용 형태 검색에 사용
   const [search, setSearch] = useState({
@@ -96,22 +98,9 @@ export default function Main({
       </S.AdWrapper>
 
       <S.ContentWrapperWithoutPagination>
-        <S.IntroH1>
-          가슴 뛰는 미래,
-          <br />
-          내일이 있는 삶
-        </S.IntroH1>
+        <S.IntroH1>{IntroduceHeader}</S.IntroH1>
         <S.IntroDiv>
-          우리는 “세상을 이롭게 하는 소프트웨어 개발자가 되겠다”는 같은 목표에
-          마음이 움직여
-          <br />
-          이곳 “DGSW”에 모이게 되었습니다. DGSW는 모두가 협동하여 서로의 목표를
-          향해 나아갑니다.
-          <br />
-          동료들과 함께 서로 도우며 불가능한 가능하게 하며 열정적으로 유능한
-          개발자로 성장하고 있습니다.
-          <br />
-          가슴이 설레시나요?지금이 바로 “DGSW”동아리에 합류할 때입니다.
+          <pre>{IntroduceClub}</pre>
         </S.IntroDiv>
 
         <S.SearchBox>

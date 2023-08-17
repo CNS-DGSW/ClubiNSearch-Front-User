@@ -1,4 +1,4 @@
-export enum EmploymentType {
+enum EmploymentType {
   "INTERN",
   "REGULAR",
 }
